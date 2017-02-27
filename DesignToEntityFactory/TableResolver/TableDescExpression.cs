@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Configuration;
+using System.Text.RegularExpressions;
 
 namespace DesignToEntityFactory.TableResolver
 {
@@ -21,10 +22,12 @@ namespace DesignToEntityFactory.TableResolver
             Match match = regex.Match(context.TableHtml);
 
             string name = match.Groups["name"].Value;
-            
+            string module = name.Substring(0, name.IndexOf("_"));
+            if (string.IsNullOrWhiteSpace(name)) name = ConfigurationManager.AppSettings["DefaultModuleName"];
+
             context.Table.Name = name;                                      //数据表名
             context.Table.Description = match.Groups["desc"].Value;         //数据表说明
-            context.Table.Module = name.Substring(0, name.IndexOf("_"));    //所属模块
+            context.Table.Module = module;                                  //所属模块
         }
     }
 }

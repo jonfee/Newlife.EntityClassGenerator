@@ -23,9 +23,9 @@ namespace DesignToEntityFactory
         private string _sourceFile;
 
         /// <summary>
-        /// 导出实体类的命名空间名称
+        /// 输出目录
         /// </summary>
-        private string _namespace;
+        private string _output;
 
         #endregion
 
@@ -40,13 +40,10 @@ namespace DesignToEntityFactory
             handler.GetSettings();
 
             _sourceFile = handler.HtmlFilePath;
-            _namespace = handler.OutNamespace;
-
-            //获取数据表的匹配集合
-            var tableMatchs = GetTableMatchs();
+            _output = handler.Output;
 
             //数据表描述对象集合
-            List<TableDesc> tables = GetTableDesc(tableMatchs);
+            List<TableDesc> tables = GetTableDesc();
 
             //导出为实体类文件，如:Area.cs
             var aa = tables;
@@ -55,13 +52,21 @@ namespace DesignToEntityFactory
         #endregion
 
         #region 私有方法
-        private List<TableDesc> GetTableDesc(MatchCollection matchs)
+
+        /// <summary>
+        /// 获取数据表描述对象集合
+        /// </summary>
+        /// <returns></returns>
+        private List<TableDesc> GetTableDesc()
         {
+            //获取数据表的匹配集合
+            var tableMatchs = GetTableMatchs();
+
             //数据表描述对象集合
             List<TableDesc> tables = new List<TableDesc>();
             //循环处理
             // 将每个HTML的内容描述转换为TableDesc对象 
-            foreach (Match m in matchs)
+            foreach (Match m in tableMatchs)
             {
                 //定义数据表描述对象处理上下文
                 DataTableContext context = new DataTableContext(m.Value);

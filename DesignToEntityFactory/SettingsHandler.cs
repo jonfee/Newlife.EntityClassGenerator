@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.IO;
 using System.Text.RegularExpressions;
 
@@ -20,25 +21,25 @@ namespace DesignToEntityFactory
             set { this._htmlFilePath = value; }
         }
 
+        /// <summary>
+        /// 输出目录
+        /// </summary>
+        public string Output
+        {
+            get
+            {
+                return $"{AppContext.BaseDirectory}\\output";
+            }
+        }
+
         private string _outNamespace;
 
-        /// <summary>
-        /// 导出的实体类文件命名空间
-        /// </summary>
-        public string OutNamespace
-        {
-            get { return this._outNamespace; }
-            set { this._outNamespace = value; }
-        }
-        
         /// <summary>
         /// 获取相关参数配置
         /// </summary>
         public void GetSettings()
         {
             SetSoure();
-
-            SetNamespace();
         }
 
         /// <summary>
@@ -73,35 +74,6 @@ namespace DesignToEntityFactory
                 {
                     Console.WriteLine("不是有效的html文件地址！");
                     SetSoure();
-                }
-            }
-        }
-
-        /// <summary>
-        /// 设置导出实体类的命名空间名称
-        /// </summary>
-        private void SetNamespace()
-        {
-            Console.WriteLine("请输入导出实体类的命名空间名称：");
-
-            string name = Console.ReadLine();
-
-            if (string.IsNullOrWhiteSpace(name))
-            {
-                SetNamespace();
-            }
-            else
-            {
-                Regex regex = new Regex(@"^[a-z][a-z0-9_\.]*$", RegexOptions.IgnoreCase | RegexOptions.Compiled);
-
-                if (regex.IsMatch(name))
-                {
-                    this._outNamespace = name;
-                }
-                else
-                {
-                    Console.WriteLine("不是有效的命名空间名称！");
-                    SetNamespace();
                 }
             }
         }

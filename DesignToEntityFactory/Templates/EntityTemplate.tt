@@ -1,0 +1,70 @@
+﻿using System;
+using Newlife.Data;
+
+namespace Newlife.Database.Builder.Models.{Module_Name}
+{
+	/// <summary>
+	/// {Entity_Description}
+	/// </summary>
+	public class {Entity_Name} : Entity
+    {
+		#region 公共属性
+		<ForEach_Properties>
+
+		/// <summary>
+		/// {Property_Description}
+		/// </summary>
+		public {Property_DataType} {Property_Name}
+        {
+            get
+            {
+                return this.GetFieldValue<{Property_DataType}>("{Property_Name}");
+            }
+
+            set
+            {
+				<If_Limit_Length>
+                this.SetFieldValue("{Property_Name}", value,{Property_Limit_Length});
+				<Else>
+				this.SetFieldValue("{Property_Name}", value);
+				</End>
+
+            }
+        }
+		</ForEach_Properties>
+
+        #endregion
+
+        #region 构造方法
+
+        /// <summary>
+        /// 初始化 <see cref="{Entity_Name}"/> 类的新实例。
+        /// </summary>
+        public {Entity_Name}()
+        {
+            this.Scheme = "";
+            this.MappingType = MappingType.Table;
+            this.MappingName = "{Entity_Name}";
+
+			<ForEach_PrimaryKeys>
+            this.PrimaryKey.Add("{Property_Name}");
+			</ForEach_PrimaryKeys>
+        }
+
+        #endregion 构造方法
+
+        #region 字段设置
+
+        protected override void SetFieldNames()
+        {
+            this.PropertyNames = new string[]
+            {
+			<ForEach_Properties>
+            {Property_Name}
+			</ForEach_Properties>
+            };
+        }
+
+        #endregion
+    }
+}

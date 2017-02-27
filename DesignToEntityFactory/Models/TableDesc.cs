@@ -96,6 +96,11 @@ namespace DesignToEntityFactory.Models
         public string DataType { get; set; }
 
         /// <summary>
+        /// 数据限制长度
+        /// </summary>
+        public int LimitLength { get; set; }
+
+        /// <summary>
         /// 默认值 
         /// </summary>
         public string DefaultValue { get; set; }
