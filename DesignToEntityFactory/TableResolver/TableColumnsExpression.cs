@@ -37,16 +37,17 @@ namespace DesignToEntityFactory.TableResolver
             foreach (Match m in mc)
             {
                 string name = m.Groups["name"].Value.Trim();
+                string desc = m.Groups["desc"].Value.Trim();
                 bool canNullable = string.IsNullOrWhiteSpace(m.Groups["cannullable"].Value);
 
                 TableColumn column = new TableColumn();
 
                 column.Name = name;
                 column.DefaultValue = m.Groups["defaultvalue"].Value;
-                column.Description = m.Groups["desc"].Value;
+                column.Description = desc;
                 column.CanNullable = canNullable;
                 column.DataType = ResolverDataType(m.Groups["datatype"].Value, canNullable);
-                column.IsPrimaryKey = name.StartsWith("主键");
+                column.IsPrimaryKey = desc.StartsWith("主键");
 
                 columnList.Add(column);
             }
@@ -61,7 +62,7 @@ namespace DesignToEntityFactory.TableResolver
         /// <returns></returns>
         private string ResolverDataType(string datatype, bool canNullable)
         {
-            Regex regex = new Regex(@"^(?<type>[a-z][^\(]*)(\([^\)]+\))?$", RegexOptions.IgnoreCase | RegexOptions.Compiled);
+            Regex regex = new Regex(@"^(?<type>[a-z][^\(（]*)([\(（][^\)）]+[\)）])?\??$", RegexOptions.IgnoreCase | RegexOptions.Compiled);
 
             string newtype = regex.Match(datatype).Groups["type"].Value;
 
@@ -89,7 +90,7 @@ namespace DesignToEntityFactory.TableResolver
                     break;
             }
 
-            if (canNullable) newtype = $"{newtype}?";
+            if (canNullable && newtype != "string") newtype = $"{newtype}?";
 
             return newtype;
         }

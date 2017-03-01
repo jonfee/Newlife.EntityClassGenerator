@@ -44,12 +44,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\Tools.cs" />
     <Compile Include="EntityFactory.cs" />
+    <Compile Include="EntityResolver\EntityDescriptionExpression.cs" />
     <Compile Include="EntityResolver\EntityExpression.cs" />
+    <Compile Include="EntityResolver\EntityNameExpression .cs" />
     <Compile Include="EntityResolver\EntityResolverContext .cs" />
+    <Compile Include="EntityResolver\ForeachPrimaryKeysExpression.cs" />
+    <Compile Include="EntityResolver\ForEachPropertiesExpression.cs" />
+    <Compile Include="EntityResolver\ModuleNameExpression.cs" />
     <Compile Include="Models\TableDesc.cs" />
+    <Compile Include="PrimaryKeyResolver\PrimaryKeyExpression.cs" />
+    <Compile Include="PrimaryKeyResolver\PrimarykeyPropertyNameExpression.cs" />
+    <Compile Include="PrimaryKeyResolver\PrimarykeyResolverContext.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PropertyResolver\PropertyDataTypeExpression.cs" />
+    <Compile Include="PropertyResolver\PropertyExpression.cs" />
+    <Compile Include="PropertyResolver\PropertyLimitLengthExpression.cs" />
+    <Compile Include="PropertyResolver\PropertyNameExpression.cs" />
+    <Compile Include="PropertyResolver\PropertyResolverContext.cs" />
+    <Compile Include="PropertyResolver\ProperytyDescriptionExpression.cs" />
     <Compile Include="TableResolver\DataTableContext.cs" />
     <Compile Include="TableResolver\TableColumnsExpression.cs" />
     <Compile Include="TableResolver\TableDescExpression.cs" />
@@ -77,6 +92,9 @@
     <Folder Include="EnumResolver\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>xcopy /e /s /k /v /i /y "$(ProjectDir)templates\*.*" "$(ProjectDir)$(OutDir)\templates\"</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

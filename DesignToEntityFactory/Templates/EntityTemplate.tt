@@ -9,8 +9,8 @@ namespace Newlife.Database.Builder.Models.{Module_Name}
 	public class {Entity_Name} : Entity
     {
 		#region 公共属性
-		<ForEach_Properties>
 
+		<ForEach_Properties>
 		/// <summary>
 		/// {Property_Description}
 		/// </summary>
@@ -20,17 +20,12 @@ namespace Newlife.Database.Builder.Models.{Module_Name}
             {
                 return this.GetFieldValue<{Property_DataType}>("{Property_Name}");
             }
-
             set
             {
-				<If_Limit_Length>
-                this.SetFieldValue("{Property_Name}", value,{Property_Limit_Length});
-				<Else>
-				this.SetFieldValue("{Property_Name}", value);
-				</End>
-
+				<If_Limit_Length>this.SetFieldValue("{Property_Name}", value,{Property_Limit_Length});<Else_Limit_Length>this.SetFieldValue("{Property_Name}", value);</End_Limit_Length>
             }
         }
+		<separator></separator>
 		</ForEach_Properties>
 
         #endregion
@@ -46,9 +41,7 @@ namespace Newlife.Database.Builder.Models.{Module_Name}
             this.MappingType = MappingType.Table;
             this.MappingName = "{Entity_Name}";
 
-			<ForEach_PrimaryKeys>
-            this.PrimaryKey.Add("{Property_Name}");
-			</ForEach_PrimaryKeys>
+			<ForEach_PrimaryKeys>this.PrimaryKey.Add("{Property_Name}");<separator>\n</separator></ForEach_PrimaryKeys>
         }
 
         #endregion 构造方法
@@ -59,9 +52,7 @@ namespace Newlife.Database.Builder.Models.{Module_Name}
         {
             this.PropertyNames = new string[]
             {
-			<ForEach_Properties>
-            {Property_Name}
-			</ForEach_Properties>
+			<ForEach_Properties>"{Property_Name}"<separator>,</separator></ForEach_Properties>
             };
         }
 

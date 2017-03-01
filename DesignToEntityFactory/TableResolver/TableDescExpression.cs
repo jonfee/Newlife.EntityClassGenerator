@@ -22,7 +22,8 @@ namespace DesignToEntityFactory.TableResolver
             Match match = regex.Match(context.TableHtml);
 
             string name = match.Groups["name"].Value;
-            string module = name.Substring(0, name.IndexOf("_"));
+            int splitIndex = name.IndexOf("_");
+            string module = splitIndex > 0 ? name.Substring(0, splitIndex) : name;
             if (string.IsNullOrWhiteSpace(name)) name = ConfigurationManager.AppSettings["DefaultModuleName"];
 
             context.Table.Name = name;                                      //数据表名

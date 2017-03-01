@@ -27,24 +27,24 @@ namespace DesignToEntityFactory.Templates
         {
             this.Write("using System;\r\nusing Newlife.Data;\r\n\r\nnamespace Newlife.Database.Builder.Models.{" +
                     "Module_Name}\r\n{\r\n\t/// <summary>\r\n\t/// {Entity_Description}\r\n\t/// </summary>\r\n\tpu" +
-                    "blic class {Entity_Name} : Entity\r\n    {\r\n\t\t#region 公共属性\r\n\t\t<ForEach_Properties>" +
-                    "\r\n\r\n\t\t/// <summary>\r\n\t\t/// {Property_Description}\r\n\t\t/// </summary>\r\n\t\tpublic {P" +
+                    "blic class {Entity_Name} : Entity\r\n    {\r\n\t\t#region 公共属性\r\n\r\n\t\t<ForEach_Propertie" +
+                    "s>\r\n\t\t/// <summary>\r\n\t\t/// {Property_Description}\r\n\t\t/// </summary>\r\n\t\tpublic {P" +
                     "roperty_DataType} {Property_Name}\r\n        {\r\n            get\r\n            {\r\n  " +
                     "              return this.GetFieldValue<{Property_DataType}>(\"{Property_Name}\");" +
-                    "\r\n            }\r\n\r\n            set\r\n            {\r\n\t\t\t\t<If_Limit_Length>\r\n      " +
-                    "          this.SetFieldValue(\"{Property_Name}\", value,{Property_Limit_Length});\r" +
-                    "\n\t\t\t\t<Else>\r\n\t\t\t\tthis.SetFieldValue(\"{Property_Name}\", value);\r\n\t\t\t\t</End>\r\n\r\n  " +
-                    "          }\r\n        }\r\n\t\t</ForEach_Properties>\r\n\r\n        #endregion\r\n\r\n       " +
-                    " #region 构造方法\r\n\r\n        /// <summary>\r\n        /// 初始化 <see cref=\"{Entity_Name}" +
-                    "\"/> 类的新实例。\r\n        /// </summary>\r\n        public {Entity_Name}()\r\n        {\r\n " +
-                    "           this.Scheme = \"\";\r\n            this.MappingType = MappingType.Table;\r" +
-                    "\n            this.MappingName = \"{Entity_Name}\";\r\n\r\n\t\t\t<ForEach_PrimaryKeys>\r\n  " +
-                    "          this.PrimaryKey.Add(\"{Property_Name}\");\r\n\t\t\t</ForEach_PrimaryKeys>\r\n  " +
-                    "      }\r\n\r\n        #endregion 构造方法\r\n\r\n        #region 字段设置\r\n\r\n        protected " +
-                    "override void SetFieldNames()\r\n        {\r\n            this.PropertyNames = new s" +
-                    "tring[]\r\n            {\r\n\t\t\t<ForEach_Properties>\r\n            {Property_Name}\r\n\t\t" +
-                    "\t</ForEach_Properties>\r\n            };\r\n        }\r\n\r\n        #endregion\r\n    }\r\n" +
-                    "}");
+                    "\r\n            }\r\n            set\r\n            {\r\n\t\t\t\t<If_Limit_Length>this.SetFi" +
+                    "eldValue(\"{Property_Name}\", value,{Property_Limit_Length});<Else_Limit_Length>th" +
+                    "is.SetFieldValue(\"{Property_Name}\", value);</End_Limit_Length>\r\n            }\r\n " +
+                    "       }\r\n\t\t<separator></separator>\r\n\t\t</ForEach_Properties>\r\n\r\n        #endregi" +
+                    "on\r\n\r\n        #region 构造方法\r\n\r\n        /// <summary>\r\n        /// 初始化 <see cref=\"" +
+                    "{Entity_Name}\"/> 类的新实例。\r\n        /// </summary>\r\n        public {Entity_Name}()\r" +
+                    "\n        {\r\n            this.Scheme = \"\";\r\n            this.MappingType = Mappin" +
+                    "gType.Table;\r\n            this.MappingName = \"{Entity_Name}\";\r\n\r\n\t\t\t<ForEach_Pri" +
+                    "maryKeys>this.PrimaryKey.Add(\"{Property_Name}\");<separator>\\n</separator></ForEa" +
+                    "ch_PrimaryKeys>\r\n        }\r\n\r\n        #endregion 构造方法\r\n\r\n        #region 字段设置\r\n\r" +
+                    "\n        protected override void SetFieldNames()\r\n        {\r\n            this.Pr" +
+                    "opertyNames = new string[]\r\n            {\r\n\t\t\t<ForEach_Properties>\"{Property_Nam" +
+                    "e}\"<separator>,</separator></ForEach_Properties>\r\n            };\r\n        }\r\n\r\n " +
+                    "       #endregion\r\n    }\r\n}");
             return this.GenerationEnvironment.ToString();
         }
     }
