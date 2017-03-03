@@ -39,12 +39,12 @@ namespace DesignToEntityFactory.Templates
                     "{Entity_Name}\"/> 类的新实例。\r\n        /// </summary>\r\n        public {Entity_Name}()\r" +
                     "\n        {\r\n            this.Scheme = \"\";\r\n            this.MappingType = Mappin" +
                     "gType.Table;\r\n            this.MappingName = \"{Entity_Name}\";\r\n\r\n\t\t\t<ForEach_Pri" +
-                    "maryKeys>this.PrimaryKey.Add(\"{Property_Name}\");<separator>\\n</separator></ForEa" +
-                    "ch_PrimaryKeys>\r\n        }\r\n\r\n        #endregion 构造方法\r\n\r\n        #region 字段设置\r\n\r" +
-                    "\n        protected override void SetFieldNames()\r\n        {\r\n            this.Pr" +
-                    "opertyNames = new string[]\r\n            {\r\n\t\t\t<ForEach_Properties>\"{Property_Nam" +
-                    "e}\"<separator>,</separator></ForEach_Properties>\r\n            };\r\n        }\r\n\r\n " +
-                    "       #endregion\r\n    }\r\n}");
+                    "maryKeys>this.PrimaryKey.Add(\"{Property_Name}\");<separator>\r\n\t\t\t</separator></Fo" +
+                    "rEach_PrimaryKeys>\r\n        }\r\n\r\n        #endregion 构造方法\r\n\r\n        #region 字段设置" +
+                    "\r\n\r\n        protected override void SetFieldNames()\r\n        {\r\n            this" +
+                    ".PropertyNames = new string[]\r\n            {\r\n\t\t\t<ForEach_Properties>\"{Property_" +
+                    "Name}\"<separator>,</separator></ForEach_Properties>\r\n            };\r\n        }\r\n" +
+                    "\r\n        #endregion\r\n    }\r\n}");
             return this.GenerationEnvironment.ToString();
         }
     }

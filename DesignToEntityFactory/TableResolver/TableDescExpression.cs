@@ -26,7 +26,7 @@ namespace DesignToEntityFactory.TableResolver
             string module = splitIndex > 0 ? name.Substring(0, splitIndex) : name;
             if (string.IsNullOrWhiteSpace(name)) name = ConfigurationManager.AppSettings["DefaultModuleName"];
 
-            context.Table.Name = name;                                      //数据表名
+            context.Table.Name = name.Replace("_", "");                     //数据表名
             context.Table.Description = match.Groups["desc"].Value;         //数据表说明
             context.Table.Module = module;                                  //所属模块
         }

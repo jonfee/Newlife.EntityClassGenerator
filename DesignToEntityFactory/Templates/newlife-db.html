@@ -1,0 +1,4369 @@
+﻿<!DOCTYPE html>
+<html class="theme theme-white">
+<head>
+<meta charset="utf-8">
+<title>全心生活-数据库结构</title>
+<link href="https://www.zybuluo.com/static/assets/template-theme-white.css" rel="stylesheet" media="screen">
+<style type="text/css">
+
+#wmd-preview h1  {
+    color: #0077bb; /* 将标题改为蓝色 */
+}</style>
+</head>
+<body class="theme theme-white">
+<div id="wmd-preview" class="wmd-preview wmd-preview-full-reader"><div class="md-section-divider"></div><div class="md-section-divider"></div><h1 data-anchor-id="o1e8" id="全心生活-数据库结构">全心生活-数据库结构</h1><p data-anchor-id="kfee"><code>全心生活</code></p><hr><div class="md-section-divider"></div><h2 data-anchor-id="lujh" id="目录">目录</h2><p data-anchor-id="cdhc"><div class="toc"><div class="toc">
+<ul>
+<li><a href="#全心生活-数据库结构">全心生活-数据库结构</a><ul>
+<li><a href="#目录">目录</a></li>
+<li><a href="#数据库迁移说明">数据库迁移说明</a></li>
+<li><a href="#枚举-奖励规则业务类型bonusbussinesstype">[枚举] 奖励规则业务类型(Bonus_BussinessType)</a></li>
+<li><a href="#枚举-消息发送渠道messagesendchannel">[枚举] 消息发送渠道(Message_SendChannel)</a></li>
+<li><a href="#枚举-提现状态withdrawstatus">[枚举] 提现状态(Withdraw_Status)</a></li>
+<li><a href="#枚举-支付方式paymenttype">[枚举] 支付方式（Payment_Type）</a></li>
+<li><a href="#枚举-开通区域状态areastatus">[枚举] 开通区域状态(Area_Status)</a></li>
+<li><a href="#枚举-运营商资产变动业务类型areaoperatorassetsbusinesstype">[枚举] 运营商资产变动业务类型(Area_OperatorAssetsBusinessType)</a></li>
+<li><a href="#枚举-运营商账号状态areaoperatoraccountstatus">[枚举] 运营商账号状态(Area_OperatorAccountStatus)</a></li>
+<li><a href="#枚举-销售网点状态areastorestatus">[枚举] 销售网点状态(Area_StoreStatus)</a></li>
+<li><a href="#枚举-销售网点资产变动业务类型areastoreassetsbusinesstype">[枚举] 销售网点资产变动业务类型(Area_StoreAssetsBusinessType)</a></li>
+<li><a href="#枚举-异业商家状态merchantstatus">[枚举] 异业商家状态(Merchant_Status)</a></li>
+<li><a href="#枚举-异业商家资产变动业务类型merchantassetsbusinesstype">[枚举] 异业商家资产变动业务类型(Merchant_AssetsBusinessType)</a></li>
+<li><a href="#枚举-异业商家优惠活动状态merchantpromotionstatus">[枚举] 异业商家优惠活动状态(Merchant_PromotionStatus)</a></li>
+<li><a href="#枚举-异业商家优惠券状态merchantcouponstatus">[枚举] 异业商家优惠券状态(Merchant_CouponStatus)</a></li>
+<li><a href="#枚举-异业商家优惠券销售订单状态merchantcouponsalesorderstatus">[枚举] 异业商家优惠券销售订单状态(Merchant_CouponSalesOrderStatus)</a></li>
+<li><a href="#枚举-异业商家优惠券使用业务类型merchantcouponusedbusinesstype">[枚举] 异业商家优惠券使用业务类型(Merchant_CouponUsedBusinessType)</a></li>
+<li><a href="#枚举-用户状态userstatus">[枚举] 用户状态(User_Status)</a></li>
+<li><a href="#枚举-用户授权登陆第三方平台userauthorizationplatformtype">[枚举] 用户授权登陆第三方平台(User_AuthorizationPlatformType)</a></li>
+<li><a href="#枚举-用户行为类型userbehaviortype">[枚举] 用户行为类型(User_BehaviorType)</a></li>
+<li><a href="#枚举-用户充值状态userrechargestatus">[枚举] 用户充值状态(User_RechargeStatus)</a></li>
+<li><a href="#枚举-异业商家扫码订单状态usermerchantpayingorderstatus">[枚举] 异业商家扫码订单状态(User_MerchantPayingOrderStatus)</a></li>
+<li><a href="#枚举-用户资产变动务类型userassetsbusinesstype">[枚举] 用户资产变动务类型(User_AssetsBusinessType)</a></li>
+<li><a href="#枚举-用户资产类型userassetstype">[枚举] 用户资产类型(User_AssetsType)</a></li>
+<li><a href="#枚举-积分商城订单状态creditorderstatus">[枚举] 积分商城订单状态(Credit_OrderStatus)</a></li>
+<li><a href="#表-平台账户表platformaccount">[表] 平台账户表(Platform_Account)</a></li>
+<li><a href="#表-银行资料bank">[表] 银行资料(Bank)</a></li>
+<li><a href="#表-奖励规则表bonusrule">[表] 奖励规则表(BonusRule)</a></li>
+<li><a href="#表-产品库分类productcategory">[表] 产品库分类(Product_Category)</a></li>
+<li><a href="#表-产品库产品信息product">[表] 产品库产品信息(Product)</a></li>
+<li><a href="#表-产品库图片信息productimage">[表] 产品库图片信息(Product_Image)</a></li>
+<li><a href="#表-产品库规格信息productsku">[表] 产品库规格信息(Product_SKU)</a></li>
+<li><a href="#表-产品库标签信息producttag">[表] 产品库标签信息(Product_Tag)</a></li>
+<li><a href="#表-产品库标签关联表producttagrelation">[表] 产品库标签关联表(Product_TagRelation)</a></li>
+<li><a href="#表-运营区域表area">[表] 运营区域表(Area)</a></li>
+<li><a href="#表-区域运营商表areaoperator">[表] 区域运营商表(Area_Operator)</a></li>
+<li><a href="#表-区域运营商资产变动表areaoperatorassetsrecord">[表] 区域运营商资产变动表(Area_OperatorAssetsRecord)</a></li>
+<li><a href="#表-区域运营商账户表areaoperatoraccount">[表] 区域运营商账户表(Area_OperatorAccount)</a></li>
+<li><a href="#表-区域经营趋势表areabusinessreport">[表] 区域经营趋势表(Area_BusinessReport)</a></li>
+<li><a href="#表-区域专属产品表areaspecificproduct">[表] 区域专属产品表(Area_SpecificProduct)</a></li>
+<li><a href="#表-区域销售商品分类表areagoodscategory">[表] 区域销售商品分类表(Area_GoodsCategory)</a></li>
+<li><a href="#表-区域销售商品表areagoods">[表] 区域销售商品表(Area_Goods)</a></li>
+<li><a href="#表-区域销售商品规格表areagoodssku">[表] 区域销售商品规格表(Area_GoodsSKU)</a></li>
+<li><a href="#表-区域销售商品标签表areagoodstag">[表] 区域销售商品标签表(Area_GoodsTag)</a></li>
+<li><a href="#表-区域销售商品标签关联表areagoodstagrelation">[表] 区域销售商品标签关联表(Area_GoodsTagRelation)</a></li>
+<li><a href="#表-销售网点areastore">[表] 销售网点(Area_Store)</a></li>
+<li><a href="#表-销售网点消息areastoremessage">[表] 销售网点消息(Area_StoreMessage)</a></li>
+<li><a href="#表-销售网点资产变动表areastoreassetsrecord">[表] 销售网点资产变动表(Area_StoreAssetsRecord)</a></li>
+<li><a href="#表-销售网点商品areastoregoods">[表] 销售网点商品(Area_StoreGoods)</a></li>
+<li><a href="#表-销售网点商品规格表areastoregoodssku">[表] 销售网点商品规格表(Area_StoreGoodsSKU)</a></li>
+<li><a href="#表-异业商家行业merchantindustry">[表] 异业商家行业(Merchant_Industry)</a></li>
+<li><a href="#表-异业商家基本信息merchant">[表] 异业商家基本信息(Merchant)</a></li>
+<li><a href="#表-异业商家图片信息merchantimage">[表] 异业商家图片信息(Merchant_Image)</a></li>
+<li><a href="#表-异业商家抽佣配置表merchantcommission">[表] 异业商家抽佣配置表(Merchant_Commission)</a></li>
+<li><a href="#表-异业商家资产变动表merchantassetsrecord">[表] 异业商家资产变动表(Merchant_AssetsRecord)</a></li>
+<li><a href="#表-异业商家提现表merchantwithdraw">[表] 异业商家提现表(Merchant_Withdraw)</a></li>
+<li><a href="#表-异业商家提现日志表merchantwithdrawlogs">[表] 异业商家提现日志表(Merchant_WithdrawLogs)</a></li>
+<li><a href="#表-异业商家优惠活动merchantpromotion">[表] 异业商家优惠活动(Merchant_Promotion)</a></li>
+<li><a href="#表-异业商家优惠券merchantcoupon">[表] 异业商家优惠券(Merchant_Coupon)</a></li>
+<li><a href="#表-异业商家优惠券销售订单merchantcouponsalesorder">[表] 异业商家优惠券销售订单(Merchant_CouponSalesOrder)</a></li>
+<li><a href="#表-异业商家消息merchantmessage">[表] 异业商家消息(Merchant_Message)</a></li>
+<li><a href="#表-用户账户user">[表] 用户账户(User)</a></li>
+<li><a href="#表-用户第三方联动登陆userplatformauthorization">[表] 用户第三方联动登陆(User_PlatformAuthorization)</a></li>
+<li><a href="#表-用户地址useraddress">[表] 用户地址(User_Address)</a></li>
+<li><a href="#表-用户消息usermessage">[表] 用户消息(User_Message)</a></li>
+<li><a href="#表-用户资产表userassets">[表] 用户资产表(User_Assets)</a></li>
+<li><a href="#表-用户行为记录userbehaviorrecord">[表] 用户行为记录(User_BehaviorRecord)</a></li>
+<li><a href="#表-用户行为趋势userbehaviorreport">[表] 用户行为趋势(User_BehaviorReport)</a></li>
+<li><a href="#表-用户充值记录表userrecharge">[表] 用户充值记录表(User_Recharge)</a></li>
+<li><a href="#表-用户资产变动记录表userassetsrecord">[表] 用户资产变动记录表(User_AssetsRecord)</a></li>
+<li><a href="#表-用户异业商家优惠券usermerchantcoupon">[表] 用户异业商家优惠券(User_MerchantCoupon)</a></li>
+<li><a href="#表-异业商家买单表usermerchantpaying">[表] 异业商家买单表(User_MerchantPaying)</a></li>
+<li><a href="#表-积分商城商品分类creditgoodscategory">[表] 积分商城商品分类(Credit_GoodsCategory)</a></li>
+<li><a href="#表-积分商城商品信息creditgoods">[表] 积分商城商品信息(Credit_Goods)</a></li>
+<li><a href="#表-积分商城商品规格creditgoodssku">[表] 积分商城商品规格(Credit_GoodsSKU)</a></li>
+<li><a href="#表-积分商城订单creditorder">[表] 积分商城订单(Credit_Order)</a></li>
+<li><a href="#表-积分商城订单明细表creditorderdetail">[表] 积分商城订单明细表(Credit_OrderDetail)</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</p><hr><div class="md-section-divider"></div><h2 data-anchor-id="1kif" id="数据库迁移说明">数据库迁移说明</h2><ol data-anchor-id="zq8w">
+<li>打开 Visual Studio <code>工具</code> -&gt; <code>Nuget 包管理器</code> -&gt; <code>程序包管理器控制台</code></li>
+<li>运行命令 <code>Enable-Migrations</code></li>
+<li>运行命令 <code>Add-Migration {Summary}</code> 其中 <code>{Summary}</code> 为本次更新说明，必须是英文</li>
+<li>运行命令 <code>Update-Database</code> 将本次更新应用到数据库</li>
+</ol><div class="md-section-divider"></div><h2 data-anchor-id="nnpk" id="枚举-奖励规则业务类型bonusbussinesstype">[枚举] 奖励规则业务类型(Bonus_BussinessType)</h2><table data-anchor-id="1l1z" class="table table-striped-white table-bordered">
+<thead>
+<tr>
+ <th>中文</th>
+ <th>英文</th>
+ <th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+ <td>异业商家买单支付</td>
+ <td>MERCHANT_PAYING</td>
+ <td>异业商家买单支付</td>
+</tr>
+<tr>
+ <td>商城买单支付</td>
+ <td>MALL_PAYING</td>
+ <td>商城买单支付</td>
+</tr>
+</tbody></table><div class="md-section-divider"></div><h2 data-anchor-id="ok6d" id="枚举-消息发送渠道messagesendchannel">[枚举] 消息发送渠道(Message_SendChannel)</h2><table data-anchor-id="199s" class="table table-striped-white table-bordered">
+<thead>
+<tr>
+ <th>中文</th>
+ <th>英文</th>
+ <th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+ <td>系统通知</td>
+ <td>SYSTEM_NOTIFY</td>
+ <td>系统通知</td>
+</tr>
+<tr>
+ <td>推送</td>
+ <td>PUSH</td>
+ <td>推送</td>
+</tr>
+<tr>
+ <td>手机短信</td>
+ <td>SMS</td>
+ <td>手机短信</td>
+</tr>
+</tbody></table><div class="md-section-divider"></div><h2 data-anchor-id="4kz7" id="枚举-提现状态withdrawstatus">[枚举] 提现状态(Withdraw_Status)</h2><table data-anchor-id="ot49" class="table table-striped-white table-bordered">
+<thead>
+<tr>
+ <th>中文</th>
+ <th>英文</th>
+ <th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+ <td>审核中</td>
+ <td>WAIT_FOR_REVIEW</td>
+ <td>等待审核</td>
+</tr>
+<tr>
+ <td>待放款</td>
+ <td>WAIT_FOR_PAYMENT</td>
+ <td>等待财务放款</td>
+</tr>
+<tr>
+ <td>已完成</td>
+ <td>SUBMITTED_BANK</td>
+ <td>已提交银行处理</td>
+</tr>
+</tbody></table><div class="md-section-divider"></div><h2 data-anchor-id="bth7" id="枚举-支付方式paymenttype">[枚举] 支付方式（Payment_Type）</h2><table data-anchor-id="j2ez" class="table table-striped-white table-bordered">
+<thead>
+<tr>
+ <th>中文</th>
+ <th>英文</th>
+ <th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+ <td>余额支付</td>
+ <td>BALANCE</td>
+ <td>余额支付</td>
+</tr>
+<tr>
+ <td>微信支付</td>
+ <td>WEIXIN</td>
+ <td>微信支付</td>
+</tr>
+<tr>
+ <td>支付宝支付</td>
+ <td>ALIPAY</td>
+ <td>支付宝支付</td>
+</tr>
+</tbody></table><div class="md-section-divider"></div><h2 data-anchor-id="s428" id="枚举-开通区域状态areastatus">[枚举] 开通区域状态(Area_Status)</h2><table data-anchor-id="wcwr" class="table table-striped-white table-bordered">
+<thead>
+<tr>
+ <th>中文</th>
+ <th>英文</th>
+ <th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+ <td>正常</td>
+ <td>NORMAL</td>
+ <td>正常状态</td>
+</tr>
+<tr>
+ <td>锁定</td>
+ <td>LOCKED</td>
+ <td>锁定状态</td>
+</tr>
+</tbody></table><div class="md-section-divider"></div><h2 data-anchor-id="5v50" id="枚举-运营商资产变动业务类型areaoperatorassetsbusinesstype">[枚举] 运营商资产变动业务类型(Area_OperatorAssetsBusinessType)</h2><table data-anchor-id="how7" class="table table-striped-white table-bordered">
+<thead>
+<tr>
+ <th>中文</th>
+ <th>英文</th>
+ <th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+ <td>利润返点</td>
+ <td>REBATES</td>
+ <td>平台抽佣利润返点</td>
+</tr>
+<tr>
+ <td>提现</td>
+ <td>WITHDRAW</td>
+ <td>提现</td>
+</tr>
+</tbody></table><div class="md-section-divider"></div><h2 data-anchor-id="ugf4" id="枚举-运营商账号状态areaoperatoraccountstatus">[枚举] 运营商账号状态(Area_OperatorAccountStatus)</h2><table data-anchor-id="z9ql" class="table table-striped-white table-bordered">
+<thead>
+<tr>
+ <th>中文</th>
+ <th>英文</th>
+ <th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+ <td>正常</td>
+ <td>NORMAL</td>
+ <td>正常状态</td>
+</tr>
+<tr>
+ <td>锁定</td>
+ <td>LOCKED</td>
+ <td>锁定状态</td>
+</tr>
+</tbody></table><div class="md-section-divider"></div><h2 data-anchor-id="j223" id="枚举-销售网点状态areastorestatus">[枚举] 销售网点状态(Area_StoreStatus)</h2><table data-anchor-id="cef9" class="table table-striped-white table-bordered">
+<thead>
+<tr>
+ <th>中文</th>
+ <th>英文</th>
+ <th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+ <td>正常</td>
+ <td>NORMAL</td>
+ <td>正常营业</td>
+</tr>
+<tr>
+ <td>停用</td>
+ <td>UNUSED</td>
+ <td>暂停营业</td>
+</tr>
+</tbody></table><div class="md-section-divider"></div><h2 data-anchor-id="jf4g" id="枚举-销售网点资产变动业务类型areastoreassetsbusinesstype">[枚举] 销售网点资产变动业务类型(Area_StoreAssetsBusinessType)</h2><table data-anchor-id="nipc" class="table table-striped-white table-bordered">
+<thead>
+<tr>
+ <th>中文</th>
+ <th>英文</th>
+ <th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+ <td>销售商品</td>
+ <td>SALE_GOODS</td>
+ <td>销售商品</td>
+</tr>
+<tr>
+ <td>提现</td>
+ <td>WITHDRAW</td>
+ <td>提现</td>
+</tr>
+</tbody></table><div class="md-section-divider"></div><h2 data-anchor-id="yqgl" id="枚举-异业商家状态merchantstatus">[枚举] 异业商家状态(Merchant_Status)</h2><table data-anchor-id="zz6k" class="table table-striped-white table-bordered">
+<thead>
+<tr>
+ <th>中文</th>
+ <th>英文</th>
+ <th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+ <td>正常</td>
+ <td>NORMAL</td>
+ <td>正常状态</td>
+</tr>
+<tr>
+ <td>锁定</td>
+ <td>LOCKED</td>
+ <td>锁定状态</td>
+</tr>
+</tbody></table><div class="md-section-divider"></div><h2 data-anchor-id="sie3" id="枚举-异业商家资产变动业务类型merchantassetsbusinesstype">[枚举] 异业商家资产变动业务类型(Merchant_AssetsBusinessType)</h2><table data-anchor-id="d3xn" class="table table-striped-white table-bordered">
+<thead>
+<tr>
+ <th>中文</th>
+ <th>英文</th>
+ <th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+ <td>扫码收款</td>
+ <td>QR_PROCEEDS</td>
+ <td>扫码收款</td>
+</tr>
+<tr>
+ <td>销售优惠券</td>
+ <td>SALE_COUPON</td>
+ <td>销售优惠券</td>
+</tr>
+</tbody></table><div class="md-section-divider"></div><h2 data-anchor-id="7ccw" id="枚举-异业商家优惠活动状态merchantpromotionstatus">[枚举] 异业商家优惠活动状态(Merchant_PromotionStatus)</h2><table data-anchor-id="tw9q" class="table table-striped-white table-bordered">
+<thead>
+<tr>
+ <th>中文</th>
+ <th>英文</th>
+ <th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+ <td>启用</td>
+ <td>ENABLED</td>
+ <td>启用</td>
+</tr>
+<tr>
+ <td>禁用</td>
+ <td>DISABLED</td>
+ <td>禁用</td>
+</tr>
+</tbody></table><div class="md-section-divider"></div><h2 data-anchor-id="4kvy" id="枚举-异业商家优惠券状态merchantcouponstatus">[枚举] 异业商家优惠券状态(Merchant_CouponStatus)</h2><table data-anchor-id="9qyk" class="table table-striped-white table-bordered">
+<thead>
+<tr>
+ <th>中文</th>
+ <th>英文</th>
+ <th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+ <td>未上架</td>
+ <td>WAIT_PUTAWAY</td>
+ <td>未上加</td>
+</tr>
+<tr>
+ <td>已上架</td>
+ <td>PUTAWAY</td>
+ <td>已上架</td>
+</tr>
+<tr>
+ <td>已停售</td>
+ <td>HALT_SALES</td>
+ <td>已停售</td>
+</tr>
+</tbody></table><div class="md-section-divider"></div><h2 data-anchor-id="7piu" id="枚举-异业商家优惠券销售订单状态merchantcouponsalesorderstatus">[枚举] 异业商家优惠券销售订单状态(Merchant_CouponSalesOrderStatus)</h2><table data-anchor-id="slmb" class="table table-striped-white table-bordered">
+<thead>
+<tr>
+ <th>中文</th>
+ <th>英文</th>
+ <th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+ <td>交易成功</td>
+ <td>SUCCESS</td>
+ <td>交易成功</td>
+</tr>
+<tr>
+ <td>交易失败</td>
+ <td>FAILTURE</td>
+ <td>交易失败</td>
+</tr>
+</tbody></table><div class="md-section-divider"></div><h2 data-anchor-id="g54z" id="枚举-异业商家优惠券使用业务类型merchantcouponusedbusinesstype">[枚举] 异业商家优惠券使用业务类型(Merchant_CouponUsedBusinessType)</h2><table data-anchor-id="4xa7" class="table table-striped-white table-bordered">
+<thead>
+<tr>
+ <th>中文</th>
+ <th>英文</th>
+ <th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+ <td>扫码支付</td>
+ <td>QR</td>
+ <td>扫码支付</td>
+</tr>
+</tbody></table><div class="md-section-divider"></div><h2 data-anchor-id="kvqx" id="枚举-用户状态userstatus">[枚举] 用户状态(User_Status)</h2><table data-anchor-id="798h" class="table table-striped-white table-bordered">
+<thead>
+<tr>
+ <th>中文</th>
+ <th>英文</th>
+ <th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+ <td>正常</td>
+ <td>NORMAL</td>
+ <td>正常状态</td>
+</tr>
+<tr>
+ <td>锁定</td>
+ <td>LOCKED</td>
+ <td>锁定状态</td>
+</tr>
+</tbody></table><div class="md-section-divider"></div><h2 data-anchor-id="soyc" id="枚举-用户授权登陆第三方平台userauthorizationplatformtype">[枚举] 用户授权登陆第三方平台(User_AuthorizationPlatformType)</h2><table data-anchor-id="mgpg" class="table table-striped-white table-bordered">
+<thead>
+<tr>
+ <th>中文</th>
+ <th>英文</th>
+ <th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+ <td>微信</td>
+ <td>WECHAT</td>
+ <td>微信</td>
+</tr>
+<tr>
+ <td>支付宝</td>
+ <td>ALIPAY</td>
+ <td>支付宝</td>
+</tr>
+</tbody></table><div class="md-section-divider"></div><h2 data-anchor-id="0005" id="枚举-用户行为类型userbehaviortype">[枚举] 用户行为类型(User_BehaviorType)</h2><table data-anchor-id="ytu8" class="table table-striped-white table-bordered">
+<thead>
+<tr>
+ <th>中文</th>
+ <th>英文</th>
+ <th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+ <td>登录账号</td>
+ <td>LOGIN</td>
+ <td>登录账号</td>
+</tr>
+<tr>
+ <td>退出登录</td>
+ <td>Logout</td>
+ <td>退出登录</td>
+</tr>
+<tr>
+ <td>扫码买单</td>
+ <td>RQ_PAYMENT</td>
+ <td>通过扫码买单</td>
+</tr>
+<tr>
+ <td>购买商家优惠券</td>
+ <td>BUY_MERCHANT_COUPON</td>
+ <td>购买异业商家的优惠券</td>
+</tr>
+<tr>
+ <td>购买区域商品</td>
+ <td>BUY_GOODS</td>
+ <td>购买区域的商品</td>
+</tr>
+<tr>
+ <td>积分兑换商品</td>
+ <td>CREDIT_BUY_GOODS</td>
+ <td>积分兑换商品</td>
+</tr>
+<tr>
+ <td>查看区域商品</td>
+ <td>LOOK_GOODS</td>
+ <td>查看区域商品</td>
+</tr>
+<tr>
+ <td>查看异业商家</td>
+ <td>LOOK_MERCHANT</td>
+ <td>查看异业商家</td>
+</tr>
+<tr>
+ <td>商品评论</td>
+ <td>COMMENT_GOODS</td>
+ <td>商品评论</td>
+</tr>
+</tbody></table><div class="md-section-divider"></div><h2 data-anchor-id="xqav" id="枚举-用户充值状态userrechargestatus">[枚举] 用户充值状态(User_RechargeStatus)</h2><table data-anchor-id="xmeg" class="table table-striped-white table-bordered">
+<thead>
+<tr>
+ <th>中文</th>
+ <th>英文</th>
+ <th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+ <td>充值成功</td>
+ <td>SUCCESS</td>
+ <td>充值成功</td>
+</tr>
+<tr>
+ <td>充值失败</td>
+ <td>FAILTURE</td>
+ <td>充值失败</td>
+</tr>
+</tbody></table><div class="md-section-divider"></div><h2 data-anchor-id="34az" id="枚举-异业商家扫码订单状态usermerchantpayingorderstatus">[枚举] 异业商家扫码订单状态(User_MerchantPayingOrderStatus)</h2><table data-anchor-id="tx3h" class="table table-striped-white table-bordered">
+<thead>
+<tr>
+ <th>中文</th>
+ <th>英文</th>
+ <th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+ <td>交易成功</td>
+ <td>SUCCESS</td>
+ <td>交易成功</td>
+</tr>
+<tr>
+ <td>交易失败</td>
+ <td>FAILTURE</td>
+ <td>交易失败</td>
+</tr>
+</tbody></table><div class="md-section-divider"></div><h2 data-anchor-id="ylqg" id="枚举-用户资产变动务类型userassetsbusinesstype">[枚举] 用户资产变动务类型(User_AssetsBusinessType)</h2><table data-anchor-id="nvfz" class="table table-striped-white table-bordered">
+<thead>
+<tr>
+ <th>中文</th>
+ <th>英文</th>
+ <th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+ <td>充值</td>
+ <td>RECHARGE</td>
+ <td>充值</td>
+</tr>
+<tr>
+ <td>购买商品</td>
+ <td>BUY_GOODS</td>
+ <td>购买商品</td>
+</tr>
+<tr>
+ <td>购买异业商家优惠券</td>
+ <td>BUY_MERCHANT_COUPON</td>
+ <td>购买异业商家优惠券</td>
+</tr>
+<tr>
+ <td>积分兑换商品</td>
+ <td>CREDIT_ECONVERSION_GOODS</td>
+ <td>积分兑换商品</td>
+</tr>
+<tr>
+ <td>扫码买单</td>
+ <td>QR_PAYMENT</td>
+ <td>扫码买单</td>
+</tr>
+</tbody></table><div class="md-section-divider"></div><h2 data-anchor-id="g4il" id="枚举-用户资产类型userassetstype">[枚举] 用户资产类型(User_AssetsType)</h2><table data-anchor-id="2ijl" class="table table-striped-white table-bordered">
+<thead>
+<tr>
+ <th>中文</th>
+ <th>英文</th>
+ <th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+ <td>现金</td>
+ <td>CASH</td>
+ <td>现金</td>
+</tr>
+<tr>
+ <td>积分</td>
+ <td>CREDIT</td>
+ <td>积分</td>
+</tr>
+<tr>
+ <td>金币</td>
+ <td>GOLD</td>
+ <td>金币</td>
+</tr>
+</tbody></table><div class="md-section-divider"></div><h2 data-anchor-id="wvav" id="枚举-积分商城订单状态creditorderstatus">[枚举] 积分商城订单状态(Credit_OrderStatus)</h2><table data-anchor-id="d2qc" class="table table-striped-white table-bordered">
+<thead>
+<tr>
+ <th>中文</th>
+ <th>英文</th>
+ <th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+ <td>待付款</td>
+ <td>WAITING_PAYMENT</td>
+ <td>待付款</td>
+</tr>
+<tr>
+ <td>待发货</td>
+ <td>WAITING_DISPATCH</td>
+ <td>待发货</td>
+</tr>
+<tr>
+ <td>待收货</td>
+ <td>WAITING_RECEIPT</td>
+ <td>待收货</td>
+</tr>
+<tr>
+ <td>已完成</td>
+ <td>COMPLETE</td>
+ <td>已完成</td>
+</tr>
+<tr>
+ <td>已取消</td>
+ <td>CANCELLED</td>
+ <td>已取消</td>
+</tr>
+</tbody></table><div class="md-section-divider"></div><h2 data-anchor-id="slwu" id="表-平台账户表platformaccount">[表] 平台账户表(Platform_Account)</h2><blockquote data-anchor-id="af6h" class="white-blockquote">
+  <p>包含平台账号信息。</p>
+</blockquote><table data-anchor-id="djk9" class="table table-striped-white table-bordered">
+<thead>
+<tr>
+ <th>字段</th>
+ <th>类型</th>
+ <th>默认值</th>
+ <th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+ <td><strong>AccountId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>主键</td>
+</tr>
+<tr>
+ <td><strong>Username</strong></td>
+ <td>varchar(20)</td>
+ <td></td>
+ <td>用户名</td>
+</tr>
+<tr>
+ <td><strong>Password</strong></td>
+ <td>varchar(50)</td>
+ <td></td>
+ <td>密码（可用于登录及其它操作验证）</td>
+</tr>
+<tr>
+ <td>Name</td>
+ <td>nvarchar(20)</td>
+ <td></td>
+ <td>姓名</td>
+</tr>
+<tr>
+ <td>Gender</td>
+ <td>bit</td>
+ <td></td>
+ <td>性别</td>
+</tr>
+<tr>
+ <td>Mobile</td>
+ <td>varchar(11)</td>
+ <td></td>
+ <td>手机号</td>
+</tr>
+<tr>
+ <td>Email</td>
+ <td>varchar(50)</td>
+ <td></td>
+ <td>邮箱</td>
+</tr>
+<tr>
+ <td>AvatarId</td>
+ <td>GUID</td>
+ <td></td>
+ <td>头像图片ID</td>
+</tr>
+<tr>
+ <td>AvatarUrl</td>
+ <td>varchar(100)</td>
+ <td></td>
+ <td>头像图片URL</td>
+</tr>
+<tr>
+ <td><strong>Status</strong></td>
+ <td>short</td>
+ <td></td>
+ <td>状态（枚举：<code>PlatformAccountStatus</code>）</td>
+</tr>
+<tr>
+ <td>Remark</td>
+ <td>nvarchar(500)</td>
+ <td></td>
+ <td>备注</td>
+</tr>
+<tr>
+ <td><strong>CreatedTime</strong></td>
+ <td>datetime</td>
+ <td>now()</td>
+ <td>创建时间</td>
+</tr>
+<tr>
+ <td>LastLoginTime</td>
+ <td>datetime</td>
+ <td></td>
+ <td>最后登录时间</td>
+</tr>
+<tr>
+ <td>LastLoginIP</td>
+ <td>varchar(63）</td>
+ <td></td>
+ <td>最后登录的IP地址(支持ipv4及ipv6)</td>
+</tr>
+</tbody></table><div class="md-section-divider"></div><h2 data-anchor-id="1th2" id="表-银行资料bank">[表] 银行资料(Bank)</h2><blockquote data-anchor-id="b8cf" class="white-blockquote">
+  <p>包含微信钱包，支付宝钱包，国内各大银行等，在总平台进行配置。</p>
+</blockquote><table data-anchor-id="ua6h" class="table table-striped-white table-bordered">
+<thead>
+<tr>
+ <th>字段</th>
+ <th>类型</th>
+ <th>默认值</th>
+ <th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+ <td><strong>BankId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>主键</td>
+</tr>
+<tr>
+ <td><strong>Name</strong></td>
+ <td>nvarchar(20)</td>
+ <td></td>
+ <td>银行名称（如：<code>中国工商银行</code>)</td>
+</tr>
+<tr>
+ <td>Phone</td>
+ <td>varchar(20)</td>
+ <td></td>
+ <td>服务电话（如：95551）</td>
+</tr>
+<tr>
+ <td>IconId</td>
+ <td>Guid</td>
+ <td></td>
+ <td>银行图标ID</td>
+</tr>
+<tr>
+ <td>IconUrl</td>
+ <td>varchar(100)</td>
+ <td></td>
+ <td>银行图标URL</td>
+</tr>
+<tr>
+ <td><strong>SortOrder</strong></td>
+ <td>int</td>
+ <td>0</td>
+ <td>排序值</td>
+</tr>
+<tr>
+ <td><strong>CreatedTime</strong></td>
+ <td>datetime</td>
+ <td>now()</td>
+ <td>创建时间</td>
+</tr>
+</tbody></table><div class="md-section-divider"></div><h2 data-anchor-id="ht5l" id="表-奖励规则表bonusrule">[表] 奖励规则表(BonusRule)</h2><blockquote data-anchor-id="haly" class="white-blockquote">
+  <p>扫码支付奖励规则表，一个业务类型只允许存在一个规则为启用状态。</p>
+</blockquote><table data-anchor-id="daro" class="table table-striped-white table-bordered">
+<thead>
+<tr>
+ <th>字段</th>
+ <th>类型</th>
+ <th>默认值</th>
+ <th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+ <td><strong>RuleId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>主键</td>
+</tr>
+<tr>
+ <td><strong>Name</strong></td>
+ <td>varchar(50)</td>
+ <td></td>
+ <td>规则名称（程序使用）</td>
+</tr>
+<tr>
+ <td><strong>BussinessType</strong></td>
+ <td>short</td>
+ <td></td>
+ <td>业务类型，关联 <code>Bonus_BussinessType</code> 枚举</td>
+</tr>
+<tr>
+ <td><strong>Content</strong></td>
+ <td>nvarchar(MAX)</td>
+ <td></td>
+ <td>规则内容(JSON数据)</td>
+</tr>
+<tr>
+ <td><strong>CreatedTime</strong></td>
+ <td>datetime</td>
+ <td>now()</td>
+ <td>创建时间</td>
+</tr>
+<tr>
+ <td>UpdatedTime</td>
+ <td>datetime</td>
+ <td></td>
+ <td>最后的修改时间</td>
+</tr>
+<tr>
+ <td><strong>IsEnabled</strong></td>
+ <td>bit</td>
+ <td>1</td>
+ <td>是否启用</td>
+</tr>
+</tbody></table><div class="md-section-divider"></div><h2 data-anchor-id="rjku" id="表-产品库分类productcategory">[表] 产品库分类(Product_Category)</h2><blockquote data-anchor-id="xtwy" class="white-blockquote">
+  <p>产品分类定义表。</p>
+</blockquote><table data-anchor-id="smye" class="table table-striped-white table-bordered">
+<thead>
+<tr>
+ <th>字段</th>
+ <th>类型</th>
+ <th>默认值</th>
+ <th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+ <td><strong>CategoryId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>主键</td>
+</tr>
+<tr>
+ <td><strong>Name</strong></td>
+ <td>nvarchar(50)</td>
+ <td></td>
+ <td>分类名称</td>
+</tr>
+<tr>
+ <td>IconId</td>
+ <td>Guid</td>
+ <td></td>
+ <td>分类图标ID</td>
+</tr>
+<tr>
+ <td>IconUrl</td>
+ <td>varchar(100)</td>
+ <td></td>
+ <td>分类图标URL</td>
+</tr>
+<tr>
+ <td><strong>ParentId</strong></td>
+ <td>long</td>
+ <td>0</td>
+ <td>上级分类</td>
+</tr>
+<tr>
+ <td><strong>SortOrder</strong></td>
+ <td>int</td>
+ <td>0</td>
+ <td>排列顺序</td>
+</tr>
+<tr>
+ <td>Description</td>
+ <td>nvarchar(500)</td>
+ <td></td>
+ <td>描述信息</td>
+</tr>
+<tr>
+ <td><strong>CreatedTime</strong></td>
+ <td>datetime</td>
+ <td>now()</td>
+ <td>创建时间</td>
+</tr>
+<tr>
+ <td><strong>IsLeaf</strong></td>
+ <td>bit</td>
+ <td>1</td>
+ <td>是否为叶子节点</td>
+</tr>
+<tr>
+ <td><strong>IsDeleted</strong></td>
+ <td>bit</td>
+ <td>0</td>
+ <td>是否删除</td>
+</tr>
+</tbody></table><div class="md-section-divider"></div><h2 data-anchor-id="jc22" id="表-产品库产品信息product">[表] 产品库产品信息(Product)</h2><blockquote data-anchor-id="7oyq" class="white-blockquote">
+  <p>产品库产品定义表。</p>
+</blockquote><table data-anchor-id="i6n3" class="table table-striped-white table-bordered">
+<thead>
+<tr>
+ <th>字段</th>
+ <th>类型</th>
+ <th>默认值</th>
+ <th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+ <td><strong>ProductId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>主键</td>
+</tr>
+<tr>
+ <td><strong>CategoryId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>所属分类，引用 <code>Product_Category</code> 表</td>
+</tr>
+<tr>
+ <td><strong>Name</strong></td>
+ <td>nvarchar(200)</td>
+ <td></td>
+ <td>产品名称</td>
+</tr>
+<tr>
+ <td>ImageId</td>
+ <td>Guid</td>
+ <td></td>
+ <td>封面图片ID</td>
+</tr>
+<tr>
+ <td>ImageUrl</td>
+ <td>varchar(100)</td>
+ <td></td>
+ <td>封面图片URL</td>
+</tr>
+<tr>
+ <td>Keywords</td>
+ <td>nvarchar(200)</td>
+ <td></td>
+ <td>关键字</td>
+</tr>
+<tr>
+ <td>Properties</td>
+ <td>nvarchar(MAX)</td>
+ <td></td>
+ <td>基本属性(JSON 字符串)</td>
+</tr>
+<tr>
+ <td>Description</td>
+ <td>nvarchar(MAX)</td>
+ <td></td>
+ <td>详情描述</td>
+</tr>
+<tr>
+ <td>RefererUrl</td>
+ <td>varchar(100)</td>
+ <td></td>
+ <td>引用页（采集来源URL）</td>
+</tr>
+<tr>
+ <td><strong>CreatedTime</strong></td>
+ <td>datetime</td>
+ <td>now()</td>
+ <td>创建时间</td>
+</tr>
+<tr>
+ <td>ModifiedTime</td>
+ <td>datetime</td>
+ <td></td>
+ <td>最后的修改时间</td>
+</tr>
+<tr>
+ <td><strong>IsSpecific</strong></td>
+ <td>bit</td>
+ <td>0</td>
+ <td>是否为区域专属产品</td>
+</tr>
+<tr>
+ <td><strong>IsDeleted</strong></td>
+ <td>bit</td>
+ <td>0</td>
+ <td>是否删除</td>
+</tr>
+</tbody></table><div class="md-section-divider"></div><h2 data-anchor-id="yhma" id="表-产品库图片信息productimage">[表] 产品库图片信息(Product_Image)</h2><blockquote data-anchor-id="kwx2" class="white-blockquote">
+  <p>产品图片信息表，与 <code>Product</code> 表为一对多关系。</p>
+</blockquote><table data-anchor-id="sbuz" class="table table-striped-white table-bordered">
+<thead>
+<tr>
+ <th>字段</th>
+ <th>类型</th>
+ <th>默认值</th>
+ <th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+ <td><strong>ImageId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>主键</td>
+</tr>
+<tr>
+ <td><strong>ProductId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>所属产品，引用 <code>Product</code> 表</td>
+</tr>
+<tr>
+ <td>FileId</td>
+ <td>Guid</td>
+ <td></td>
+ <td>文件ID</td>
+</tr>
+<tr>
+ <td><strong>FileUrl</strong></td>
+ <td>varchar(100)</td>
+ <td></td>
+ <td>文件地址</td>
+</tr>
+<tr>
+ <td><strong>SortOrder</strong></td>
+ <td>int</td>
+ <td>0</td>
+ <td>排列顺序</td>
+</tr>
+<tr>
+ <td><strong>CreatedTime</strong></td>
+ <td>datetime</td>
+ <td>now()</td>
+ <td>创建时间</td>
+</tr>
+<tr>
+ <td><strong>IsDeleted</strong></td>
+ <td>bit</td>
+ <td>0</td>
+ <td>是否删除</td>
+</tr>
+</tbody></table><div class="md-section-divider"></div><h2 data-anchor-id="dq6s" id="表-产品库规格信息productsku">[表] 产品库规格信息(Product_SKU)</h2><blockquote data-anchor-id="qu5i" class="white-blockquote">
+  <p>产品规格信息表，与 <code>Product</code> 表为一对多关系。</p>
+</blockquote><table data-anchor-id="n8kz" class="table table-striped-white table-bordered">
+<thead>
+<tr>
+ <th>字段</th>
+ <th>类型</th>
+ <th>默认值</th>
+ <th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+ <td><strong>SkuId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>主键</td>
+</tr>
+<tr>
+ <td><strong>ProductId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>所属产品，引用 <code>Product</code> 表</td>
+</tr>
+<tr>
+ <td>Barcode</td>
+ <td>varchar(50)</td>
+ <td></td>
+ <td>条码信息</td>
+</tr>
+<tr>
+ <td>Name</td>
+ <td>nvarchar(200)</td>
+ <td></td>
+ <td>规格名称</td>
+</tr>
+<tr>
+ <td>ImageId</td>
+ <td>Guid</td>
+ <td></td>
+ <td>规格图片ID</td>
+</tr>
+<tr>
+ <td>ImageUrl</td>
+ <td>varchar(100)</td>
+ <td></td>
+ <td>规格图片URL</td>
+</tr>
+<tr>
+ <td>Properties</td>
+ <td>nvarchar(MAX)</td>
+ <td></td>
+ <td>规格属性(JSON 字符串)</td>
+</tr>
+<tr>
+ <td>SupplyPrice</td>
+ <td>decimal(8,2)</td>
+ <td></td>
+ <td>供应价</td>
+</tr>
+<tr>
+ <td>CostPrice</td>
+ <td>decimal(8,2)</td>
+ <td></td>
+ <td>成本价</td>
+</tr>
+<tr>
+ <td>GuidePrice</td>
+ <td>decimal(8,2)</td>
+ <td></td>
+ <td>销售指导价</td>
+</tr>
+<tr>
+ <td><strong>IsDeleted</strong></td>
+ <td>bit</td>
+ <td>0</td>
+ <td>是否删除</td>
+</tr>
+</tbody></table><div class="md-section-divider"></div><h2 data-anchor-id="45cs" id="表-产品库标签信息producttag">[表] 产品库标签信息(Product_Tag)</h2><blockquote data-anchor-id="djhp" class="white-blockquote">
+  <p>产品标签定义表。</p>
+</blockquote><table data-anchor-id="lldy" class="table table-striped-white table-bordered">
+<thead>
+<tr>
+ <th>字段</th>
+ <th>类型</th>
+ <th>默认值</th>
+ <th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+ <td><strong>TagId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>主键</td>
+</tr>
+<tr>
+ <td><strong>Name</strong></td>
+ <td>nvarchar(200)</td>
+ <td></td>
+ <td>标签名称</td>
+</tr>
+<tr>
+ <td><strong>SortOrder</strong></td>
+ <td>int</td>
+ <td>0</td>
+ <td>排列顺序</td>
+</tr>
+<tr>
+ <td><strong>CreatedTime</strong></td>
+ <td>datetime</td>
+ <td>now()</td>
+ <td>创建时间</td>
+</tr>
+<tr>
+ <td><strong>IsDeleted</strong></td>
+ <td>bit</td>
+ <td>0</td>
+ <td>是否删除</td>
+</tr>
+</tbody></table><div class="md-section-divider"></div><h2 data-anchor-id="5v3f" id="表-产品库标签关联表producttagrelation">[表] 产品库标签关联表(Product_TagRelation)</h2><blockquote data-anchor-id="wv3i" class="white-blockquote">
+  <p>产品标签关联表，与 <code>Product</code> 表为多对多关系。</p>
+</blockquote><table data-anchor-id="lsl5" class="table table-striped-white table-bordered">
+<thead>
+<tr>
+ <th>字段</th>
+ <th>类型</th>
+ <th>默认值</th>
+ <th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+ <td><strong>ProductId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>主键，产品ID，引用 <code>Product</code> 表</td>
+</tr>
+<tr>
+ <td><strong>TagId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>主键，标签ID，引用 <code>Product_Tag</code> 表</td>
+</tr>
+</tbody></table><div class="md-section-divider"></div><h2 data-anchor-id="xxca" id="表-运营区域表area">[表] 运营区域表(Area)</h2><blockquote data-anchor-id="5isj" class="white-blockquote">
+  <p>已开通运营的区域信息，<code>AreaId</code> 对应行政区域ID</p>
+</blockquote><table data-anchor-id="jut9" class="table table-striped-white table-bordered">
+<thead>
+<tr>
+ <th>字段</th>
+ <th>类型</th>
+ <th>默认值</th>
+ <th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+ <td><strong>AreaId</strong></td>
+ <td>int</td>
+ <td></td>
+ <td>主键，开通的区域ID</td>
+</tr>
+<tr>
+ <td><strong>Name</strong></td>
+ <td>nvarchar(10)</td>
+ <td></td>
+ <td>区域名称（如：深圳）</td>
+</tr>
+<tr>
+ <td><strong>Status</strong></td>
+ <td>short</td>
+ <td></td>
+ <td>状态（枚举：<code>Area_Status</code>）</td>
+</tr>
+<tr>
+ <td><strong>OpenTime</strong></td>
+ <td>datetime</td>
+ <td>now()</td>
+ <td>开通时间</td>
+</tr>
+<tr>
+ <td><strong>SortOrder</strong></td>
+ <td>int</td>
+ <td>0</td>
+ <td>排列顺序</td>
+</tr>
+<tr>
+ <td>Remark</td>
+ <td>nvarchar(500)</td>
+ <td></td>
+ <td>备注信息</td>
+</tr>
+</tbody></table><div class="md-section-divider"></div><h2 data-anchor-id="ogkz" id="表-区域运营商表areaoperator">[表] 区域运营商表(Area_Operator)</h2><blockquote data-anchor-id="9m5j" class="white-blockquote">
+  <p>已开通运营区域的运营商信息。</p>
+</blockquote><table data-anchor-id="n9hs" class="table table-striped-white table-bordered">
+<thead>
+<tr>
+ <th>字段</th>
+ <th>类型</th>
+ <th>默认值</th>
+ <th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+ <td><strong>OperatorId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>主键，运营商ID</td>
+</tr>
+<tr>
+ <td><strong>AreaId</strong></td>
+ <td>int</td>
+ <td></td>
+ <td>运营区域ID，关联<code>Area</code>表中<code>AreaId</code>字段</td>
+</tr>
+<tr>
+ <td><strong>Name</strong></td>
+ <td>nvarchar(50)</td>
+ <td></td>
+ <td>公司名称</td>
+</tr>
+<tr>
+ <td>Address</td>
+ <td>nvarchar(100)</td>
+ <td></td>
+ <td>公司地址</td>
+</tr>
+<tr>
+ <td>Linkman</td>
+ <td>nvarchar(10)</td>
+ <td></td>
+ <td>联系人</td>
+</tr>
+<tr>
+ <td>Phone</td>
+ <td>varchar(30)</td>
+ <td></td>
+ <td>联系电话</td>
+</tr>
+<tr>
+ <td>Email</td>
+ <td>varchar(50)</td>
+ <td></td>
+ <td>E-Mail</td>
+</tr>
+<tr>
+ <td><strong>Balance</strong></td>
+ <td>decimal(10,2)</td>
+ <td>0.00</td>
+ <td>资金余额</td>
+</tr>
+<tr>
+ <td>Remark</td>
+ <td>nvarchar(500)</td>
+ <td></td>
+ <td>备注</td>
+</tr>
+<tr>
+ <td><strong>CreatedTime</strong></td>
+ <td>datetime</td>
+ <td>now()</td>
+ <td>创建时间</td>
+</tr>
+<tr>
+ <td>UpdatedTime</td>
+ <td>datetime</td>
+ <td></td>
+ <td>更新时间</td>
+</tr>
+</tbody></table><div class="md-section-divider"></div><h2 data-anchor-id="czii" id="表-区域运营商资产变动表areaoperatorassetsrecord">[表] 区域运营商资产变动表(Area_OperatorAssetsRecord)</h2><blockquote data-anchor-id="ficd" class="white-blockquote">
+  <p>包含 所属业务/进/出账记录/关联业务数据/创建时间</p>
+</blockquote><table data-anchor-id="pqb2" class="table table-striped-white table-bordered">
+<thead>
+<tr>
+ <th>字段</th>
+ <th>类型</th>
+ <th>默认值</th>
+ <th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+ <td><strong>RecordId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>主键，记录ID</td>
+</tr>
+<tr>
+ <td><strong>OperatorId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>运营商ID</td>
+</tr>
+<tr>
+ <td><strong>BusinessType</strong></td>
+ <td>short</td>
+ <td></td>
+ <td>业务类型（枚举：<code>Area_OperatorAssetsBusinessType</code>）</td>
+</tr>
+<tr>
+ <td><strong>BusinessObject</strong></td>
+ <td>nvarchar(MAX)</td>
+ <td></td>
+ <td>关联的业务对象（以<code>json</code>格式存储）</td>
+</tr>
+<tr>
+ <td><strong>Amount</strong></td>
+ <td>decimal(10,2)</td>
+ <td></td>
+ <td>进/出资产数量(出账时用“-”符号，如：<code>-100.00</code>)</td>
+</tr>
+<tr>
+ <td><strong>BeforeBalance</strong></td>
+ <td>decimal(10,2)</td>
+ <td></td>
+ <td>变动前的余额</td>
+</tr>
+<tr>
+ <td><strong>AfterBalance</strong></td>
+ <td>decimal(10,2)</td>
+ <td></td>
+ <td>变动后的余额</td>
+</tr>
+<tr>
+ <td><strong>Summary</strong></td>
+ <td>nvarchar(500)</td>
+ <td></td>
+ <td>摘要信息</td>
+</tr>
+<tr>
+ <td><strong>CreatedTime</strong></td>
+ <td>datetime</td>
+ <td>now()</td>
+ <td>创建时间</td>
+</tr>
+</tbody></table><div class="md-section-divider"></div><h2 data-anchor-id="n160" id="表-区域运营商账户表areaoperatoraccount">[表] 区域运营商账户表(Area_OperatorAccount)</h2><blockquote data-anchor-id="tu5u" class="white-blockquote">
+  <p>包含区域运营商账户信息</p>
+</blockquote><table data-anchor-id="c34d" class="table table-striped-white table-bordered">
+<thead>
+<tr>
+ <th>字段</th>
+ <th>类型</th>
+ <th>默认值</th>
+ <th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+ <td><strong>AccountId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>主键</td>
+</tr>
+<tr>
+ <td><strong>OperatorId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>所属运营商ID</td>
+</tr>
+<tr>
+ <td><strong>Username</strong></td>
+ <td>varchar(20)</td>
+ <td></td>
+ <td>用户名</td>
+</tr>
+<tr>
+ <td><strong>Password</strong></td>
+ <td>varchar(50)</td>
+ <td></td>
+ <td>密码（可用于登录及其它操作验证）</td>
+</tr>
+<tr>
+ <td><strong>Name</strong></td>
+ <td>nvarchar(20)</td>
+ <td></td>
+ <td>姓名</td>
+</tr>
+<tr>
+ <td>Gender</td>
+ <td>bit</td>
+ <td></td>
+ <td>性别</td>
+</tr>
+<tr>
+ <td>Mobile</td>
+ <td>varchar(11)</td>
+ <td></td>
+ <td>手机号</td>
+</tr>
+<tr>
+ <td>Email</td>
+ <td>varchar(50)</td>
+ <td></td>
+ <td>邮箱</td>
+</tr>
+<tr>
+ <td>AvatarId</td>
+ <td>GUID</td>
+ <td></td>
+ <td>头像图片ID</td>
+</tr>
+<tr>
+ <td>AvatarUrl</td>
+ <td>varchar(100)</td>
+ <td></td>
+ <td>头像图片URL</td>
+</tr>
+<tr>
+ <td><strong>Status</strong></td>
+ <td>short</td>
+ <td></td>
+ <td>状态（枚举：<code>Area_OperatorAccountStatus</code>）</td>
+</tr>
+<tr>
+ <td>Remark</td>
+ <td>nvarchar(500)</td>
+ <td></td>
+ <td>备注</td>
+</tr>
+<tr>
+ <td><strong>CreatedTime</strong></td>
+ <td>datetime</td>
+ <td>now()</td>
+ <td>创建时间</td>
+</tr>
+<tr>
+ <td>LastLoginTime</td>
+ <td>datetime</td>
+ <td></td>
+ <td>最后登录时间</td>
+</tr>
+<tr>
+ <td>LastLoginIP</td>
+ <td>varchar(63）</td>
+ <td></td>
+ <td>最后登录的IP地址(支持ipv4及ipv6)</td>
+</tr>
+</tbody></table><div class="md-section-divider"></div><h2 data-anchor-id="6e4l" id="表-区域经营趋势表areabusinessreport">[表] 区域经营趋势表(Area_BusinessReport)</h2><blockquote data-anchor-id="vxpc" class="white-blockquote">
+  <p>包含区域的经营趋势报告（每日一条）</p>
+</blockquote><table data-anchor-id="ag09" class="table table-striped-white table-bordered">
+<thead>
+<tr>
+ <th>字段</th>
+ <th>类型</th>
+ <th>默认值</th>
+ <th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+ <td><strong>ReportId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>主键，报告ID</td>
+</tr>
+<tr>
+ <td><strong>AreaId</strong></td>
+ <td>int</td>
+ <td></td>
+ <td>所属区域ID，引用 <code>Area</code> 表</td>
+</tr>
+<tr>
+ <td><strong>ReportDate</strong></td>
+ <td>date</td>
+ <td></td>
+ <td>统计日期</td>
+</tr>
+<tr>
+ <td><strong>StoreCount</strong></td>
+ <td>int</td>
+ <td>0</td>
+ <td>当日销售网点数</td>
+</tr>
+<tr>
+ <td><strong>MerchantCount</strong></td>
+ <td>int</td>
+ <td>0</td>
+ <td>当日异业商家数</td>
+</tr>
+<tr>
+ <td><strong>UserCount</strong></td>
+ <td>int</td>
+ <td>0</td>
+ <td>当日用户数</td>
+</tr>
+<tr>
+ <td><strong>GoodsCount</strong></td>
+ <td>int</td>
+ <td>0</td>
+ <td>当日商品数</td>
+</tr>
+<tr>
+ <td><strong>GoodsOrderCount</strong></td>
+ <td>int</td>
+ <td>0</td>
+ <td>当日商品订单数</td>
+</tr>
+<tr>
+ <td><strong>GoodsOrderAmount</strong></td>
+ <td>decimal(10,2)</td>
+ <td>0.00</td>
+ <td>当日商品订单销售额</td>
+</tr>
+<tr>
+ <td><strong>QROrderCount</strong></td>
+ <td>int</td>
+ <td>0</td>
+ <td>当日用户扫码买单数</td>
+</tr>
+<tr>
+ <td><strong>QROrderAmount</strong></td>
+ <td>decimal(10,2)</td>
+ <td>0.00</td>
+ <td>当日用户扫码买单金额</td>
+</tr>
+<tr>
+ <td><strong>MerchantCouponSaleCount</strong></td>
+ <td>int</td>
+ <td>0</td>
+ <td>当日异业商家优惠券销量</td>
+</tr>
+<tr>
+ <td><strong>MerchantCouponSaleAmount</strong></td>
+ <td>decimal(10,2)</td>
+ <td></td>
+ <td>当日异业商家优惠券销售额</td>
+</tr>
+<tr>
+ <td>Summary</td>
+ <td>nvarchar(500)</td>
+ <td></td>
+ <td>摘要</td>
+</tr>
+</tbody></table><div class="md-section-divider"></div><h2 data-anchor-id="4riz" id="表-区域专属产品表areaspecificproduct">[表] 区域专属产品表(Area_SpecificProduct)</h2><blockquote data-anchor-id="kxnq" class="white-blockquote">
+  <p>区域专属产品表</p>
+</blockquote><table data-anchor-id="juv5" class="table table-striped-white table-bordered">
+<thead>
+<tr>
+ <th>字段</th>
+ <th>类型</th>
+ <th>默认值</th>
+ <th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+ <td><strong>AreaId</strong></td>
+ <td>int</td>
+ <td></td>
+ <td>主键，区域ID</td>
+</tr>
+<tr>
+ <td><strong>ProductId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>主键，产品ID，引用 <code>Product</code> 表</td>
+</tr>
+</tbody></table><div class="md-section-divider"></div><h2 data-anchor-id="f71t" id="表-区域销售商品分类表areagoodscategory">[表] 区域销售商品分类表(Area_GoodsCategory)</h2><blockquote data-anchor-id="40md" class="white-blockquote">
+  <p>区域销售商品分类表（支持多层级）</p>
+</blockquote><table data-anchor-id="zbd0" class="table table-striped-white table-bordered">
+<thead>
+<tr>
+ <th>字段</th>
+ <th>类型</th>
+ <th>默认值</th>
+ <th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+ <td><strong>CategoryId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>主键</td>
+</tr>
+<tr>
+ <td><strong>AreaId</strong></td>
+ <td>int</td>
+ <td></td>
+ <td>区域ID，引用 <code>Area</code> 表</td>
+</tr>
+<tr>
+ <td><strong>Name</strong></td>
+ <td>nvarchar(50)</td>
+ <td></td>
+ <td>分类名称</td>
+</tr>
+<tr>
+ <td>IconId</td>
+ <td>Guid</td>
+ <td></td>
+ <td>分类图标ID</td>
+</tr>
+<tr>
+ <td>IconUrl</td>
+ <td>varchar(100)</td>
+ <td></td>
+ <td>分类图标URL</td>
+</tr>
+<tr>
+ <td><strong>ParentId</strong></td>
+ <td>long</td>
+ <td>0</td>
+ <td>上级分类</td>
+</tr>
+<tr>
+ <td><strong>SortOrder</strong></td>
+ <td>int</td>
+ <td>0</td>
+ <td>排列顺序</td>
+</tr>
+<tr>
+ <td>Description</td>
+ <td>nvarchar(500)</td>
+ <td></td>
+ <td>描述信息</td>
+</tr>
+<tr>
+ <td><strong>CreatedTime</strong></td>
+ <td>datetime</td>
+ <td>now()</td>
+ <td>创建时间</td>
+</tr>
+<tr>
+ <td><strong>IsLeaf</strong></td>
+ <td>bit</td>
+ <td>1</td>
+ <td>是否为叶子节点</td>
+</tr>
+<tr>
+ <td><strong>IsDeleted</strong></td>
+ <td>bit</td>
+ <td>0</td>
+ <td>是否删除</td>
+</tr>
+</tbody></table><div class="md-section-divider"></div><h2 data-anchor-id="foz9" id="表-区域销售商品表areagoods">[表] 区域销售商品表(Area_Goods)</h2><blockquote data-anchor-id="1vlq" class="white-blockquote">
+  <p>区域销售商品表（必须从 <code>Product</code> 关联）</p>
+</blockquote><table data-anchor-id="oln4" class="table table-striped-white table-bordered">
+<thead>
+<tr>
+ <th>字段</th>
+ <th>类型</th>
+ <th>默认值</th>
+ <th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+ <td><strong>GoodsId</strong></td>
+ <td>int</td>
+ <td></td>
+ <td>主键</td>
+</tr>
+<tr>
+ <td><strong>AreaId</strong></td>
+ <td>int</td>
+ <td></td>
+ <td>区域ID，引用 <code>Area</code> 表</td>
+</tr>
+<tr>
+ <td><strong>ProductId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>产品ID，引用 <code>Product</code> 表</td>
+</tr>
+<tr>
+ <td><strong>CategoryId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>分类ID，引用 <code>Area_GoodsCategory</code> 表</td>
+</tr>
+<tr>
+ <td><strong>Name</strong></td>
+ <td>nvarchar(200)</td>
+ <td></td>
+ <td>商品名称</td>
+</tr>
+<tr>
+ <td>ImageId</td>
+ <td>Guid</td>
+ <td></td>
+ <td>封面图片ID</td>
+</tr>
+<tr>
+ <td>ImageUrl</td>
+ <td>varchar(100)</td>
+ <td></td>
+ <td>封面图片URL</td>
+</tr>
+<tr>
+ <td>Keywords</td>
+ <td>nvarchar(200)</td>
+ <td></td>
+ <td>关键字</td>
+</tr>
+<tr>
+ <td>Properties</td>
+ <td>nvarchar(MAX)</td>
+ <td></td>
+ <td>基本属性(JSON 字符串)</td>
+</tr>
+<tr>
+ <td>Description</td>
+ <td>nvarchar(MAX)</td>
+ <td></td>
+ <td>详情描述</td>
+</tr>
+<tr>
+ <td><strong>CreatedTime</strong></td>
+ <td>datetime</td>
+ <td>now()</td>
+ <td>创建时间</td>
+</tr>
+<tr>
+ <td>ModifiedTime</td>
+ <td>datetime</td>
+ <td></td>
+ <td>最后修改时间</td>
+</tr>
+<tr>
+ <td><strong>IsDeleted</strong></td>
+ <td>bit</td>
+ <td>0</td>
+ <td>是否删除</td>
+</tr>
+</tbody></table><div class="md-section-divider"></div><h2 data-anchor-id="xrli" id="表-区域销售商品规格表areagoodssku">[表] 区域销售商品规格表(Area_GoodsSKU)</h2><blockquote data-anchor-id="ek15" class="white-blockquote">
+  <p>区域销售商品规格表，与 <code>Area_Goods</code> 为一对多关系。</p>
+</blockquote><table data-anchor-id="u88o" class="table table-striped-white table-bordered">
+<thead>
+<tr>
+ <th>字段</th>
+ <th>类型</th>
+ <th>默认值</th>
+ <th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+ <td><strong>SkuId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>主键</td>
+</tr>
+<tr>
+ <td><strong>AreaId</strong></td>
+ <td>int</td>
+ <td></td>
+ <td>所属区域，引用 <code>Area</code> 表</td>
+</tr>
+<tr>
+ <td><strong>GoodsId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>所属商品，引用 <code>Area_Goods</code> 表</td>
+</tr>
+<tr>
+ <td><strong>ProductSkuId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>产品SKU主键，引用 <code>Product_SKU</code> 表</td>
+</tr>
+<tr>
+ <td>Barcode</td>
+ <td>varchar(50)</td>
+ <td></td>
+ <td>条码信息</td>
+</tr>
+<tr>
+ <td>Name</td>
+ <td>nvarchar(200)</td>
+ <td></td>
+ <td>规格名称</td>
+</tr>
+<tr>
+ <td>ImageId</td>
+ <td>Guid</td>
+ <td></td>
+ <td>规格图片ID</td>
+</tr>
+<tr>
+ <td>ImageUrl</td>
+ <td>varchar(100)</td>
+ <td></td>
+ <td>规格图片URL</td>
+</tr>
+<tr>
+ <td>Properties</td>
+ <td>nvarchar(MAX)</td>
+ <td></td>
+ <td>规格属性(JSON 字符串)</td>
+</tr>
+<tr>
+ <td>SupplyPrice</td>
+ <td>decimal(8,2)</td>
+ <td></td>
+ <td>供应价</td>
+</tr>
+<tr>
+ <td>CostPrice</td>
+ <td>decimal(8,2)</td>
+ <td></td>
+ <td>成本价</td>
+</tr>
+<tr>
+ <td><strong>SalePrice</strong></td>
+ <td>decimal(8,2)</td>
+ <td></td>
+ <td>销售价</td>
+</tr>
+<tr>
+ <td><strong>Stock</strong></td>
+ <td>int</td>
+ <td></td>
+ <td>库存数量</td>
+</tr>
+<tr>
+ <td><strong>Sales</strong></td>
+ <td>int</td>
+ <td>0</td>
+ <td>销量</td>
+</tr>
+<tr>
+ <td><strong>IsDeleted</strong></td>
+ <td>bit</td>
+ <td>0</td>
+ <td>是否删除</td>
+</tr>
+</tbody></table><div class="md-section-divider"></div><h2 data-anchor-id="dhdb" id="表-区域销售商品标签表areagoodstag">[表] 区域销售商品标签表(Area_GoodsTag)</h2><blockquote data-anchor-id="l3u4" class="white-blockquote">
+  <p>区域销售商品标签表，与 <code>Product_Tag</code> 合并使用</p>
+</blockquote><table data-anchor-id="36nm" class="table table-striped-white table-bordered">
+<thead>
+<tr>
+ <th>字段</th>
+ <th>类型</th>
+ <th>默认值</th>
+ <th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+ <td><strong>TagId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>主键</td>
+</tr>
+<tr>
+ <td><strong>AreaId</strong></td>
+ <td>int</td>
+ <td></td>
+ <td>区域ID，引用 <code>Area</code> 表</td>
+</tr>
+<tr>
+ <td><strong>Name</strong></td>
+ <td>nvarchar(200)</td>
+ <td></td>
+ <td>标签名称</td>
+</tr>
+<tr>
+ <td><strong>SortOrder</strong></td>
+ <td>int</td>
+ <td>0</td>
+ <td>排列顺序</td>
+</tr>
+<tr>
+ <td><strong>CreatedTime</strong></td>
+ <td>datetime</td>
+ <td>now()</td>
+ <td>创建时间</td>
+</tr>
+<tr>
+ <td><strong>IsDeleted</strong></td>
+ <td>bit</td>
+ <td>0</td>
+ <td>是否删除</td>
+</tr>
+</tbody></table><div class="md-section-divider"></div><h2 data-anchor-id="pdfp" id="表-区域销售商品标签关联表areagoodstagrelation">[表] 区域销售商品标签关联表(Area_GoodsTagRelation)</h2><blockquote data-anchor-id="afpc" class="white-blockquote">
+  <p>区域销售商品标签关联表，与 <code>Area_Goods</code> 为多对多关系。</p>
+</blockquote><table data-anchor-id="wai6" class="table table-striped-white table-bordered">
+<thead>
+<tr>
+ <th>字段</th>
+ <th>类型</th>
+ <th>默认值</th>
+ <th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+ <td><strong>GoodsId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>主键，商品ID，引用 <code>Area_Goods</code> 表</td>
+</tr>
+<tr>
+ <td><strong>TagId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>主键，标签ID，引用 <code>Area_GoodsTag</code> 表</td>
+</tr>
+</tbody></table><div class="md-section-divider"></div><h2 data-anchor-id="ikkx" id="表-销售网点areastore">[表] 销售网点(Area_Store)</h2><blockquote data-anchor-id="5ubf" class="white-blockquote">
+  <p>销售网点的基本信息。</p>
+</blockquote><table data-anchor-id="s87b" class="table table-striped-white table-bordered">
+<thead>
+<tr>
+ <th>字段</th>
+ <th>类型</th>
+ <th>默认值</th>
+ <th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+ <td><strong>StoreId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>主键，销售网点ID</td>
+</tr>
+<tr>
+ <td><strong>Mobile</strong></td>
+ <td>varchar(11)</td>
+ <td></td>
+ <td>认证手机号(用于登录系统)</td>
+</tr>
+<tr>
+ <td><strong>Password</strong></td>
+ <td>varchar(50)</td>
+ <td></td>
+ <td>登录密码</td>
+</tr>
+<tr>
+ <td>SecurityPassword</td>
+ <td>varchar(50)</td>
+ <td></td>
+ <td>安全密码(支付等场景用)</td>
+</tr>
+<tr>
+ <td><strong>Name</strong></td>
+ <td>nvarchar(50)</td>
+ <td></td>
+ <td>销售网点名称</td>
+</tr>
+<tr>
+ <td><strong>AreaId</strong></td>
+ <td>int</td>
+ <td></td>
+ <td>所属区域ID，关联<code>Area</code>表</td>
+</tr>
+<tr>
+ <td><strong>Linkman</strong></td>
+ <td>nvarchar(20)</td>
+ <td></td>
+ <td>联系人</td>
+</tr>
+<tr>
+ <td><strong>Phone</strong></td>
+ <td>varchar(30)</td>
+ <td></td>
+ <td>联系电话</td>
+</tr>
+<tr>
+ <td><strong>RegionIds</strong></td>
+ <td>varchar(50)</td>
+ <td></td>
+ <td>收货地区域ID路径，如：440000,440300,440301</td>
+</tr>
+<tr>
+ <td><strong>RegionNames</strong></td>
+ <td>nvarchar(50)</td>
+ <td></td>
+ <td>收货地区域名称路径，如：广东省,深圳市,南山区</td>
+</tr>
+<tr>
+ <td><strong>Address</strong></td>
+ <td>nvarchar(50）</td>
+ <td></td>
+ <td>街道地址（如：<code>蛇口南海大道海翔广场709</code>）</td>
+</tr>
+<tr>
+ <td><strong>Longitude</strong></td>
+ <td>decimal(10,6)</td>
+ <td>0</td>
+ <td>所在位置经度</td>
+</tr>
+<tr>
+ <td><strong>Latitude</strong></td>
+ <td>decimal(10,6)</td>
+ <td>0</td>
+ <td>所有位置纬度</td>
+</tr>
+<tr>
+ <td>OnWorkTime</td>
+ <td>time</td>
+ <td>"07:00"</td>
+ <td>开始营业时间（如：<code>08:30</code>）</td>
+</tr>
+<tr>
+ <td>OffWorkTime</td>
+ <td>time</td>
+ <td>"23:00"</td>
+ <td>结束营业时间（如：<code>23:00</code>）</td>
+</tr>
+<tr>
+ <td><strong>Balance</strong></td>
+ <td>decimal(10,2)</td>
+ <td>0.00</td>
+ <td>资金余额</td>
+</tr>
+<tr>
+ <td><strong>SeriveRange</strong></td>
+ <td>int</td>
+ <td>0</td>
+ <td>配送半径（单位：公里）</td>
+</tr>
+<tr>
+ <td><strong>Status</strong></td>
+ <td>short</td>
+ <td></td>
+ <td>状态（枚举：<code>Area_StoreStatus</code>）</td>
+</tr>
+<tr>
+ <td>Remark</td>
+ <td>nvarchar(500)</td>
+ <td></td>
+ <td>备注</td>
+</tr>
+<tr>
+ <td><strong>CreatedTime</strong></td>
+ <td>datetime</td>
+ <td>now()</td>
+ <td>创建时间</td>
+</tr>
+<tr>
+ <td>UpdatedTime</td>
+ <td>datetime?</td>
+ <td>now()</td>
+ <td>更新时间</td>
+</tr>
+</tbody></table><div class="md-section-divider"></div><h2 data-anchor-id="xx7h" id="表-销售网点消息areastoremessage">[表] 销售网点消息(Area_StoreMessage)</h2><blockquote data-anchor-id="j972" class="white-blockquote">
+  <p>包含消息级别/发送渠道</p>
+</blockquote><table data-anchor-id="xpjn" class="table table-striped-white table-bordered">
+<thead>
+<tr>
+ <th>字段</th>
+ <th>类型</th>
+ <th>默认值</th>
+ <th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+ <td><strong>MessageId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>主键，消息ID</td>
+</tr>
+<tr>
+ <td><strong>StoreId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>销售网点ID，关联<code>Area_Store</code>表</td>
+</tr>
+<tr>
+ <td><strong>Level</strong></td>
+ <td>int</td>
+ <td>0</td>
+ <td>消息级别</td>
+</tr>
+<tr>
+ <td>Tag</td>
+ <td>nvarchar(20)</td>
+ <td></td>
+ <td>标签（扩展）</td>
+</tr>
+<tr>
+ <td><strong>Channel</strong></td>
+ <td>short</td>
+ <td></td>
+ <td>发送渠道（枚举：<code>Message_SendChannel</code>）</td>
+</tr>
+<tr>
+ <td><strong>Content</strong></td>
+ <td>nvarchar(max)</td>
+ <td></td>
+ <td>消息内容</td>
+</tr>
+<tr>
+ <td>LinkData</td>
+ <td>nvarchar(max)</td>
+ <td></td>
+ <td>关联的数据（以<code>json</code>格式存储）</td>
+</tr>
+<tr>
+ <td><strong>IsRead</strong></td>
+ <td>bit</td>
+ <td>0</td>
+ <td>是否已读</td>
+</tr>
+<tr>
+ <td><strong>SendTime</strong></td>
+ <td>datetime</td>
+ <td>now()</td>
+ <td>发送时间</td>
+</tr>
+<tr>
+ <td>ReadTime</td>
+ <td>datetime?</td>
+ <td></td>
+ <td>查阅时间</td>
+</tr>
+</tbody></table><div class="md-section-divider"></div><h2 data-anchor-id="4i4e" id="表-销售网点资产变动表areastoreassetsrecord">[表] 销售网点资产变动表(Area_StoreAssetsRecord)</h2><blockquote data-anchor-id="jkkb" class="white-blockquote">
+  <p>包含 所属业务/进/出账记录/关联业务数据/创建时间</p>
+</blockquote><table data-anchor-id="ib9d" class="table table-striped-white table-bordered">
+<thead>
+<tr>
+ <th>字段</th>
+ <th>类型</th>
+ <th>默认值</th>
+ <th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+ <td><strong>RecordId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>主键，记录ID</td>
+</tr>
+<tr>
+ <td><strong>StoreId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>销售网点ID</td>
+</tr>
+<tr>
+ <td><strong>BusinessType</strong></td>
+ <td>short</td>
+ <td></td>
+ <td>业务类型（枚举：<code>Area_StoreAssetsBusinessType</code>）</td>
+</tr>
+<tr>
+ <td><strong>BusinessObject</strong></td>
+ <td>nvarchar(max)</td>
+ <td></td>
+ <td>关联的业务对象（以<code>json</code>格式存储）</td>
+</tr>
+<tr>
+ <td><strong>Amount</strong></td>
+ <td>decimal(10,2)</td>
+ <td></td>
+ <td>进/出资产数量(出账时用“-”符号，如：<code>-100.00</code>)</td>
+</tr>
+<tr>
+ <td><strong>BeforeBalance</strong></td>
+ <td>decimal(10,2)</td>
+ <td></td>
+ <td>变动前的余额</td>
+</tr>
+<tr>
+ <td><strong>AfterBalance</strong></td>
+ <td>decimal(10,2)</td>
+ <td></td>
+ <td>变动后的余额</td>
+</tr>
+<tr>
+ <td><strong>Summary</strong></td>
+ <td>nvarchar(500)</td>
+ <td></td>
+ <td>摘要信息</td>
+</tr>
+<tr>
+ <td><strong>CreatedTime</strong></td>
+ <td>datetime</td>
+ <td>now()</td>
+ <td>创建时间</td>
+</tr>
+</tbody></table><div class="md-section-divider"></div><h2 data-anchor-id="jjrt" id="表-销售网点商品areastoregoods">[表] 销售网点商品(Area_StoreGoods)</h2><blockquote data-anchor-id="dx1h" class="white-blockquote">
+  <p>销售网点销售商品表（必须从Area_Goods继承）</p>
+</blockquote><table data-anchor-id="n077" class="table table-striped-white table-bordered">
+<thead>
+<tr>
+ <th>字段</th>
+ <th>类型</th>
+ <th>默认值</th>
+ <th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+ <td><strong>GoodsId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>主键，引用 <code>Area_Goods</code> 表</td>
+</tr>
+<tr>
+ <td><strong>StoreId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>主键，网点ID，引用 <code>Area_Store</code> 表</td>
+</tr>
+</tbody></table><div class="md-section-divider"></div><h2 data-anchor-id="hw3z" id="表-销售网点商品规格表areastoregoodssku">[表] 销售网点商品规格表(Area_StoreGoodsSKU)</h2><blockquote data-anchor-id="48rg" class="white-blockquote">
+  <p>销售网点商品规格表，（必须从Area_GoodsSKU继承）</p>
+</blockquote><table data-anchor-id="clbm" class="table table-striped-white table-bordered">
+<thead>
+<tr>
+ <th>字段</th>
+ <th>类型</th>
+ <th>默认值</th>
+ <th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+ <td><strong>SkuId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>主键，引用 <code>Area_GoodsSKU</code> 表</td>
+</tr>
+<tr>
+ <td><strong>StoreId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>销售网点ID，引用 <code>Area_Store</code> 表</td>
+</tr>
+<tr>
+ <td><strong>GoodsId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>销售网点商品ID，引用 <code>Area_StoreGoods</code> 表</td>
+</tr>
+<tr>
+ <td><strong>GoodsSkuId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>区域商品SKU主键，引用 <code>Area_GoodsSKU</code> 表</td>
+</tr>
+<tr>
+ <td><strong>Stock</strong></td>
+ <td>int</td>
+ <td></td>
+ <td>库存数量</td>
+</tr>
+<tr>
+ <td><strong>Sales</strong></td>
+ <td>int</td>
+ <td>0</td>
+ <td>商品销量</td>
+</tr>
+</tbody></table><div class="md-section-divider"></div><h2 data-anchor-id="vtcg" id="表-异业商家行业merchantindustry">[表] 异业商家行业(Merchant_Industry)</h2><blockquote data-anchor-id="tkon" class="white-blockquote">
+  <p>底层支持多层级</p>
+</blockquote><table data-anchor-id="v50p" class="table table-striped-white table-bordered">
+<thead>
+<tr>
+ <th>字段</th>
+ <th>类型</th>
+ <th>默认值</th>
+ <th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+ <td><strong>IndustryId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>主键，行业ID</td>
+</tr>
+<tr>
+ <td><strong>Name</strong></td>
+ <td>nvarchar(30)</td>
+ <td></td>
+ <td>行业名称</td>
+</tr>
+<tr>
+ <td><strong>ParentId</strong></td>
+ <td>long</td>
+ <td>0</td>
+ <td>父级行业ID</td>
+</tr>
+<tr>
+ <td><strong>IsLeaf</strong></td>
+ <td>bit</td>
+ <td>0</td>
+ <td>是否为叶子节点</td>
+</tr>
+<tr>
+ <td><strong>SortOrder</strong></td>
+ <td>int</td>
+ <td>0</td>
+ <td>排序值</td>
+</tr>
+<tr>
+ <td><strong>CreatedTime</strong></td>
+ <td>datetime</td>
+ <td>now()</td>
+ <td>创建时间</td>
+</tr>
+<tr>
+ <td><strong>IsDeleted</strong></td>
+ <td>bit</td>
+ <td>0</td>
+ <td>是否已删除</td>
+</tr>
+</tbody></table><div class="md-section-divider"></div><h2 data-anchor-id="mlyc" id="表-异业商家基本信息merchant">[表] 异业商家基本信息(Merchant)</h2><blockquote data-anchor-id="emcs" class="white-blockquote">
+  <p>商家基本信息/账号/密码/余额/店招/地址/经纬度/行业/营业时间/银行账号信息/提现周期/支付周期/等</p>
+</blockquote><table data-anchor-id="w38x" class="table table-striped-white table-bordered">
+<thead>
+<tr>
+ <th>字段</th>
+ <th>类型</th>
+ <th>默认值</th>
+ <th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+ <td><strong>MerchantId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>主键，商家ID</td>
+</tr>
+<tr>
+ <td><strong>AreaId</strong></td>
+ <td>int</td>
+ <td></td>
+ <td>所属区域ID，关联<code>Area</code>表</td>
+</tr>
+<tr>
+ <td><strong>Mobile</strong></td>
+ <td>varchar(20)</td>
+ <td></td>
+ <td>认证手机号（可用于登录）</td>
+</tr>
+<tr>
+ <td><strong>Password</strong></td>
+ <td>varchar(50)</td>
+ <td></td>
+ <td>登录密码</td>
+</tr>
+<tr>
+ <td>SecurityPassword</td>
+ <td>varchar(50)</td>
+ <td></td>
+ <td>安全密码</td>
+</tr>
+<tr>
+ <td>Name</td>
+ <td>nvarchar(50)</td>
+ <td></td>
+ <td>商家名称</td>
+</tr>
+<tr>
+ <td>IndustryId</td>
+ <td>long</td>
+ <td></td>
+ <td>所属行业ID，关联<code>Merchant_Industry</code>表</td>
+</tr>
+<tr>
+ <td>ImageId</td>
+ <td>GUID</td>
+ <td></td>
+ <td>店招图片ID</td>
+</tr>
+<tr>
+ <td>ImageUrl</td>
+ <td>varchar(100)</td>
+ <td></td>
+ <td>店招图片URL</td>
+</tr>
+<tr>
+ <td>Linkman</td>
+ <td>nvarchar(20)</td>
+ <td></td>
+ <td>联系人</td>
+</tr>
+<tr>
+ <td>Phone</td>
+ <td>varchar(30)</td>
+ <td></td>
+ <td>联系电话</td>
+</tr>
+<tr>
+ <td>RegionIds</td>
+ <td>varchar(50)</td>
+ <td></td>
+ <td>区域ID路径，如：440000,440300,440301</td>
+</tr>
+<tr>
+ <td>RegionNames</td>
+ <td>nvarchar(50)</td>
+ <td></td>
+ <td>区域名称路径，如：广东省,深圳市,罗湖区</td>
+</tr>
+<tr>
+ <td>Address</td>
+ <td>nvarchar(100)</td>
+ <td></td>
+ <td>详细地址</td>
+</tr>
+<tr>
+ <td>Longitude</td>
+ <td>decimal(10,6)</td>
+ <td></td>
+ <td>所在位置经度</td>
+</tr>
+<tr>
+ <td>Latitude</td>
+ <td>decimal(10,6)</td>
+ <td></td>
+ <td>所有位置纬度</td>
+</tr>
+<tr>
+ <td>OnWorkTime</td>
+ <td>time</td>
+ <td>"07:00"</td>
+ <td>开始营业时间（如：<code>08:30</code>）</td>
+</tr>
+<tr>
+ <td>OffWorkTime</td>
+ <td>time</td>
+ <td>"23:00"</td>
+ <td>结束营业时间（如：<code>23:00</code>）</td>
+</tr>
+<tr>
+ <td><strong>Balance</strong></td>
+ <td>decimal(10,2)</td>
+ <td>0.00</td>
+ <td>资金余额</td>
+</tr>
+<tr>
+ <td>BankId</td>
+ <td>short</td>
+ <td></td>
+ <td>提现/银行账号类型，关联<code>BankType</code>表</td>
+</tr>
+<tr>
+ <td>BankAccount</td>
+ <td>varchar(19)</td>
+ <td></td>
+ <td>提现/银行账号（用于提现时使用）</td>
+</tr>
+<tr>
+ <td>BankAccountName</td>
+ <td>nvarchar(50)</td>
+ <td></td>
+ <td>提现/银行账户名</td>
+</tr>
+<tr>
+ <td>CashCycle</td>
+ <td>int</td>
+ <td>7</td>
+ <td>提现周期（单位：天）</td>
+</tr>
+<tr>
+ <td>CashPayCycle</td>
+ <td>int</td>
+ <td>3</td>
+ <td>提现支付周期（单位：天）</td>
+</tr>
+<tr>
+ <td><strong>Status</strong></td>
+ <td>short</td>
+ <td></td>
+ <td>状态（枚举：<code>Merchant_Status</code>）</td>
+</tr>
+<tr>
+ <td><strong>CreatedTime</strong></td>
+ <td>datetime</td>
+ <td>now()</td>
+ <td>创建时间</td>
+</tr>
+<tr>
+ <td>UpdatedTime</td>
+ <td>datetime?</td>
+ <td></td>
+ <td>最后更新时间</td>
+</tr>
+</tbody></table><div class="md-section-divider"></div><h2 data-anchor-id="neuk" id="表-异业商家图片信息merchantimage">[表] 异业商家图片信息(Merchant_Image)</h2><blockquote data-anchor-id="81np" class="white-blockquote">
+  <p>异业商家的图片信息，与 <code>Merchant</code> 为一对多关系。</p>
+</blockquote><table data-anchor-id="k6ar" class="table table-striped-white table-bordered">
+<thead>
+<tr>
+ <th>字段</th>
+ <th>类型</th>
+ <th>默认值</th>
+ <th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+ <td><strong>ImageId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>主键</td>
+</tr>
+<tr>
+ <td><strong>MerchantId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>所属异业商家，引用 <code>Merchant</code> 表</td>
+</tr>
+<tr>
+ <td>FileId</td>
+ <td>GUID</td>
+ <td></td>
+ <td>图片ID</td>
+</tr>
+<tr>
+ <td><strong>FileUrl</strong></td>
+ <td>varchar(100)</td>
+ <td></td>
+ <td>图片地址</td>
+</tr>
+<tr>
+ <td><strong>SortOrder</strong></td>
+ <td>int</td>
+ <td>0</td>
+ <td>排列顺序</td>
+</tr>
+<tr>
+ <td><strong>CreatedTime</strong></td>
+ <td>datetime</td>
+ <td>now()</td>
+ <td>创建时间</td>
+</tr>
+<tr>
+ <td><strong>IsDeleted</strong></td>
+ <td>bit</td>
+ <td>0</td>
+ <td>是否删除</td>
+</tr>
+</tbody></table><div class="md-section-divider"></div><h2 data-anchor-id="a1ma" id="表-异业商家抽佣配置表merchantcommission">[表] 异业商家抽佣配置表(Merchant_Commission)</h2><blockquote data-anchor-id="dj2q" class="white-blockquote">
+  <p>商家ID/业务类型/比例</p>
+</blockquote><table data-anchor-id="7kn7" class="table table-striped-white table-bordered">
+<thead>
+<tr>
+ <th>字段</th>
+ <th>类型</th>
+ <th>默认值</th>
+ <th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+ <td><strong>MerchantId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>主键，商家ID</td>
+</tr>
+<tr>
+ <td><strong>BusinessType</strong></td>
+ <td>short</td>
+ <td></td>
+ <td>主键，业务类型（枚举：<code>Merchant_AssetsBusinessType</code>）</td>
+</tr>
+<tr>
+ <td><strong>Ratio</strong></td>
+ <td>float</td>
+ <td>0</td>
+ <td>抽佣比例，与参照金额实际抽佣点（如：<code>0.1即表示 抽佣10%或1‰</code>）</td>
+</tr>
+<tr>
+ <td><strong>UpdatedTime</strong></td>
+ <td>datetime</td>
+ <td>now()</td>
+ <td>更新时间</td>
+</tr>
+</tbody></table><div class="md-section-divider"></div><h2 data-anchor-id="4q5a" id="表-异业商家资产变动表merchantassetsrecord">[表] 异业商家资产变动表(Merchant_AssetsRecord)</h2><blockquote data-anchor-id="2zv2" class="white-blockquote">
+  <p>包含 所属业务/进/出账记录/关联业务数据/创建时间</p>
+</blockquote><table data-anchor-id="c0qm" class="table table-striped-white table-bordered">
+<thead>
+<tr>
+ <th>字段</th>
+ <th>类型</th>
+ <th>默认值</th>
+ <th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+ <td><strong>RecordId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>主键，记录ID</td>
+</tr>
+<tr>
+ <td><strong>MerchantId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>异业商家ID</td>
+</tr>
+<tr>
+ <td><strong>BusinessType</strong></td>
+ <td>short</td>
+ <td></td>
+ <td>业务类型（枚举：<code>Merchant_AssetsBusinessType</code>）</td>
+</tr>
+<tr>
+ <td><strong>BusinessObject</strong></td>
+ <td>nvarchar(max)</td>
+ <td></td>
+ <td>关联的业务对象（以<code>json</code>格式存储）</td>
+</tr>
+<tr>
+ <td><strong>Amount</strong></td>
+ <td>decimal(10,2)</td>
+ <td></td>
+ <td>进/出资产数量(出账时用“-”符号，如：<code>-100.00</code>)</td>
+</tr>
+<tr>
+ <td><strong>BeforeBalance</strong></td>
+ <td>decimal(10,2)</td>
+ <td></td>
+ <td>变动前的余额</td>
+</tr>
+<tr>
+ <td><strong>AfterBalance</strong></td>
+ <td>decimal(10,2)</td>
+ <td></td>
+ <td>变动后的余额</td>
+</tr>
+<tr>
+ <td><strong>Summary</strong></td>
+ <td>nvarchar(500)</td>
+ <td></td>
+ <td>摘要信息</td>
+</tr>
+<tr>
+ <td><strong>CreatedTime</strong></td>
+ <td>datetime</td>
+ <td>now()</td>
+ <td>创建时间</td>
+</tr>
+</tbody></table><div class="md-section-divider"></div><h2 data-anchor-id="2nwg" id="表-异业商家提现表merchantwithdraw">[表] 异业商家提现表(Merchant_Withdraw)</h2><blockquote data-anchor-id="4r88" class="white-blockquote">
+  <p>ID/流水号/商家ID/银行信息/金额/手续费/提交时间/摘要/状态</p>
+</blockquote><table data-anchor-id="ut01" class="table table-striped-white table-bordered">
+<thead>
+<tr>
+ <th>字段</th>
+ <th>类型</th>
+ <th>默认值</th>
+ <th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+ <td><strong>WithdrawId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>主键，提现ID</td>
+</tr>
+<tr>
+ <td><strong>SerialNo</strong></td>
+ <td>varchar(30)</td>
+ <td></td>
+ <td>提现流水号</td>
+</tr>
+<tr>
+ <td><strong>MerchantId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>异业商家ID，关联<code>Merchant</code>表</td>
+</tr>
+<tr>
+ <td><strong>BankInfo</strong></td>
+ <td>nvarchar(200)</td>
+ <td></td>
+ <td>提现银行信息，以<code>json</code>格式存储</td>
+</tr>
+<tr>
+ <td><strong>Amount</strong></td>
+ <td>decimal(10,2)</td>
+ <td>0</td>
+ <td>提现金额</td>
+</tr>
+<tr>
+ <td><strong>Charge</strong></td>
+ <td>decimal(10,2)</td>
+ <td>0</td>
+ <td>提现手续费</td>
+</tr>
+<tr>
+ <td><strong>Summary</strong></td>
+ <td>nvarchar(500)</td>
+ <td></td>
+ <td>摘要</td>
+</tr>
+<tr>
+ <td><strong>ApplyTime</strong></td>
+ <td>datetime</td>
+ <td>now()</td>
+ <td>提现申请时间</td>
+</tr>
+<tr>
+ <td><strong>Status</strong></td>
+ <td>short</td>
+ <td></td>
+ <td>状态（枚举：<code>Withdraw_Status</code>）</td>
+</tr>
+</tbody></table><div class="md-section-divider"></div><h2 data-anchor-id="5m8f" id="表-异业商家提现日志表merchantwithdrawlogs">[表] 异业商家提现日志表(Merchant_WithdrawLogs)</h2><blockquote data-anchor-id="wtel" class="white-blockquote">
+  <p>日志ID/提现ID/处理人员/处理时间/处理摘要/处理状态</p>
+</blockquote><table data-anchor-id="m7eg" class="table table-striped-white table-bordered">
+<thead>
+<tr>
+ <th>字段</th>
+ <th>类型</th>
+ <th>默认值</th>
+ <th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+ <td><strong>RecordId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>主键，记录ID</td>
+</tr>
+<tr>
+ <td><strong>WithdrawId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>提现ID，关联<code>Merchant_Withdraw</code>表</td>
+</tr>
+<tr>
+ <td><strong>Summary</strong></td>
+ <td>nvarchar(500）</td>
+ <td></td>
+ <td>处理摘要</td>
+</tr>
+<tr>
+ <td>HandlerId</td>
+ <td>long?</td>
+ <td></td>
+ <td>处理人员</td>
+</tr>
+<tr>
+ <td><strong>HandlerName</strong></td>
+ <td>nvarchar(20)</td>
+ <td></td>
+ <td>处理人名称</td>
+</tr>
+<tr>
+ <td><strong>HandleTime</strong></td>
+ <td>datetime</td>
+ <td>now()</td>
+ <td>处理时间</td>
+</tr>
+<tr>
+ <td><strong>Status</strong></td>
+ <td>short</td>
+ <td></td>
+ <td>处理后的状态（枚举：<code>Withdraw_Status</code>）</td>
+</tr>
+</tbody></table><div class="md-section-divider"></div><h2 data-anchor-id="hnqd" id="表-异业商家优惠活动merchantpromotion">[表] 异业商家优惠活动(Merchant_Promotion)</h2><blockquote data-anchor-id="2w5g" class="white-blockquote">
+  <p>商家发布的优惠活动信息</p>
+</blockquote><table data-anchor-id="zkry" class="table table-striped-white table-bordered">
+<thead>
+<tr>
+ <th>字段</th>
+ <th>类型</th>
+ <th>默认值</th>
+ <th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+ <td><strong>PromotionId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>主键，优惠活动ID</td>
+</tr>
+<tr>
+ <td><strong>MerchantId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>异业商家ID，关联<code>Merchant_Info</code>表</td>
+</tr>
+<tr>
+ <td><strong>Name</strong></td>
+ <td>nvarchar(50)</td>
+ <td></td>
+ <td>优惠活动名称</td>
+</tr>
+<tr>
+ <td><strong>MinOrderAmount</strong></td>
+ <td>decimal(10,2)</td>
+ <td></td>
+ <td>使用条件（订单金额≥该配置值时才可使用）</td>
+</tr>
+<tr>
+ <td><strong>Amount</strong></td>
+ <td>decimal(8,2)</td>
+ <td></td>
+ <td>优惠金额</td>
+</tr>
+<tr>
+ <td><strong>BeginTime</strong></td>
+ <td>datetime</td>
+ <td></td>
+ <td>活动开始时间</td>
+</tr>
+<tr>
+ <td><strong>EndTime</strong></td>
+ <td>datetime</td>
+ <td></td>
+ <td>活动结束时间</td>
+</tr>
+<tr>
+ <td><strong>Status</strong></td>
+ <td>short</td>
+ <td></td>
+ <td>状态（枚举：<code>Merchant_PromotionStatus</code>）</td>
+</tr>
+<tr>
+ <td><strong>CreatedTime</strong></td>
+ <td>datetime</td>
+ <td></td>
+ <td>创建时间</td>
+</tr>
+<tr>
+ <td><strong>IsDeleted</strong></td>
+ <td>bit</td>
+ <td>0</td>
+ <td>是否已删除</td>
+</tr>
+</tbody></table><div class="md-section-divider"></div><h2 data-anchor-id="whrx" id="表-异业商家优惠券merchantcoupon">[表] 异业商家优惠券(Merchant_Coupon)</h2><blockquote data-anchor-id="colr" class="white-blockquote">
+  <p>商家发布的优惠券信息(券号/名称/面额/售价/总量/使用条件/使用截至时间)</p>
+</blockquote><table data-anchor-id="8be1" class="table table-striped-white table-bordered">
+<thead>
+<tr>
+ <th>字段</th>
+ <th>类型</th>
+ <th>默认值</th>
+ <th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+ <td><strong>CouponId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>主键，优惠券ID</td>
+</tr>
+<tr>
+ <td><strong>MerchantId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>异业商家Id，关联<code>Merchant</code>表</td>
+</tr>
+<tr>
+ <td><strong>Name</strong></td>
+ <td>nvarchar(50)</td>
+ <td></td>
+ <td>优惠券名称</td>
+</tr>
+<tr>
+ <td><strong>Denomination</strong></td>
+ <td>int</td>
+ <td>0</td>
+ <td>面额（不支持小数）</td>
+</tr>
+<tr>
+ <td><strong>Price</strong></td>
+ <td>decimal(8,2)</td>
+ <td></td>
+ <td>售价</td>
+</tr>
+<tr>
+ <td><strong>Inventory</strong></td>
+ <td>int</td>
+ <td></td>
+ <td>发布数（库存）</td>
+</tr>
+<tr>
+ <td><strong>Sales</strong></td>
+ <td>int</td>
+ <td>0</td>
+ <td>销量</td>
+</tr>
+<tr>
+ <td><strong>LimitAmount</strong></td>
+ <td>decimal(10,2)</td>
+ <td></td>
+ <td>使用条件（订单金额≥该配置值时才可使用）</td>
+</tr>
+<tr>
+ <td><strong>ExpiryTime</strong></td>
+ <td>datetime</td>
+ <td></td>
+ <td>使用有效期（绝对失效时间）</td>
+</tr>
+<tr>
+ <td><strong>Status</strong></td>
+ <td>short</td>
+ <td></td>
+ <td>状态（枚举：<code>Merchant_CouponStatus</code>）</td>
+</tr>
+<tr>
+ <td><strong>CreatedTime</strong></td>
+ <td>datetime</td>
+ <td></td>
+ <td>创建时间</td>
+</tr>
+<tr>
+ <td><strong>IsDeleted</strong></td>
+ <td>bit</td>
+ <td>0</td>
+ <td>是否已删除</td>
+</tr>
+</tbody></table><div class="md-section-divider"></div><h2 data-anchor-id="uyor" id="表-异业商家优惠券销售订单merchantcouponsalesorder">[表] 异业商家优惠券销售订单(Merchant_CouponSalesOrder)</h2><blockquote data-anchor-id="7e1q" class="white-blockquote">
+  <p>订单ID/优惠券ID/购买用户ID/销售时间/销售金额/支付方式/关联支付流水号</p>
+</blockquote><table data-anchor-id="ex72" class="table table-striped-white table-bordered">
+<thead>
+<tr>
+ <th>字段</th>
+ <th>类型</th>
+ <th>默认值</th>
+ <th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+ <td><strong>OrderId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>主键，订单ID</td>
+</tr>
+<tr>
+ <td><strong>OrderNo</strong></td>
+ <td>varchar(20)</td>
+ <td></td>
+ <td>订单编号</td>
+</tr>
+<tr>
+ <td><strong>CouponId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>优惠券ID，关联<code>Merchant_Coupon</code>表</td>
+</tr>
+<tr>
+ <td><strong>MerchantId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>异业商家Id，关联<code>Merchant</code>表</td>
+</tr>
+<tr>
+ <td><strong>UserId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>买家用户ID，关联<code>User</code>表</td>
+</tr>
+<tr>
+ <td><strong>Quantity</strong></td>
+ <td>int</td>
+ <td></td>
+ <td>购买数量</td>
+</tr>
+<tr>
+ <td><strong>Amount</strong></td>
+ <td>decimal(10,2)</td>
+ <td></td>
+ <td>订单金额</td>
+</tr>
+<tr>
+ <td><strong>PaymentType</strong></td>
+ <td>short</td>
+ <td></td>
+ <td>支付方式（枚举：<code>Payment_Type</code>）</td>
+</tr>
+<tr>
+ <td>PaymentSerialNo</td>
+ <td>varchar(50)</td>
+ <td></td>
+ <td>关联的支付流水号</td>
+</tr>
+<tr>
+ <td><strong>CreatedTime</strong></td>
+ <td>datetime</td>
+ <td>now()</td>
+ <td>下单时间</td>
+</tr>
+<tr>
+ <td><strong>Status</strong></td>
+ <td>short</td>
+ <td></td>
+ <td>订单状态（枚举：<code>Merchant_CouponSalesOrderStatus</code>）</td>
+</tr>
+</tbody></table><div class="md-section-divider"></div><h2 data-anchor-id="qre7" id="表-异业商家消息merchantmessage">[表] 异业商家消息(Merchant_Message)</h2><blockquote data-anchor-id="dav8" class="white-blockquote">
+  <p>包含消息级别/发送渠道</p>
+</blockquote><table data-anchor-id="mywj" class="table table-striped-white table-bordered">
+<thead>
+<tr>
+ <th>字段</th>
+ <th>类型</th>
+ <th>默认值</th>
+ <th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+ <td><strong>MessageId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>主键，消息ID</td>
+</tr>
+<tr>
+ <td><strong>MerchantId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>异业商家ID，关联<code>Merchant</code>表</td>
+</tr>
+<tr>
+ <td><strong>Level</strong></td>
+ <td>int</td>
+ <td>0</td>
+ <td>消息级别</td>
+</tr>
+<tr>
+ <td>Tag</td>
+ <td>nvarchar(20)</td>
+ <td></td>
+ <td>标签（扩展）</td>
+</tr>
+<tr>
+ <td><strong>Channel</strong></td>
+ <td>short</td>
+ <td></td>
+ <td>发送渠道（枚举：<code>Message_SendChannel</code>）</td>
+</tr>
+<tr>
+ <td><strong>Content</strong></td>
+ <td>nvarchar(max)</td>
+ <td></td>
+ <td>消息内容</td>
+</tr>
+<tr>
+ <td><strong>LinkData</strong></td>
+ <td>nvarchar(max)</td>
+ <td></td>
+ <td>关联的数据（以<code>json</code>格式存储）</td>
+</tr>
+<tr>
+ <td><strong>IsRead</strong></td>
+ <td>bit</td>
+ <td>0</td>
+ <td>是否已读</td>
+</tr>
+<tr>
+ <td><strong>SendTime</strong></td>
+ <td>datetime</td>
+ <td>now()</td>
+ <td>发送时间</td>
+</tr>
+<tr>
+ <td>ReadTime</td>
+ <td>datetime?</td>
+ <td></td>
+ <td>查阅时间</td>
+</tr>
+</tbody></table><div class="md-section-divider"></div><h2 data-anchor-id="w3m3" id="表-用户账户user">[表] 用户账户(User)</h2><blockquote data-anchor-id="6g8j" class="white-blockquote">
+  <p>包含账户基本信息(用户ID/昵称/真实姓名/头像/生日/性别/邮箱/手机号/微信ID/支付宝ID/注册时间/最后登录时间/最后所在定位(经纬度)/)等，其中手机号/微信ID/支付宝ID 至少一项不能为空</p>
+</blockquote><table data-anchor-id="7dsc" class="table table-striped-white table-bordered">
+<thead>
+<tr>
+ <th>字段</th>
+ <th>类型</th>
+ <th>默认值</th>
+ <th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+ <td><strong>UserId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>主键，用户ID</td>
+</tr>
+<tr>
+ <td><strong>NickName</strong></td>
+ <td>nvarchar(20)</td>
+ <td></td>
+ <td>昵称，不允许重复</td>
+</tr>
+<tr>
+ <td>Password</td>
+ <td>varchar(50)</td>
+ <td></td>
+ <td>登录密码</td>
+</tr>
+<tr>
+ <td>SecurityPassword</td>
+ <td>varchar(50)</td>
+ <td></td>
+ <td>安全密码（用于支付操作等）</td>
+</tr>
+<tr>
+ <td>RealName</td>
+ <td>nvarchar(20)</td>
+ <td></td>
+ <td>真实姓名</td>
+</tr>
+<tr>
+ <td>AvatarId</td>
+ <td>GUID</td>
+ <td></td>
+ <td>头像图片ID</td>
+</tr>
+<tr>
+ <td>AvatarUrl</td>
+ <td>varchar(100)</td>
+ <td></td>
+ <td>头像图片URL</td>
+</tr>
+<tr>
+ <td>Birthdate</td>
+ <td>date</td>
+ <td></td>
+ <td>出生日期</td>
+</tr>
+<tr>
+ <td>Gender</td>
+ <td>bit?</td>
+ <td></td>
+ <td>性别</td>
+</tr>
+<tr>
+ <td>Mobile</td>
+ <td>varchar(11)</td>
+ <td></td>
+ <td>手机号（可用于系统登录）</td>
+</tr>
+<tr>
+ <td><strong>Status</strong></td>
+ <td>short</td>
+ <td></td>
+ <td>状态（枚举：<code>User_Status</code>）</td>
+</tr>
+<tr>
+ <td>LastLoginTime</td>
+ <td>datetime?</td>
+ <td></td>
+ <td>最后登录时间</td>
+</tr>
+<tr>
+ <td>LastLongitude</td>
+ <td>decimal(10,6)?</td>
+ <td></td>
+ <td>最后所在位置（经度）</td>
+</tr>
+<tr>
+ <td>LastLatitude</td>
+ <td>decimal(10,6)?</td>
+ <td></td>
+ <td>最后所在位置（纬度）</td>
+</tr>
+<tr>
+ <td><strong>CreatedTime</strong></td>
+ <td>datetime</td>
+ <td>now()</td>
+ <td>注册时间</td>
+</tr>
+<tr>
+ <td>UpdatedTime</td>
+ <td>datetime?</td>
+ <td></td>
+ <td>最后的更新时间</td>
+</tr>
+</tbody></table><div class="md-section-divider"></div><h2 data-anchor-id="8qqu" id="表-用户第三方联动登陆userplatformauthorization">[表] 用户第三方联动登陆(User_PlatformAuthorization)</h2><blockquote data-anchor-id="5tga" class="white-blockquote">
+  <p>第三方登陆平台对应的key和信息</p>
+</blockquote><table data-anchor-id="yb95" class="table table-striped-white table-bordered">
+<thead>
+<tr>
+ <th>字段</th>
+ <th>类型</th>
+ <th>默认值</th>
+ <th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+ <td><strong>AuthorizationId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>主键，授权ID</td>
+</tr>
+<tr>
+ <td><strong>UserId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>用户ID</td>
+</tr>
+<tr>
+ <td><strong>Platform</strong></td>
+ <td>short</td>
+ <td></td>
+ <td>平台类型，引用 <code>User_AuthorizationPlatform</code> 枚举</td>
+</tr>
+<tr>
+ <td><strong>Account</strong></td>
+ <td>varchar(50)</td>
+ <td></td>
+ <td>第三方平台的账号</td>
+</tr>
+<tr>
+ <td><strong>LoginCount</strong></td>
+ <td>int</td>
+ <td>1</td>
+ <td>登陆次数</td>
+</tr>
+<tr>
+ <td><strong>LastLoginTime</strong></td>
+ <td>datetime</td>
+ <td></td>
+ <td>最后登陆的时间</td>
+</tr>
+</tbody></table><div class="md-section-divider"></div><h2 data-anchor-id="8pm9" id="表-用户地址useraddress">[表] 用户地址(User_Address)</h2><blockquote data-anchor-id="0c5d" class="white-blockquote">
+  <p>包含省.市.区(县)经纬度/详细地址/邮编/联系人/联系电话（手机号或电话号）/是否默认</p>
+</blockquote><table data-anchor-id="gbvn" class="table table-striped-white table-bordered">
+<thead>
+<tr>
+ <th>字段</th>
+ <th>类型</th>
+ <th>默认值</th>
+ <th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+ <td><strong>AddressId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>主键，收货地址ID</td>
+</tr>
+<tr>
+ <td><strong>UserId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>用户ID，关联<code>User_Account</code>表</td>
+</tr>
+<tr>
+ <td><strong>Consignee</strong></td>
+ <td>nvarchar(20)</td>
+ <td></td>
+ <td>收货人</td>
+</tr>
+<tr>
+ <td><strong>Phone</strong></td>
+ <td>varchar(20)</td>
+ <td></td>
+ <td>联系电话（手机号或电话号）</td>
+</tr>
+<tr>
+ <td><strong>RegionIds</strong></td>
+ <td>varchar(30)</td>
+ <td></td>
+ <td>区域ID路径（如：<code>440000,440300,440301</code>）</td>
+</tr>
+<tr>
+ <td><strong>RegionNames</strong></td>
+ <td>nvarchar(50)</td>
+ <td></td>
+ <td>区域名称路径（如：<code>广东省,深圳市,南山区</code>）</td>
+</tr>
+<tr>
+ <td><strong>Address</strong></td>
+ <td>nvarchar(50）</td>
+ <td></td>
+ <td>详细地址（如：<code>蛇口南海大道海翔广场709</code>）</td>
+</tr>
+<tr>
+ <td><strong>Longitude</strong></td>
+ <td>decimal(10,6)</td>
+ <td></td>
+ <td>所在位置经度</td>
+</tr>
+<tr>
+ <td><strong>Latitude</strong></td>
+ <td>decimal(10,6)</td>
+ <td></td>
+ <td>所有位置纬度</td>
+</tr>
+<tr>
+ <td>PostCode</td>
+ <td>varchar(6)</td>
+ <td></td>
+ <td>邮编</td>
+</tr>
+<tr>
+ <td><strong>IsDefault</strong></td>
+ <td>bit</td>
+ <td>0</td>
+ <td>是否默认地址</td>
+</tr>
+<tr>
+ <td><strong>CreatedTime</strong></td>
+ <td>datetime</td>
+ <td>now()</td>
+ <td>创建时间</td>
+</tr>
+<tr>
+ <td>UpdatedTime</td>
+ <td>datetime?</td>
+ <td></td>
+ <td>最后的修改时间</td>
+</tr>
+</tbody></table><div class="md-section-divider"></div><h2 data-anchor-id="2wci" id="表-用户消息usermessage">[表] 用户消息(User_Message)</h2><blockquote data-anchor-id="3lym" class="white-blockquote">
+  <p>包含消息级别/发送渠道</p>
+</blockquote><table data-anchor-id="a5zl" class="table table-striped-white table-bordered">
+<thead>
+<tr>
+ <th>字段</th>
+ <th>类型</th>
+ <th>默认值</th>
+ <th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+ <td><strong>MessageId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>主键，消息ID</td>
+</tr>
+<tr>
+ <td><strong>UserId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>用户ID，关联<code>User</code>表</td>
+</tr>
+<tr>
+ <td><strong>Level</strong></td>
+ <td>int</td>
+ <td>0</td>
+ <td>消息级别</td>
+</tr>
+<tr>
+ <td>Tag</td>
+ <td>nvarchar(20)</td>
+ <td></td>
+ <td>标签（扩展）</td>
+</tr>
+<tr>
+ <td><strong>Channel</strong></td>
+ <td>short</td>
+ <td></td>
+ <td>发送渠道（枚举：<code>Message_SendChannel</code>）</td>
+</tr>
+<tr>
+ <td><strong>Content</strong></td>
+ <td>nvarchar(max)</td>
+ <td></td>
+ <td>消息内容</td>
+</tr>
+<tr>
+ <td>LinkData</td>
+ <td>nvarchar(max)</td>
+ <td></td>
+ <td>关联的数据（以<code>json</code>格式存储）</td>
+</tr>
+<tr>
+ <td><strong>IsRead</strong></td>
+ <td>bit</td>
+ <td>0</td>
+ <td>是否已读</td>
+</tr>
+<tr>
+ <td><strong>SendTime</strong></td>
+ <td>datetime</td>
+ <td>now()</td>
+ <td>发送时间</td>
+</tr>
+<tr>
+ <td>ReadTime</td>
+ <td>datetime?</td>
+ <td></td>
+ <td>查阅时间</td>
+</tr>
+</tbody></table><div class="md-section-divider"></div><h2 data-anchor-id="85kq" id="表-用户资产表userassets">[表] 用户资产表(User_Assets)</h2><blockquote data-anchor-id="3w25" class="white-blockquote">
+  <p>包含余额/积分/及其他虚拟货币</p>
+</blockquote><table data-anchor-id="zdfe" class="table table-striped-white table-bordered">
+<thead>
+<tr>
+ <th>字段</th>
+ <th>类型</th>
+ <th>默认值</th>
+ <th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+ <td><strong>UserId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>主键， 用户ID，关联<code>User</code>表</td>
+</tr>
+<tr>
+ <td><strong>Cashs</strong></td>
+ <td>decimal(10,2)</td>
+ <td>0.00</td>
+ <td>资/现金</td>
+</tr>
+<tr>
+ <td><strong>Credits</strong></td>
+ <td>int</td>
+ <td>0</td>
+ <td>积分</td>
+</tr>
+<tr>
+ <td><strong>Golds</strong></td>
+ <td>int</td>
+ <td>0</td>
+ <td>金币</td>
+</tr>
+<tr>
+ <td><strong>UpdatedTime</strong></td>
+ <td>datetime</td>
+ <td>now()</td>
+ <td>更新时间</td>
+</tr>
+</tbody></table><div class="md-section-divider"></div><h2 data-anchor-id="98ao" id="表-用户行为记录userbehaviorrecord">[表] 用户行为记录(User_BehaviorRecord)</h2><blockquote data-anchor-id="dy0i" class="white-blockquote">
+  <p>包含业务动作/行为对象(json)/操作时间/所在经纬度/操作描述等。</p>
+</blockquote><table data-anchor-id="uuyr" class="table table-striped-white table-bordered">
+<thead>
+<tr>
+ <th>字段</th>
+ <th>类型</th>
+ <th>默认值</th>
+ <th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+ <td><strong>RecordId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>主键，记录ID</td>
+</tr>
+<tr>
+ <td><strong>UserId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>用户ID，关联<code>User</code>表</td>
+</tr>
+<tr>
+ <td><strong>BehaviorType</strong></td>
+ <td>short</td>
+ <td></td>
+ <td>业务行为类型（枚举：<code>User_BehaviorType</code>）</td>
+</tr>
+<tr>
+ <td><strong>BehaviorObject</strong></td>
+ <td>nvarchar(max)</td>
+ <td></td>
+ <td>业务行为对象（使用<code>json</code>格式存储）</td>
+</tr>
+<tr>
+ <td>Longitude</td>
+ <td>decimal(10,6)?</td>
+ <td></td>
+ <td>所在位置经度</td>
+</tr>
+<tr>
+ <td>Latitude</td>
+ <td>decimal(10,6)?</td>
+ <td></td>
+ <td>所有位置纬度</td>
+</tr>
+<tr>
+ <td><strong>Summary</strong></td>
+ <td>nvarchar(500)</td>
+ <td></td>
+ <td>行为摘要</td>
+</tr>
+<tr>
+ <td><strong>CreatedTime</strong></td>
+ <td>datetime</td>
+ <td>now()</td>
+ <td>操作时间</td>
+</tr>
+</tbody></table><div class="md-section-divider"></div><h2 data-anchor-id="gxbu" id="表-用户行为趋势userbehaviorreport">[表] 用户行为趋势(User_BehaviorReport)</h2><blockquote data-anchor-id="z78e" class="white-blockquote">
+  <p>包含当日消费金额/评论次数/关注的商品标签(json)/等</p>
+</blockquote><table data-anchor-id="uw3m" class="table table-striped-white table-bordered">
+<thead>
+<tr>
+ <th>字段</th>
+ <th>类型</th>
+ <th>默认值</th>
+ <th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+ <td><strong>ReportId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>主键，报告ID</td>
+</tr>
+<tr>
+ <td><strong>UserId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>用户ID，关联<code>User</code>表</td>
+</tr>
+<tr>
+ <td><strong>ReportDate</strong></td>
+ <td>date</td>
+ <td></td>
+ <td>统计日期（忽略时间）</td>
+</tr>
+<tr>
+ <td><strong>ConsumeAmount</strong></td>
+ <td>decimal(10,2)</td>
+ <td>0.00</td>
+ <td>当日消费总额</td>
+</tr>
+<tr>
+ <td><strong>GoodsOrderCount</strong></td>
+ <td>int</td>
+ <td>0</td>
+ <td>区域商品订单数</td>
+</tr>
+<tr>
+ <td><strong>GoodsCommentCount</strong></td>
+ <td>int</td>
+ <td>0</td>
+ <td>商品评论次数</td>
+</tr>
+<tr>
+ <td><strong>QROrderCount</strong></td>
+ <td>int</td>
+ <td>0</td>
+ <td>扫码支付数</td>
+</tr>
+<tr>
+ <td><strong>MerchantCouponOrderCount</strong></td>
+ <td>int</td>
+ <td>0</td>
+ <td>异业商家优惠券订单数</td>
+</tr>
+<tr>
+ <td><strong>CreditOrderCount</strong></td>
+ <td>int</td>
+ <td>0</td>
+ <td>积分兑换订单数量</td>
+</tr>
+<tr>
+ <td>FollowGoodsTags</td>
+ <td>nvarchar(max)</td>
+ <td></td>
+ <td>关注的商品标签</td>
+</tr>
+</tbody></table><div class="md-section-divider"></div><h2 data-anchor-id="yjwg" id="表-用户充值记录表userrecharge">[表] 用户充值记录表(User_Recharge)</h2><blockquote data-anchor-id="bppx" class="white-blockquote">
+  <p>包含充值流水号/充值时间/金额/付款方式/第三方交易号/充值状态等</p>
+</blockquote><table data-anchor-id="l4fu" class="table table-striped-white table-bordered">
+<thead>
+<tr>
+ <th>字段</th>
+ <th>类型</th>
+ <th>默认值</th>
+ <th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+ <td><strong>RecordId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>主键，记录ID</td>
+</tr>
+<tr>
+ <td><strong>OrderNo</strong></td>
+ <td>varchar(30)</td>
+ <td></td>
+ <td>充值流水号</td>
+</tr>
+<tr>
+ <td><strong>UserId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>用户ID，关联<code>User</code>表</td>
+</tr>
+<tr>
+ <td><strong>Amount</strong></td>
+ <td>decimal(8,2)</td>
+ <td></td>
+ <td>充值金额</td>
+</tr>
+<tr>
+ <td><strong>PaymentType</strong></td>
+ <td>short</td>
+ <td></td>
+ <td>支付方式（枚举：<code>Payment_Type</code>）</td>
+</tr>
+<tr>
+ <td>PaymentOrderNo</td>
+ <td>varchar(50)</td>
+ <td></td>
+ <td>关联的第三方交易号</td>
+</tr>
+<tr>
+ <td><strong>Status</strong></td>
+ <td>short</td>
+ <td></td>
+ <td>状态（枚举：<code>User_RechargeStatus</code>）</td>
+</tr>
+<tr>
+ <td><strong>SubmitTime</strong></td>
+ <td>datetime</td>
+ <td>now()</td>
+ <td>充值时间</td>
+</tr>
+<tr>
+ <td>SuccessTime</td>
+ <td>datetime?</td>
+ <td></td>
+ <td>到账时间</td>
+</tr>
+</tbody></table><div class="md-section-divider"></div><h2 data-anchor-id="hixp" id="表-用户资产变动记录表userassetsrecord">[表] 用户资产变动记录表(User_AssetsRecord)</h2><blockquote data-anchor-id="c7l7" class="white-blockquote">
+  <p>包含所有资产变动的流水信息</p>
+</blockquote><table data-anchor-id="yqog" class="table table-striped-white table-bordered">
+<thead>
+<tr>
+ <th>字段</th>
+ <th>类型</th>
+ <th>默认值</th>
+ <th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+ <td><strong>RecordId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>主键，记录ID</td>
+</tr>
+<tr>
+ <td><strong>UserId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>用户ID，引用 <code>User</code> 表</td>
+</tr>
+<tr>
+ <td><strong>BusinessType</strong></td>
+ <td>short</td>
+ <td></td>
+ <td>业务类型（枚举：<code>User_AssetsBusinessType</code>）</td>
+</tr>
+<tr>
+ <td><strong>BusinessObject</strong></td>
+ <td>nvarchar(max)</td>
+ <td></td>
+ <td>关联的业务对象（以<code>json</code>格式存储）</td>
+</tr>
+<tr>
+ <td><strong>AssetsType</strong></td>
+ <td>short</td>
+ <td></td>
+ <td>资产类型，引用 <code>User_AssetsType</code> 枚举</td>
+</tr>
+<tr>
+ <td><strong>Amount</strong></td>
+ <td>decimal(10,2)</td>
+ <td></td>
+ <td>进/出资产数量(出账时用“-”符号，如：<code>-100.00</code>)</td>
+</tr>
+<tr>
+ <td><strong>BeforeAmount</strong></td>
+ <td>decimal(10,2)</td>
+ <td></td>
+ <td>变动前的总额</td>
+</tr>
+<tr>
+ <td><strong>AfterAmount</strong></td>
+ <td>decimal(10,2)</td>
+ <td></td>
+ <td>变动后的总额</td>
+</tr>
+<tr>
+ <td><strong>Summary</strong></td>
+ <td>nvarchar(500)</td>
+ <td></td>
+ <td>摘要信息</td>
+</tr>
+<tr>
+ <td><strong>CreatedTime</strong></td>
+ <td>datetime</td>
+ <td>now()</td>
+ <td>创建时间</td>
+</tr>
+</tbody></table><div class="md-section-divider"></div><h2 data-anchor-id="d06w" id="表-用户异业商家优惠券usermerchantcoupon">[表] 用户异业商家优惠券(User_MerchantCoupon)</h2><blockquote data-anchor-id="aavl" class="white-blockquote">
+  <p>ID/优惠券ID/用户ID/商户ID/购买时间/使用时间/使用订单ID/</p>
+</blockquote><table data-anchor-id="vwwo" class="table table-striped-white table-bordered">
+<thead>
+<tr>
+ <th>字段</th>
+ <th>类型</th>
+ <th>默认值</th>
+ <th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+ <td><strong>RecordId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>主键</td>
+</tr>
+<tr>
+ <td><strong>CouponId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>优惠券ID，关联<code>Merchant_Coupon</code>表</td>
+</tr>
+<tr>
+ <td><strong>CouponNo</strong></td>
+ <td>varchar(50)</td>
+ <td></td>
+ <td>优惠券编号</td>
+</tr>
+<tr>
+ <td><strong>UserId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>用户ID，关联<code>User</code>表</td>
+</tr>
+<tr>
+ <td><strong>SaleOrderId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>销售订单ID，关联</td>
+</tr>
+<tr>
+ <td><strong>MerchantId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>异业商家ID，关联<code>Merchant</code>表</td>
+</tr>
+<tr>
+ <td>UsedTime</td>
+ <td>datetime?</td>
+ <td></td>
+ <td>使用时间</td>
+</tr>
+<tr>
+ <td>UsedBusinessType</td>
+ <td>short</td>
+ <td></td>
+ <td>使用的关联业务类型，引用 <code>Merchant_CouponUsedBusinessType</code></td>
+</tr>
+<tr>
+ <td>UsedBusinessOrderId</td>
+ <td>long?</td>
+ <td></td>
+ <td>使用的关联业务订单ID</td>
+</tr>
+<tr>
+ <td><strong>CreatedTime</strong></td>
+ <td>datetime</td>
+ <td>now()</td>
+ <td>购买时间</td>
+</tr>
+</tbody></table><div class="md-section-divider"></div><h2 data-anchor-id="bao9" id="表-异业商家买单表usermerchantpaying">[表] 异业商家买单表(User_MerchantPaying)</h2><blockquote data-anchor-id="qbbc" class="white-blockquote">
+  <p>存储用户在异业商家买单的数据。</p>
+</blockquote><table data-anchor-id="aw0b" class="table table-striped-white table-bordered">
+<thead>
+<tr>
+ <th>字段</th>
+ <th>类型</th>
+ <th>默认值</th>
+ <th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+ <td><strong>OrderId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>主键</td>
+</tr>
+<tr>
+ <td><strong>OrderNo</strong></td>
+ <td>varchar(50)</td>
+ <td></td>
+ <td>订单编号</td>
+</tr>
+<tr>
+ <td><strong>MerchantId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>异业商家ID，引用 <code>Merchant</code> 表</td>
+</tr>
+<tr>
+ <td><strong>UserId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>用户ID，引用 <code>User</code> 表</td>
+</tr>
+<tr>
+ <td>Summary</td>
+ <td>nvarchar(500)</td>
+ <td></td>
+ <td>摘要信息</td>
+</tr>
+<tr>
+ <td><strong>PaymentType</strong></td>
+ <td>short</td>
+ <td></td>
+ <td>支付渠道，引用 <code>PaymentType</code> 枚举</td>
+</tr>
+<tr>
+ <td><strong>PaymentAmount</strong></td>
+ <td>decimal(8,2)</td>
+ <td></td>
+ <td>支付金额</td>
+</tr>
+<tr>
+ <td><strong>OrderAmount</strong></td>
+ <td>decimal(8,2)</td>
+ <td></td>
+ <td>订单总额</td>
+</tr>
+<tr>
+ <td><strong>DiscountAmount</strong></td>
+ <td>decimal(8,2)</td>
+ <td>0</td>
+ <td>优惠总额</td>
+</tr>
+<tr>
+ <td><strong>CommissionAmount</strong></td>
+ <td>decimal(8,2)</td>
+ <td></td>
+ <td>抽佣金额</td>
+</tr>
+<tr>
+ <td>PromotionId</td>
+ <td>long</td>
+ <td></td>
+ <td>参与的优惠活动ID，引用 <code>Merchant_Promotion</code> 表</td>
+</tr>
+<tr>
+ <td>CouponId</td>
+ <td>long</td>
+ <td></td>
+ <td>使用的优惠券ID，引用 <code>Merchant_Coupon</code> 表</td>
+</tr>
+<tr>
+ <td><strong>BonusCredits</strong></td>
+ <td>int</td>
+ <td>0</td>
+ <td>奖励积分</td>
+</tr>
+<tr>
+ <td><strong>BonusGolds</strong></td>
+ <td>int</td>
+ <td>0</td>
+ <td>奖励金币</td>
+</tr>
+<tr>
+ <td><strong>BonusCashs</strong></td>
+ <td>decimal(10,6)</td>
+ <td>0.00</td>
+ <td>奖励现金</td>
+</tr>
+<tr>
+ <td><strong>TransactionNo</strong></td>
+ <td>varchar(50)</td>
+ <td></td>
+ <td>支付渠道交易号</td>
+</tr>
+<tr>
+ <td><strong>TransactionTime</strong></td>
+ <td>datetime</td>
+ <td></td>
+ <td>交易时间</td>
+</tr>
+<tr>
+ <td>TransactionLongitude</td>
+ <td>decimal(10,6)?</td>
+ <td></td>
+ <td>交易地点(经度)</td>
+</tr>
+<tr>
+ <td>TransactionLatitude</td>
+ <td>decimal(10,6)?</td>
+ <td></td>
+ <td>交易地点(纬度)</td>
+</tr>
+<tr>
+ <td><strong>Status</strong></td>
+ <td>short</td>
+ <td></td>
+ <td>订单状态，引用 <code>User_MerchantPayingOrderStatus</code> 枚举</td>
+</tr>
+</tbody></table><div class="md-section-divider"></div><h2 data-anchor-id="hve6" id="表-积分商城商品分类creditgoodscategory">[表] 积分商城商品分类(Credit_GoodsCategory)</h2><blockquote data-anchor-id="w9x5" class="white-blockquote">
+  <p>积分商品分类表，支持多层级</p>
+</blockquote><table data-anchor-id="u815" class="table table-striped-white table-bordered">
+<thead>
+<tr>
+ <th>字段</th>
+ <th>类型</th>
+ <th>默认值</th>
+ <th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+ <td><strong>CategoryId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>主键</td>
+</tr>
+<tr>
+ <td><strong>Name</strong></td>
+ <td>nvarchar(50)</td>
+ <td></td>
+ <td>分类名称</td>
+</tr>
+<tr>
+ <td>IconId</td>
+ <td>Guid</td>
+ <td></td>
+ <td>分类图标ID</td>
+</tr>
+<tr>
+ <td>IconUrl</td>
+ <td>varchar(100)</td>
+ <td></td>
+ <td>分类图标URL</td>
+</tr>
+<tr>
+ <td><strong>ParentId</strong></td>
+ <td>long</td>
+ <td>0</td>
+ <td>上级分类</td>
+</tr>
+<tr>
+ <td><strong>SortOrder</strong></td>
+ <td>int</td>
+ <td>0</td>
+ <td>排列顺序</td>
+</tr>
+<tr>
+ <td>Description</td>
+ <td>nvarchar(500)</td>
+ <td></td>
+ <td>描述信息</td>
+</tr>
+<tr>
+ <td><strong>CreatedTime</strong></td>
+ <td>datetime</td>
+ <td>now()</td>
+ <td>创建时间</td>
+</tr>
+<tr>
+ <td><strong>IsLeaf</strong></td>
+ <td>bit</td>
+ <td>1</td>
+ <td>是否为叶子节点</td>
+</tr>
+<tr>
+ <td><strong>IsDeleted</strong></td>
+ <td>bit</td>
+ <td>0</td>
+ <td>是否删除</td>
+</tr>
+</tbody></table><div class="md-section-divider"></div><h2 data-anchor-id="ybo0" id="表-积分商城商品信息creditgoods">[表] 积分商城商品信息(Credit_Goods)</h2><blockquote data-anchor-id="3t1z" class="white-blockquote">
+  <p>积分商品表，与 <code>Product</code> 表强关联</p>
+</blockquote><table data-anchor-id="treq" class="table table-striped-white table-bordered">
+<thead>
+<tr>
+ <th>字段</th>
+ <th>类型</th>
+ <th>默认值</th>
+ <th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+ <td><strong>GoodsId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>主键</td>
+</tr>
+<tr>
+ <td><strong>ProductId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>产品ID，引用 <code>Product</code> 表</td>
+</tr>
+<tr>
+ <td><strong>CategoryId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>所属分类，引用 <code>Credit_GoodsCategory</code> 表</td>
+</tr>
+<tr>
+ <td><strong>Name</strong></td>
+ <td>nvarchar(200)</td>
+ <td></td>
+ <td>商品名称</td>
+</tr>
+<tr>
+ <td>ImageId</td>
+ <td>Guid</td>
+ <td></td>
+ <td>封面图片ID</td>
+</tr>
+<tr>
+ <td>ImageUrl</td>
+ <td>varchar(100)</td>
+ <td></td>
+ <td>封面图片URL</td>
+</tr>
+<tr>
+ <td>Keywords</td>
+ <td>nvarchar(200)</td>
+ <td></td>
+ <td>关键字</td>
+</tr>
+<tr>
+ <td>Properties</td>
+ <td>nvarchar(MAX)</td>
+ <td></td>
+ <td>基本属性(JSON 字符串)</td>
+</tr>
+<tr>
+ <td>Description</td>
+ <td>nvarchar(MAX)</td>
+ <td></td>
+ <td>详情描述</td>
+</tr>
+<tr>
+ <td><strong>CreatedTime</strong></td>
+ <td>datetime</td>
+ <td>now()</td>
+ <td>创建时间</td>
+</tr>
+<tr>
+ <td>ModifiedTime</td>
+ <td>datetime</td>
+ <td></td>
+ <td>最后的修改时间</td>
+</tr>
+<tr>
+ <td><strong>IsDeleted</strong></td>
+ <td>bit</td>
+ <td>0</td>
+ <td>是否删除</td>
+</tr>
+</tbody></table><div class="md-section-divider"></div><h2 data-anchor-id="59o9" id="表-积分商城商品规格creditgoodssku">[表] 积分商城商品规格(Credit_GoodsSKU)</h2><blockquote data-anchor-id="n2ju" class="white-blockquote">
+  <p>积分商品规格表，与 <code>Credit_Goods</code> 为一对多关系。</p>
+</blockquote><table data-anchor-id="2vtj" class="table table-striped-white table-bordered">
+<thead>
+<tr>
+ <th>字段</th>
+ <th>类型</th>
+ <th>默认值</th>
+ <th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+ <td><strong>SkuId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>主键</td>
+</tr>
+<tr>
+ <td><strong>GoodsId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>所属商品，引用 <code>Credit_Goods</code> 表</td>
+</tr>
+<tr>
+ <td><strong>ProductSkuId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>产品SKU主键，引用 <code>Product_SKU</code> 表</td>
+</tr>
+<tr>
+ <td>Barcode</td>
+ <td>varchar(50)</td>
+ <td></td>
+ <td>条码信息</td>
+</tr>
+<tr>
+ <td>Name</td>
+ <td>nvarchar(200)</td>
+ <td></td>
+ <td>规格名称</td>
+</tr>
+<tr>
+ <td>ImageId</td>
+ <td>Guid</td>
+ <td></td>
+ <td>规格图片ID</td>
+</tr>
+<tr>
+ <td>ImageUrl</td>
+ <td>varchar(100)</td>
+ <td></td>
+ <td>规格图片URL</td>
+</tr>
+<tr>
+ <td>Properties</td>
+ <td>nvarchar(MAX)</td>
+ <td></td>
+ <td>规格属性(JSON 字符串)</td>
+</tr>
+<tr>
+ <td>SupplyPrice</td>
+ <td>decimal(8,2)</td>
+ <td></td>
+ <td>供应价</td>
+</tr>
+<tr>
+ <td>CostPrice</td>
+ <td>decimal(8,2)</td>
+ <td></td>
+ <td>成本价</td>
+</tr>
+<tr>
+ <td>SalePrice</td>
+ <td>decimal(8,2)</td>
+ <td></td>
+ <td>销售指导价(市值)</td>
+</tr>
+<tr>
+ <td><strong>SaleCash</strong></td>
+ <td>decimal(8,2)</td>
+ <td></td>
+ <td>销售现金</td>
+</tr>
+<tr>
+ <td><strong>SaleCredit</strong></td>
+ <td>int</td>
+ <td></td>
+ <td>积分抵扣额</td>
+</tr>
+<tr>
+ <td><strong>Stock</strong></td>
+ <td>int</td>
+ <td></td>
+ <td>库存数量</td>
+</tr>
+<tr>
+ <td><strong>CreatedTime</strong></td>
+ <td>datetime</td>
+ <td>now()</td>
+ <td>创建时间</td>
+</tr>
+<tr>
+ <td><strong>IsDeleted</strong></td>
+ <td>bit</td>
+ <td>0</td>
+ <td>是否删除</td>
+</tr>
+</tbody></table><div class="md-section-divider"></div><h2 data-anchor-id="66uq" id="表-积分商城订单creditorder">[表] 积分商城订单(Credit_Order)</h2><blockquote data-anchor-id="xpyl" class="white-blockquote">
+  <p>积分商城订单主体信息。</p>
+</blockquote><table data-anchor-id="mspc" class="table table-striped-white table-bordered">
+<thead>
+<tr>
+ <th>字段</th>
+ <th>类型</th>
+ <th>默认值</th>
+ <th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+ <td><strong>OrderId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>主键，订单ID</td>
+</tr>
+<tr>
+ <td><strong>OrderNo</strong></td>
+ <td>varchar(50)</td>
+ <td></td>
+ <td>订单编号</td>
+</tr>
+<tr>
+ <td>Summary</td>
+ <td>nvarchar(200)</td>
+ <td></td>
+ <td>摘要信息</td>
+</tr>
+<tr>
+ <td><strong>UserId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>买家用户ID</td>
+</tr>
+<tr>
+ <td><strong>Linkman</strong></td>
+ <td>nvarchar(20)</td>
+ <td></td>
+ <td>收货人姓名</td>
+</tr>
+<tr>
+ <td><strong>Phone</strong></td>
+ <td>varchar(20)</td>
+ <td></td>
+ <td>收货人电话</td>
+</tr>
+<tr>
+ <td>PostCode</td>
+ <td>char(6)</td>
+ <td></td>
+ <td>收货地邮编</td>
+</tr>
+<tr>
+ <td><strong>RegionIds</strong></td>
+ <td>varchar(50)</td>
+ <td></td>
+ <td>收货地区域ID路径，如：440000,440300,440301</td>
+</tr>
+<tr>
+ <td><strong>RegionNames</strong></td>
+ <td>nvarchar(50)</td>
+ <td></td>
+ <td>收货地区域名称路径，如：广东省,深圳市,罗湖区</td>
+</tr>
+<tr>
+ <td><strong>Address</strong></td>
+ <td>nvarchar(100)</td>
+ <td></td>
+ <td>收货地详细地址</td>
+</tr>
+<tr>
+ <td>ExpressCompanyId</td>
+ <td>long?</td>
+ <td></td>
+ <td>承运快递公司</td>
+</tr>
+<tr>
+ <td>ExpressOrderNo</td>
+ <td>varchar(50)</td>
+ <td></td>
+ <td>承运快递单号</td>
+</tr>
+<tr>
+ <td><strong>CreatedTime</strong></td>
+ <td>datetime</td>
+ <td></td>
+ <td>创建时间</td>
+</tr>
+<tr>
+ <td>PaymentTime</td>
+ <td>datetime?</td>
+ <td></td>
+ <td>支付时间</td>
+</tr>
+<tr>
+ <td>DispatchTime</td>
+ <td>datetime?</td>
+ <td></td>
+ <td>发货时间</td>
+</tr>
+<tr>
+ <td>ReceiptTime</td>
+ <td>datetime?</td>
+ <td></td>
+ <td>签收时间</td>
+</tr>
+<tr>
+ <td>CancelTime</td>
+ <td>datetime?</td>
+ <td></td>
+ <td>取消时间</td>
+</tr>
+<tr>
+ <td>ActualCashs</td>
+ <td>decimal(8,2)</td>
+ <td></td>
+ <td>订单实际总现金</td>
+</tr>
+<tr>
+ <td>ActualCredis</td>
+ <td>int</td>
+ <td></td>
+ <td>订单实际抵扣总积分</td>
+</tr>
+<tr>
+ <td>Remark</td>
+ <td>nvarchar(500)</td>
+ <td></td>
+ <td>买家备注</td>
+</tr>
+<tr>
+ <td><strong>Status</strong></td>
+ <td>short</td>
+ <td></td>
+ <td>订单状态，引用 <code>Credit_OrderStatus</code>枚举</td>
+</tr>
+</tbody></table><div class="md-section-divider"></div><h2 data-anchor-id="1v8b" id="表-积分商城订单明细表creditorderdetail">[表] 积分商城订单明细表(Credit_OrderDetail)</h2><blockquote data-anchor-id="fre0" class="white-blockquote">
+  <p>积分商城订单明细表。（包含积分商品的快照信息）</p>
+</blockquote><table data-anchor-id="hoxy" class="table table-striped-white table-bordered">
+<thead>
+<tr>
+ <th>字段</th>
+ <th>类型</th>
+ <th>默认值</th>
+ <th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+ <td><strong>DetailId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>主键</td>
+</tr>
+<tr>
+ <td><strong>OrderId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>订单ID，引用 <code>Credit_Order</code> 表</td>
+</tr>
+<tr>
+ <td><strong>GoodsId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>积分商品ID，引用 <code>Credit_Goods</code> 表</td>
+</tr>
+<tr>
+ <td><strong>GoodsSkuId</strong></td>
+ <td>long</td>
+ <td></td>
+ <td>规格ID，引用 <code>Credit_GoodsSKU</code> 表</td>
+</tr>
+<tr>
+ <td><strong>GoodsName</strong></td>
+ <td>nvarchar(200)</td>
+ <td></td>
+ <td>商品名称</td>
+</tr>
+<tr>
+ <td>GoodsBarcode</td>
+ <td>varchar(50)</td>
+ <td></td>
+ <td>商品条码</td>
+</tr>
+<tr>
+ <td>GoodsSaleCash</td>
+ <td>decimal(8,2)</td>
+ <td></td>
+ <td>商品销售现金</td>
+</tr>
+<tr>
+ <td>GoodsSaleCredit</td>
+ <td>int</td>
+ <td></td>
+ <td>商品抵扣积分</td>
+</tr>
+<tr>
+ <td>GoodsImageId</td>
+ <td>Guid</td>
+ <td></td>
+ <td>商品封面图片ID</td>
+</tr>
+<tr>
+ <td>GoodsImageUrl</td>
+ <td>varchar(100)</td>
+ <td></td>
+ <td>商品封面图片URL</td>
+</tr>
+<tr>
+ <td>GoodsProperties</td>
+ <td>nvarchar(MAX)</td>
+ <td></td>
+ <td>商品属性(JSON 字符串)</td>
+</tr>
+<tr>
+ <td>GoodsDescription</td>
+ <td>nvarchar(MAX)</td>
+ <td></td>
+ <td>商品详情描述</td>
+</tr>
+<tr>
+ <td><strong>Quantity</strong></td>
+ <td>int</td>
+ <td></td>
+ <td>购买数量</td>
+</tr>
+<tr>
+ <td><strong>ActualCashs</strong></td>
+ <td>decimal(8,2)</td>
+ <td></td>
+ <td>实际成交现金</td>
+</tr>
+<tr>
+ <td><strong>ActualCredits</strong></td>
+ <td>int</td>
+ <td></td>
+ <td>实际抵扣积分</td>
+</tr>
+</tbody></table></div>
+</body>
+</html>

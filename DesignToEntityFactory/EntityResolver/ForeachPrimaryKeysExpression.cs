@@ -17,7 +17,7 @@ namespace DesignToEntityFactory.EntityResolver
         {
             if (context == null || context.TableDesc == null) return;
 
-            Regex regex = new Regex(@"\<(?<foreach>ForEach_PrimaryKeys)\>(?<template>((?!\<separator\>).|\n)*)\<separator\>(?<separator>((?!\</separator\>).|\n)*)\</separator\>\</\k<foreach>\>", RegexOptions.IgnoreCase | RegexOptions.Compiled);
+            Regex regex = new Regex(@"<(?<foreach>ForEach_PrimaryKeys)>(?<template>((?!<separator>).|\n)*)<separator>(?<separator>((?!</separator>).|\n)*)</separator></\k<foreach>>", RegexOptions.IgnoreCase | RegexOptions.Compiled);
 
             string text = context.OutputEntityContent;
 

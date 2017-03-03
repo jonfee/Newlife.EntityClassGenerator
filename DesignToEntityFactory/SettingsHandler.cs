@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Configuration;
 using System.IO;
 using System.Text.RegularExpressions;
 
@@ -20,19 +19,6 @@ namespace DesignToEntityFactory
             get { return _htmlFilePath; }
             set { this._htmlFilePath = value; }
         }
-
-        /// <summary>
-        /// 输出目录
-        /// </summary>
-        public string Output
-        {
-            get
-            {
-                return $"{AppContext.BaseDirectory}\\output";
-            }
-        }
-
-        private string _outNamespace;
 
         /// <summary>
         /// 获取相关参数配置

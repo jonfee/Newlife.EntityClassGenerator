@@ -41,7 +41,8 @@ namespace Newlife.Database.Builder.Models.{Module_Name}
             this.MappingType = MappingType.Table;
             this.MappingName = "{Entity_Name}";
 
-			<ForEach_PrimaryKeys>this.PrimaryKey.Add("{Property_Name}");<separator>\n</separator></ForEach_PrimaryKeys>
+			<ForEach_PrimaryKeys>this.PrimaryKey.Add("{Property_Name}");<separator>
+			</separator></ForEach_PrimaryKeys>
         }
 
         #endregion 构造方法
