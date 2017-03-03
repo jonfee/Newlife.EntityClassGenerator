@@ -1,7 +1,7 @@
 ﻿using DesignToEntityFactory.Core;
-using DesignToEntityFactory.EntityClassResolve;
+using DesignToEntityFactory.EntityResolve.ClassFile;
 using DesignToEntityFactory.Models;
-using DesignToEntityFactory.TableResolver;
+using DesignToEntityFactory.EntityResolve.Table;
 using System;
 using System.Collections.Generic;
 using System.Linq;

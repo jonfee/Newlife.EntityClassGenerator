@@ -1,6 +1,6 @@
 ﻿using DesignToEntityFactory.Core;
-using DesignToEntityFactory.EnumClassResolve;
-using DesignToEntityFactory.EnumResolver;
+using DesignToEntityFactory.EnumResolve.ClassFile;
+using DesignToEntityFactory.EnumResolve.Data;
 using DesignToEntityFactory.Models;
 using System;
 using System.Collections.Generic;
