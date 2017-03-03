@@ -42,7 +42,7 @@ namespace DesignToEntityFactory.Factory
             {
                 var enumDesc = (EnumDesc)DataQueue.Dequeue();
 
-                Console.WriteLine($"正在生成{enumDesc.Description}({enumDesc.Name})……{enumCount - DataQueue.Count()}/{enumCount}");
+                Console.WriteLine($"正在生成【枚举类】{enumDesc.Description}({enumDesc.Name})……{enumCount - DataQueue.Count()}/{enumCount}");
 
                 //枚举类解析对象上下文
                 EnumClassResolveContext context = new EnumClassResolveContext(templateContent, enumDesc);

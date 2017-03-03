@@ -48,7 +48,7 @@ namespace DesignToEntityFactory.Factory
             {
                 var table = (TableDesc)DataQueue.Dequeue();
 
-                Console.WriteLine($"正在生成{table.Description}({table.Name})……{tableCount - DataQueue.Count()}/{tableCount}");
+                Console.WriteLine($"正在生成【实体类】{table.Description}({table.Name})……{tableCount - DataQueue.Count()}/{tableCount}");
 
                 //实体类解析对象上下文
                 EntityClassResolveContext context = new EntityClassResolveContext(templateContent, table);
