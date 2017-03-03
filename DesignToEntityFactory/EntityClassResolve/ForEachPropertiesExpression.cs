@@ -4,25 +4,25 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace DesignToEntityFactory.EntityResolver
+namespace DesignToEntityFactory.EntityClassResolve
 {
     /// <summary>
     /// 循环处理实体对象属性解释器
     /// 针对“<ForEach_Properties>”的解析
     /// </summary>
-    public class ForEachPropertiesExpression : EntityExpression
+    public class ForEachPropertiesExpression : EntityClassExpression
     {
         /// <summary>
         /// 执行文法解释
         /// </summary>
         /// <param name="context"></param>
-        public override void Interpret(EntityResolverContext context)
+        public override void Interpret(EntityClassResolveContext context)
         {
             if (context == null || context.TableDesc == null) return;
 
             Regex regex = new Regex(@"<(?<foreach>ForEach_Properties)>(?<template>((?!<separator>).|\n)*)<separator>(?<separator>((?!</separator>).|\n)*)</separator>[^<]*</\k<foreach>>", RegexOptions.IgnoreCase | RegexOptions.Compiled);
 
-            string text = context.OutputEntityContent;
+            string text = context.OutputEntityClassContent;
 
             MatchCollection mc = regex.Matches(text);
 
@@ -42,7 +42,7 @@ namespace DesignToEntityFactory.EntityResolver
             }
 
             //实体对象输出内容
-            context.OutputEntityContent = text;
+            context.OutputEntityClassContent = text;
         }
 
         /// <summary>

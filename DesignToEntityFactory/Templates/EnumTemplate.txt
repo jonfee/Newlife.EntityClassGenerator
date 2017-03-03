@@ -1,0 +1,18 @@
+﻿using System;
+using System.Collections.Generic;
+
+namespace Newlife.ComponentModel.{Module_Name}
+{
+	/// <summary>
+	/// {Enum_Description}
+	/// </summary>
+	public enum {Enum_Name} : short
+	{
+		<Foreach_Options>
+		/// <summary>
+		/// {Enum_OptionDescription}
+		/// </summary>
+		{Enum_OptionName} = {Enum_OptionValue}<separator>,
+		</separator></Foreach_Options>
+	}
+}

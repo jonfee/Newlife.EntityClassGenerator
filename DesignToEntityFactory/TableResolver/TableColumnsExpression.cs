@@ -12,18 +12,9 @@ namespace DesignToEntityFactory.TableResolver
         /// <summary>
         /// 执行方法解释
         /// </summary>
-        /// <param name="context"><see cref="DataTableContext"/>实例</param>
-        public override void Interpret(DataTableContext context)
+        /// <param name="context"><see cref="TableDescContext"/>实例</param>
+        public override void Interpret(TableDescContext context)
         {
-            /*
-              <tr>
-                <td><strong>RuleId</strong></td>
-                <td>long</td>
-                <td>0</td>
-                <td>主键，规则ID</td>
-               </tr>
-             */
-
             if (context == null || string.IsNullOrWhiteSpace(context.TableHtml)) return;
 
             //数据表字段 的匹配正则式

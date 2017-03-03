@@ -11,13 +11,13 @@ namespace DesignToEntityFactory.TableResolver
         /// <summary>
         /// 执行文法解释
         /// </summary>
-        /// <param name="context"><see cref="DataTableContext"/>实例</param>
-        public override void Interpret(DataTableContext context)
+        /// <param name="context"><see cref="TableDescContext"/>实例</param>
+        public override void Interpret(TableDescContext context)
         {
             if (context == null || string.IsNullOrWhiteSpace(context.TableHtml)) return;
 
             //数据表描述 的匹配正则式
-            Regex regex = new Regex(@"<(?<HxTag>h\d+)\s+[^>]*id=""表[^>]+>\s*\[表\]\s*(?<desc>[^\(]+)\((?<name>[^\)]+)\)</\k<HxTag>>", RegexOptions.IgnoreCase | RegexOptions.Compiled);
+            Regex regex = new Regex(@"<(?<HxTag>h\d+)\s+[^>]*id=""表[^>]+>\s*\[表\]\s*(?<desc>[^\(（]+)[\(（](?<name>[^\）)]+)[\)）]</\k<HxTag>>", RegexOptions.IgnoreCase | RegexOptions.Compiled);
 
             Match match = regex.Match(context.TableHtml);
 

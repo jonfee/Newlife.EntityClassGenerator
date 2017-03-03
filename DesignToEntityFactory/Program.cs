@@ -1,5 +1,6 @@
 ﻿using DesignToEntityFactory.Core;
 using DesignToEntityFactory.Factory;
+using DesignToEntityFactory.Models;
 using System;
 using System.Collections.Generic;
 
@@ -23,7 +24,7 @@ namespace DesignToEntityFactory
 
             List<FileFactory> factoryList = new List<FileFactory>();
             factoryList.Add(new EntityFactory(sourceHtml));
-            //factoryList.Add(new EnumFactory(sourceHtml));
+            factoryList.Add(new EnumFactory(sourceHtml));
             //factoryList.Add(new MappingFactory(sourceHtml));
 
             //循环执行生成

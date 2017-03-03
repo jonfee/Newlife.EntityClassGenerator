@@ -46,15 +46,34 @@
   <ItemGroup>
     <Compile Include="Core\Configs.cs" />
     <Compile Include="Core\Tools.cs" />
+    <Compile Include="EnumClassResolve\EnumClassExpression.cs" />
+    <Compile Include="EnumClassResolve\EnumClassResolveContext.cs" />
+    <Compile Include="EnumClassResolve\EnumDescriptionExpression.cs" />
+    <Compile Include="EnumClassResolve\EnumModuleNameExpression.cs" />
+    <Compile Include="EnumClassResolve\EnumNameExpression.cs" />
+    <Compile Include="EnumClassResolve\ForeachOptionsExpression.cs" />
+    <Compile Include="EnumOptionResolve\EnumClassOptionExpression.cs" />
+    <Compile Include="EnumOptionResolve\EnumOptionAliasExpression.cs" />
+    <Compile Include="EnumOptionResolve\EnumOptionDescriptionExpression.cs" />
+    <Compile Include="EnumOptionResolve\EnumOptionNameExpression.cs" />
+    <Compile Include="EnumOptionResolve\EnumOptionResolveContext.cs" />
+    <Compile Include="EnumOptionResolve\EnumOptionValueExpression.cs" />
+    <Compile Include="EnumResolver\EnumDescExpression.cs" />
+    <Compile Include="EnumResolver\EnumExpression.cs" />
+    <Compile Include="EnumResolver\EnumOptionsExpression .cs" />
+    <Compile Include="EnumResolver\EnumDescContext.cs" />
     <Compile Include="Factory\EntityFactory.cs" />
-    <Compile Include="EntityResolver\EntityDescriptionExpression.cs" />
-    <Compile Include="EntityResolver\EntityExpression.cs" />
-    <Compile Include="EntityResolver\EntityNameExpression .cs" />
-    <Compile Include="EntityResolver\EntityResolverContext .cs" />
-    <Compile Include="EntityResolver\ForeachPrimaryKeysExpression.cs" />
-    <Compile Include="EntityResolver\ForEachPropertiesExpression.cs" />
-    <Compile Include="EntityResolver\ModuleNameExpression.cs" />
+    <Compile Include="EntityClassResolve\EntityDescriptionExpression.cs" />
+    <Compile Include="EntityClassResolve\EntityClassExpression.cs" />
+    <Compile Include="EntityClassResolve\EntityNameExpression .cs" />
+    <Compile Include="EntityClassResolve\EntityClassResolveContext .cs" />
+    <Compile Include="EntityClassResolve\ForeachPrimaryKeysExpression.cs" />
+    <Compile Include="EntityClassResolve\ForEachPropertiesExpression.cs" />
+    <Compile Include="EntityClassResolve\ModuleNameExpression.cs" />
+    <Compile Include="Factory\EnumFactory.cs" />
     <Compile Include="Factory\FileFactory.cs" />
+    <Compile Include="Models\EnumDesc.cs" />
+    <Compile Include="Models\FactoryModel.cs" />
     <Compile Include="Models\TableDesc.cs" />
     <Compile Include="PrimaryKeyResolver\PrimaryKeyExpression.cs" />
     <Compile Include="PrimaryKeyResolver\PrimarykeyPropertyNameExpression.cs" />
@@ -67,33 +86,24 @@
     <Compile Include="PropertyResolver\PropertyNameExpression.cs" />
     <Compile Include="PropertyResolver\PropertyResolverContext.cs" />
     <Compile Include="PropertyResolver\ProperytyDescriptionExpression.cs" />
-    <Compile Include="TableResolver\DataTableContext.cs" />
+    <Compile Include="TableResolver\TableDescContext.cs" />
     <Compile Include="TableResolver\TableColumnsExpression.cs" />
     <Compile Include="TableResolver\TableDescExpression.cs" />
     <Compile Include="TableResolver\TableExpression.cs" />
     <Compile Include="SettingsHandler.cs" />
-    <Compile Include="Templates\EntityTemplate.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>EntityTemplate.tt</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Templates\EntityTemplate.tt">
-      <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>EntityTemplate.cs</LastGenOutput>
-    </Content>
+    <Content Include="Templates\EntityTemplate.txt" />
+    <Content Include="Templates\EnumTemplate.txt" />
     <Content Include="Templates\newlife-db.html" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="EnumResolver\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>xcopy /e /s /k /v /i /y "$(ProjectDir)templates\*.*" "$(ProjectDir)$(OutDir)\templates\"</PostBuildEvent>

@@ -5,9 +5,9 @@ using System.Linq;
 namespace DesignToEntityFactory.Models
 {
     /// <summary>
-    /// 数据表描述
+    /// 数据表信息描述
     /// </summary>
-    public class TableDesc
+    public class TableDesc: FactoryModel
     {
         /// <summary>
         /// 数据表名称

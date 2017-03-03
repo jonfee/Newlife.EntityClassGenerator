@@ -1,11 +1,11 @@
 ﻿using DesignToEntityFactory.Models;
 
-namespace DesignToEntityFactory.EntityResolver
+namespace DesignToEntityFactory.EntityClassResolve
 {
     /// <summary>
     /// 数据表描述解析为实体类处理上下文
     /// </summary>
-    public class EntityResolverContext
+    public class EntityClassResolveContext
     {
         private TableDesc _tableDesc;
 
@@ -24,31 +24,31 @@ namespace DesignToEntityFactory.EntityResolver
             }
         }
 
-        private string _outputEntityContent;
+        private string _outputEntityClassContent;
 
         /// <summary>
         /// 输出的实体类文件内容
         /// </summary>
-        public string OutputEntityContent
+        public string OutputEntityClassContent
         {
             get
             {
-                return _outputEntityContent;
+                return _outputEntityClassContent;
             }
             set
             {
-                this._outputEntityContent = value;
+                this._outputEntityClassContent = value;
             }
         }
 
         /// <summary>
-        /// 初始化<see cref="EntityResolverContext"/>实例
+        /// 初始化<see cref="EntityClassResolverContext"/>实例
         /// </summary>
         /// <param name="entityTemplate">实体类文件模板</param>
         /// <param name="tableDesc">数据表描述对象</param>
-        public EntityResolverContext(string entityTemplate,TableDesc tableDesc)
+        public EntityClassResolveContext(string entityTemplate,TableDesc tableDesc)
         {
-            this._outputEntityContent = entityTemplate;
+            this._outputEntityClassContent = entityTemplate;
             this._tableDesc = tableDesc;
         }
     }

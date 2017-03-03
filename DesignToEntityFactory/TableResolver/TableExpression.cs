@@ -8,7 +8,7 @@
         /// <summary>
         /// 文法解释
         /// </summary>
-        /// <param name="context"><seealso cref="DataTableContext"/>对象实例</param>
-        public abstract void Interpret(DataTableContext context);
+        /// <param name="context"><seealso cref="TableDescContext"/>对象实例</param>
+        public abstract void Interpret(TableDescContext context);
     }
 }

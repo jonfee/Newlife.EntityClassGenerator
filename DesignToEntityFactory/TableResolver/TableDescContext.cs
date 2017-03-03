@@ -5,7 +5,7 @@ namespace DesignToEntityFactory.TableResolver
     /// <summary>
     /// 数据表处理上下文
     /// </summary>
-    public class DataTableContext
+    public class TableDescContext
     {
         private string _tableHtml;
         /// <summary>
@@ -28,10 +28,10 @@ namespace DesignToEntityFactory.TableResolver
         }
 
         /// <summary>
-        /// 初始化<see cref="DataTableContext"/>实例
+        /// 初始化<see cref="TableDescContext"/>实例
         /// </summary>
         /// <param name="tableHtml">数据表HTML</param>
-        public DataTableContext(string tableHtml)
+        public TableDescContext(string tableHtml)
         {
             this._tableHtml = tableHtml;
 
