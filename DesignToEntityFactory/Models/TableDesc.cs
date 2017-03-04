@@ -91,14 +91,24 @@ namespace DesignToEntityFactory.Models
         public string Description { get; set; }
 
         /// <summary>
+        /// 对应数据库数据类型
+        /// </summary>
+        public string DbType { get; set; }
+
+        /// <summary>
         /// 数据类型
         /// </summary>
         public string DataType { get; set; }
 
         /// <summary>
-        /// 数据限制长度
+        /// 第一限制长度
         /// </summary>
-        public int LimitLength { get; set; }
+        public int FirstLimitLength { get; set; }
+
+        /// <summary>
+        /// 第二限制长度
+        /// </summary>
+        public int SecondLimitLength { get; set; }
 
         /// <summary>
         /// 默认值 

@@ -72,6 +72,7 @@
     <Compile Include="EntityResolve\ClassFile\ModuleNameExpression.cs" />
     <Compile Include="Factory\EnumFactory.cs" />
     <Compile Include="Factory\FileFactory.cs" />
+    <Compile Include="Factory\MappingFactory.cs" />
     <Compile Include="Models\EnumDesc.cs" />
     <Compile Include="Models\FactoryModel.cs" />
     <Compile Include="Models\TableDesc.cs" />
@@ -86,11 +87,12 @@
     <Compile Include="EntityResolve\Property\PropertyNameExpression.cs" />
     <Compile Include="EntityResolve\Property\PropertyResolverContext.cs" />
     <Compile Include="EntityResolve\Property\ProperytyDescriptionExpression.cs" />
-    <Compile Include="EntityResolve\Table\TableDescContext.cs" />
-    <Compile Include="EntityResolve\Table\TableColumnsExpression.cs" />
-    <Compile Include="EntityResolve\Table\TableDescExpression.cs" />
-    <Compile Include="EntityResolve\Table\TableExpression.cs" />
+    <Compile Include="TableResolve\TableDescContext.cs" />
+    <Compile Include="TableResolve\TableColumnsExpression.cs" />
+    <Compile Include="TableResolve\TableDescExpression.cs" />
+    <Compile Include="TableResolve\TableExpression.cs" />
     <Compile Include="SettingsHandler.cs" />
+    <Compile Include="TableResolve\TableHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -98,12 +100,15 @@
   <ItemGroup>
     <Content Include="Templates\EntityTemplate.txt" />
     <Content Include="Templates\EnumTemplate.txt" />
+    <Content Include="Templates\MappingTemplate.txt" />
     <Content Include="Templates\newlife-db.html" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="MappingResolve\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>xcopy /e /s /k /v /i /y "$(ProjectDir)templates\*.*" "$(ProjectDir)$(OutDir)\templates\"</PostBuildEvent>

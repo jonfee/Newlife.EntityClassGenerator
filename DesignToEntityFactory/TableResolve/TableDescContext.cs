@@ -1,6 +1,6 @@
 ﻿using DesignToEntityFactory.Models;
 
-namespace DesignToEntityFactory.EntityResolve.Table
+namespace DesignToEntityFactory.TableResolve
 {
     /// <summary>
     /// 数据表处理上下文

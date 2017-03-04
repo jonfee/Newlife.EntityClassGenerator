@@ -1,6 +1,6 @@
 ﻿using DesignToEntityFactory.Core;
 using DesignToEntityFactory.Factory;
-using DesignToEntityFactory.Models;
+using DesignToEntityFactory.TableResolve;
 using System;
 using System.Collections.Generic;
 
@@ -8,11 +8,6 @@ namespace DesignToEntityFactory
 {
     class Program
     {
-        /// <summary>
-        /// 输出目录
-        /// </summary>
-        static string _outputDirectory;
-
         static void Main(string[] args)
         {
             //设置/获取生成器参数
@@ -22,10 +17,13 @@ namespace DesignToEntityFactory
             //读取源文件内容
             string sourceHtml = Tools.ReadFileContent(handler.HtmlFilePath);
 
+            //解析出数据表集合
+            var tables = TableHelper.ResolveTables(sourceHtml);
+
             List<FileFactory> factoryList = new List<FileFactory>();
-            factoryList.Add(new EntityFactory(sourceHtml));
+            factoryList.Add(new EntityFactory(sourceHtml, tables));
             factoryList.Add(new EnumFactory(sourceHtml));
-            //factoryList.Add(new MappingFactory(sourceHtml));
+            factoryList.Add(new MappingFactory(sourceHtml, tables));
 
             //循环执行生成
             foreach (var factory in factoryList)

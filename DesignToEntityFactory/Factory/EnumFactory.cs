@@ -20,7 +20,6 @@ namespace DesignToEntityFactory.Factory
         /// 初始化<see cref="EnumFactory"/>实例
         /// </summary>
         /// <param name="sourceHtml">源文件HTML内容</param>
-        /// <param name="output">输出目录</param>
         public EnumFactory(string sourceHtml) : base(sourceHtml, "Enums")
         {
         }

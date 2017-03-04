@@ -1,8 +1,10 @@
-﻿using DesignToEntityFactory.Models;
+﻿using DesignToEntityFactory.Core;
+using DesignToEntityFactory.Models;
+using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
-namespace DesignToEntityFactory.EntityResolve.Table
+namespace DesignToEntityFactory.TableResolve
 {
     /// <summary>
     /// 数据表字段文法解释器
@@ -33,10 +35,22 @@ namespace DesignToEntityFactory.EntityResolve.Table
                 string desc = ResolverDesc(m.Groups["desc"].Value.Trim());
                 //是否可为空
                 bool canNullable = string.IsNullOrWhiteSpace(m.Groups["cannullable"].Value);
-                //数据类型
-                string dataType = ResolverEnumType(desc); //枚举类型
-                if (string.IsNullOrWhiteSpace(dataType))
-                    dataType = ResolverDataType(m.Groups["datatype"].Value, canNullable);   //非枚举类型
+
+                //字段枚举类型
+                string enumType = ResolverEnumType(desc); //枚举类型
+
+                //数据库数据类型
+                string dbType;
+                //C#中数据类型
+                string csharpType;
+                //第一限制长度
+                int firstLimitLength;
+                //第二限制长度
+                int secondLimitLength;
+
+                //解析数据类型
+                ResolverDataType(m.Groups["datatype"].Value, canNullable, out csharpType, out dbType, out firstLimitLength, out secondLimitLength);
+                if (!string.IsNullOrWhiteSpace(enumType)) csharpType = enumType;
 
                 TableColumn column = new TableColumn();
 
@@ -44,7 +58,8 @@ namespace DesignToEntityFactory.EntityResolve.Table
                 column.DefaultValue = m.Groups["defaultvalue"].Value;
                 column.Description = desc;
                 column.CanNullable = canNullable;
-                column.DataType = dataType;
+                column.DataType = csharpType;
+                column.DbType = dbType;
                 column.IsPrimaryKey = desc.StartsWith("主键");
 
                 columnList.Add(column);
@@ -54,46 +69,50 @@ namespace DesignToEntityFactory.EntityResolve.Table
         }
 
         /// <summary>
-        /// 解析数据类型
+        /// 解析数据类型，同时输出<paramref name="firstLimitLength"/>和<paramref name="secondLimitLength"/>参数值
         /// </summary>
         /// <param name="datatype">html设计中的数据类型</param>
+        /// <param name="canNullable">是否允许为空</param>
+        /// <param name="csharpType">out输出csharpType参数</param>
+        /// <param name="dbType">out输出dbType参数</param>
+        /// <param name="firstLimitLength">out输出firstLimitLength参数</param>
+        /// <param name="secondLimitLength">out输出secondLimitLength参数</param>
         /// <returns></returns>
-        private string ResolverDataType(string datatype, bool canNullable)
+        private void ResolverDataType(string datatype, bool canNullable, out string csharpType, out string dbType, out int firstLimitLength, out int secondLimitLength)
         {
-            Regex regex = new Regex(@"^(?<type>[a-z][^\(（\?]*)([\(（][^\)）]+[\)）])?\??$", RegexOptions.IgnoreCase | RegexOptions.Compiled);
+            dbType = null;
+            firstLimitLength = 0;
+            secondLimitLength = 0;
 
-            string newtype = regex.Match(datatype).Groups["type"].Value;
+            Regex regex = new Regex(@"^(?<type>[a-z][^\(（\?]*)([\(（](?<limitLength>[^\)）]+)[\)）])?\??$", RegexOptions.IgnoreCase | RegexOptions.Compiled);
 
-            switch (newtype.ToLower())
+            Match match = regex.Match(datatype);
+
+            #region //数据类型处理
+
+            string type = match.Groups["type"].Value;
+            //数据库数据类型
+            dbType = Tools.ConvertToDBType(type);
+            //C#中的数据类型
+            csharpType = Tools.ConvertToCsharpType(type);
+            if (canNullable && csharpType != "string") csharpType = $"{csharpType}?";
+
+            #endregion
+
+            #region //限制长度处理
+
+            string[] limits = (match.Groups["limitLength"].Value ?? string.Empty).Split(new[] { ',', '，' }, StringSplitOptions.RemoveEmptyEntries);
+
+            if (limits.Length > 0)
             {
-                case "char":
-                case "nchar":
-                case "varchar":
-                case "nvarchar":
-                case "text":
-                case "ntext":
-                    newtype = "string";
-                    break;
-                case "bit":
-                    newtype = "bool";
-                    break;
-                case "time":
-                    newtype = "TimeSpan";
-                    break;
-                case "datetime":
-                    newtype = "DateTime";
-                    break;
-                case "bigint":
-                    newtype = "long";
-                    break;
-                case "guid":
-                    newtype = "Guid";
-                    break;
+                int.TryParse(limits[0], out firstLimitLength);
+            }
+            if (limits.Length > 1)
+            {
+                int.TryParse(limits[1], out secondLimitLength);
             }
 
-            if (canNullable && newtype != "string") newtype = $"{newtype}?";
-
-            return newtype;
+            #endregion
         }
 
         /// <summary>

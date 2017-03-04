@@ -67,7 +67,7 @@ namespace DesignToEntityFactory.EntityResolve.ClassFile
             foreach (var column in columnList)
             {
                 //循环项中的模板
-                var template = column.LimitLength > 0 ? limitTemplate : unlimitTemplate;
+                var template = column.FirstLimitLength > 0 ? limitTemplate : unlimitTemplate;
 
                 PropertyResolverContext context = new PropertyResolverContext(column, template);
 

@@ -1,7 +1,7 @@
 ﻿using System.Configuration;
 using System.Text.RegularExpressions;
 
-namespace DesignToEntityFactory.EntityResolve.Table
+namespace DesignToEntityFactory.TableResolve
 {
     /// <summary>
     /// 数据表描述文法解释器

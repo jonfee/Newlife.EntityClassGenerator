@@ -1,11 +1,10 @@
 ﻿using DesignToEntityFactory.Core;
 using DesignToEntityFactory.EntityResolve.ClassFile;
 using DesignToEntityFactory.Models;
-using DesignToEntityFactory.EntityResolve.Table;
+using DesignToEntityFactory.TableResolve;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 
 namespace DesignToEntityFactory.Factory
 {
@@ -14,16 +13,30 @@ namespace DesignToEntityFactory.Factory
     /// </summary>
     public class EntityFactory : FileFactory
     {
+        /// <summary>
+        /// 数据表集合
+        /// </summary>
+        private List<TableDesc> _tables;
+
         #region 初始化
 
         /// <summary>
         /// 初始化<see cref="EntityFactory"/>实例
         /// </summary>
         /// <param name="sourceHtml">源文件HTML内容</param>
-        /// <param name="output">输出目录</param>
-        public EntityFactory(string sourceHtml) : base(sourceHtml, "Models")
+        public EntityFactory(string sourceHtml) : this(sourceHtml, null)
         {
-            //初始化业务
+
+        }
+
+        /// <summary>
+        /// 初始化<see cref="EntityFactory"/>实例
+        /// </summary>
+        /// <param name="sourceHtml">源文件HTML内容</param>
+        /// <param name="tables">数据表集合</param>
+        public EntityFactory(string sourceHtml, List<TableDesc> tables) : base(sourceHtml, "Models")
+        {
+            _tables = tables;
         }
 
         #endregion
@@ -80,40 +93,14 @@ namespace DesignToEntityFactory.Factory
         /// </summary>
         public override void ResolveDataInQueue()
         {
-            #region //获取数据表的匹配集合
+            if (_tables == null)
+                _tables = TableHelper.ResolveTables(SourceHtml);
 
-            if (string.IsNullOrWhiteSpace(SourceHtml)) return;
-
-            Regex regex = new Regex(@"<(?<HxTag>h\d+)\s+[^>]*id=""表[^>]+>((?<Nested><\k<HxTag>[^>]*>)|</\k<HxTag>>(?<-Nested>)|.*?)*</\k<HxTag>>(?<clumns>((?!</table>).|\n)*)", RegexOptions.IgnoreCase | RegexOptions.Compiled);
-
-            var tableMatchs = regex.Matches(SourceHtml);
-
-            #endregion
-
-            #region //将每个HTML的内容描述转换为TableDesc对象 
-
-            //循环处理
-            foreach (Match m in tableMatchs)
+            foreach (var tb in _tables)
             {
-                //定义数据表描述对象处理上下文
-                TableDescContext context = new TableDescContext(m.Value);
-
-                //将HTMl信息解释为数据表TableDesc的解释器
-                List<TableExpression> exps = new List<TableExpression>();
-                exps.Add(new TableDescExpression());    //数据表描述信息解释器
-                exps.Add(new TableColumnsExpression()); //数据表字段解释器
-
-                //循环执行文法解释器
-                foreach (var exp in exps)
-                {
-                    exp.Interpret(context);
-                }
-
                 //将解释出来的TableDesc加入数据队列
-                DataQueue.Enqueue(context.Table);
+                DataQueue.Enqueue(tb);
             }
-
-            #endregion
         }
 
         #endregion

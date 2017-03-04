@@ -16,7 +16,7 @@ namespace DesignToEntityFactory.EntityResolve.Property
 
             string text = context.Output;
 
-            context.Output = regex.Replace(text, context.Column.LimitLength.ToString());
+            context.Output = regex.Replace(text, context.Column.FirstLimitLength.ToString());
         }
     }
 }

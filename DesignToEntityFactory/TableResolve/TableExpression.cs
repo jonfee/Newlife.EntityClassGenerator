@@ -1,4 +1,4 @@
-﻿namespace DesignToEntityFactory.EntityResolve.Table
+﻿namespace DesignToEntityFactory.TableResolve
 {
     /// <summary>
     /// 数据表解释器文法-抽象类
