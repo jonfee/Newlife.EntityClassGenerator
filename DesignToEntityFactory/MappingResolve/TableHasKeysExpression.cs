@@ -19,10 +19,13 @@ namespace DesignToEntityFactory.MappingResolve
 
             Match match = regex.Match(text);
 
+            //主键集合
             var primaryKeys = context.Table.Columns.Where(p => p.IsPrimaryKey == true).ToList();
 
+            //主键数量
             int keysCount = primaryKeys.Count();
 
+            //主键生成的模板，根据主键数量不同，有不同的模板
             string template = "";
 
             if (keysCount == 0)
@@ -42,6 +45,7 @@ namespace DesignToEntityFactory.MappingResolve
             KeysResolveStrategyContext resolveContext = new KeysResolveStrategyContext(keysCount);
             string replaceChars = resolveContext.Execute(template, primaryKeys);
 
+            //输出主键的生成代码字符串内容
             context.Output = regex.Replace(text, replaceChars);
         }
     }
