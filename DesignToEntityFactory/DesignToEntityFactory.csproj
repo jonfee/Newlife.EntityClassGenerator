@@ -78,11 +78,12 @@
     <Compile Include="MappingResolve\Keys\MoreKeysResolveStrategy.cs" />
     <Compile Include="MappingResolve\Keys\NoneKeyResolveStrategy.cs" />
     <Compile Include="MappingResolve\Keys\OneKeyResolveStrategy.cs" />
+    <Compile Include="MappingResolve\MappingColumnsExpression.cs" />
     <Compile Include="MappingResolve\MappingExpression.cs" />
     <Compile Include="MappingResolve\MappingNameExpression.cs" />
     <Compile Include="MappingResolve\MappingResolveContext.cs" />
     <Compile Include="MappingResolve\ModuleNameExpression.cs" />
-    <Compile Include="MappingResolve\TableHasKeysExpression.cs" />
+    <Compile Include="MappingResolve\MappingHasKeysExpression.cs" />
     <Compile Include="MappingResolve\TableSchemaExpression.cs" />
     <Compile Include="Models\EnumDesc.cs" />
     <Compile Include="Models\FactoryModel.cs" />
@@ -117,7 +118,9 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="MappingResolve\Columns\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>xcopy /e /s /k /v /i /y "$(ProjectDir)templates\*.*" "$(ProjectDir)$(OutDir)\templates\"</PostBuildEvent>

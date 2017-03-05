@@ -7,7 +7,7 @@ namespace DesignToEntityFactory.MappingResolve
     /// <summary>
     /// 针对数据表主键设置的解释器
     /// </summary>
-    public class TableHasKeysExpression : MappingExpression
+    public class MappingHasKeysExpression : MappingExpression
     {
         public override void Interpret(MappingResolveContext context)
         {

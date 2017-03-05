@@ -71,7 +71,7 @@ namespace DesignToEntityFactory.Factory
                 exps.Add(new ModuleNameExpression());           //模块名称文法解释器
                 exps.Add(new MappingNameExpression());          //实体名称文法解释器
                 exps.Add(new TableSchemaExpression());          //实体类描述文法解释器
-                exps.Add(new TableHasKeysExpression());         //实体属性循环处理文法解释器
+                exps.Add(new MappingHasKeysExpression());         //实体属性循环处理文法解释器
 
                 //循环执行解析
                 foreach (var exp in exps)
