@@ -19,7 +19,8 @@ namespace Newlife.Database.Builder.Mappings
             <If_PrimaryKeys_None><ElseIf_PrimaryKeys_One>this.HasKey(p => p.{Primary_Key_Name});<ElseIf_PrimaryKeys_More>this.HasKey(p => new {<Foreach_PrimaryKeys>p.{Primary_Key_Name}<separator>,</separator></Foreach_PrimaryKeys>});</EndIf>
 
 			<Mapping_Columns>
-			this.property(p=>p.{Column_Name}).HasColumnName("{Column_Name}")<If_HasColumnType>.HasColumnType("{Column_DataType}")</EndIf><If_IsRequired>.IsRequired()</EndIf><If_IsOptional>.IsOptional()</EndIf><If_IsUnicode>.IsUnicode({Is_DoubleBytes})</EndIf><If_HasPrecision>.HasPrecision({First_LimitLength},{Second_LimitLength})</EndIf><If_HasMaxLength>.HasMaxLength({Limit_Length})</EndIf><If_OnePrimaryKey>.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)</EndIf>
+			this.property(p=>p.{Property_Name}).HasColumnName("{Column_Name}")<If_HasColumnType>.HasColumnType("{Column_DataType}")</EndIf><If_IsRequired>.IsRequired()</EndIf><If_IsOptional>.IsOptional()</EndIf><If_IsUnicode>.IsUnicode({Is_DoubleBytes})</EndIf><If_HasPrecision>.HasPrecision({Total_Bit},{Decimal_Bit})</EndIf><If_HasMaxLength>.HasMaxLength({Max_Length})</EndIf><If_IsUniquePrimary>.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)</EndIf>;<separator>
+			</separator>
 			</Mapping_Columns>
         }
     }

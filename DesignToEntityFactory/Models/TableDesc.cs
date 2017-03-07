@@ -101,14 +101,14 @@ namespace DesignToEntityFactory.Models
         public string DataType { get; set; }
 
         /// <summary>
-        /// 第一限制长度
+        /// 总限制长度
         /// </summary>
-        public int FirstLimitLength { get; set; }
+        public int TotalBit { get; set; }
 
         /// <summary>
-        /// 第二限制长度
+        /// 小数位限制长度
         /// </summary>
-        public int SecondLimitLength { get; set; }
+        public int DeicmalBit { get; set; }
 
         /// <summary>
         /// 默认值 
@@ -124,5 +124,10 @@ namespace DesignToEntityFactory.Models
         /// 是否为主键
         /// </summary>
         public bool IsPrimaryKey { get; set; }
+
+        /// <summary>
+        /// 是否为唯一主键 
+        /// </summary>
+        public bool IsUniquePrimary { get; set; }
     }
 }

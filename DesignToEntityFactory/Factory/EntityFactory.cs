@@ -54,7 +54,7 @@ namespace DesignToEntityFactory.Factory
             //数据表总数
             int tableCount = DataQueue.Count();
 
-            Console.WriteLine($"共有数据表{tableCount}个");
+            Console.WriteLine($"共有{tableCount}个实体类类文件待生成：");
 
             //处理数据表转换队列
             while (DataQueue.Count() > 0)

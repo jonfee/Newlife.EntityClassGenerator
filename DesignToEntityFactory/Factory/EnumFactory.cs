@@ -34,7 +34,7 @@ namespace DesignToEntityFactory.Factory
             //枚举总数
             int enumCount = DataQueue.Count();
 
-            Console.WriteLine($"共有枚举{enumCount}个");
+            Console.WriteLine($"共有{enumCount}个枚举类文件待生成：");
 
             //处理数据表转换队列
             while (DataQueue.Count() > 0)

@@ -54,7 +54,7 @@ namespace DesignToEntityFactory.Factory
             //数据表总数
             int tableCount = DataQueue.Count();
 
-            Console.WriteLine($"共有数据表{tableCount}个");
+            Console.WriteLine($"共有{tableCount}个Mapping类待生成：");
 
             //处理数据表转换队列
             while (DataQueue.Count() > 0)
@@ -69,9 +69,10 @@ namespace DesignToEntityFactory.Factory
                 //解析器集合
                 List<MappingExpression> exps = new List<MappingExpression>();
                 exps.Add(new ModuleNameExpression());           //模块名称文法解释器
-                exps.Add(new MappingNameExpression());          //实体名称文法解释器
-                exps.Add(new TableSchemaExpression());          //实体类描述文法解释器
-                exps.Add(new MappingHasKeysExpression());         //实体属性循环处理文法解释器
+                exps.Add(new MappingNameExpression());          //Mapping名称文法解释器
+                exps.Add(new TableSchemaExpression());          //Mapping类数据表架构(Schema)文法解释器
+                exps.Add(new MappingHasKeysExpression());       //Mapping主键配置处理文法解释器
+                exps.Add(new MappingColumnsExpression());       //Mapping字段配置处理文法解释器
 
                 //循环执行解析
                 foreach (var exp in exps)

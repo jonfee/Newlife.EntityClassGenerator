@@ -2,6 +2,7 @@
 using DesignToEntityFactory.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace DesignToEntityFactory.TableResolve
@@ -25,6 +26,8 @@ namespace DesignToEntityFactory.TableResolve
             MatchCollection mc = regex.Matches(context.TableHtml);
 
             List<TableColumn> columnList = new List<TableColumn>();
+
+            List<string> keys = new List<string>();
 
             //遍历字段处理
             foreach (Match m in mc)
@@ -61,8 +64,22 @@ namespace DesignToEntityFactory.TableResolve
                 column.DataType = csharpType;
                 column.DbType = dbType;
                 column.IsPrimaryKey = desc.StartsWith("主键");
+                column.IsUniquePrimary = false; //是否为唯一主键，默认false
 
                 columnList.Add(column);
+
+                //加入到主键集合中
+                if (column.IsPrimaryKey)
+                {
+                    keys.Add(name);
+                }
+            }
+
+            //处理唯一主键
+            if (keys.Count == 1)
+            {
+                var item = columnList.FirstOrDefault(p => p.Name.Equals(keys[0]));
+                item.IsUniquePrimary = true;
             }
 
             context.Table.Columns = columnList;

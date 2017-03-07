@@ -36,6 +36,7 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -73,6 +74,30 @@
     <Compile Include="Factory\EnumFactory.cs" />
     <Compile Include="Factory\FileFactory.cs" />
     <Compile Include="Factory\MappingFactory.cs" />
+    <Compile Include="GenerateService.cs" />
+    <Compile Include="MappingResolve\Columns\ColumnExpression.cs" />
+    <Compile Include="MappingResolve\Columns\ColumnNameExpression.cs" />
+    <Compile Include="MappingResolve\Columns\ColumnResolveContext.cs" />
+    <Compile Include="MappingResolve\Columns\HasColumnTypeExpression.cs" />
+    <Compile Include="MappingResolve\Columns\HasPrecisionExpression.cs" />
+    <Compile Include="MappingResolve\Columns\IsOptionalExpression.cs" />
+    <Compile Include="MappingResolve\Columns\IsRequiredExpression.cs" />
+    <Compile Include="MappingResolve\Columns\IsUnicodeExpression.cs" />
+    <Compile Include="MappingResolve\Columns\UniqueKeyGeneratedExpression.cs" />
+    <Compile Include="MappingResolve\Columns\MaxLengthExpression.cs" />
+    <Compile Include="MappingResolve\Columns\MaxLength\MaxLengthChecker.cs" />
+    <Compile Include="MappingResolve\Columns\MaxLength\MaxLengthHandlder.cs" />
+    <Compile Include="MappingResolve\Columns\MaxLength\MaxLengthReplacer.cs" />
+    <Compile Include="MappingResolve\Columns\Precision\PrecisionChecker.cs" />
+    <Compile Include="MappingResolve\Columns\Precision\PrecisionHandler.cs" />
+    <Compile Include="MappingResolve\Columns\Precision\PrecisionReplacer.cs" />
+    <Compile Include="MappingResolve\Columns\MappingPropertyNameExpression.cs" />
+    <Compile Include="MappingResolve\Columns\Unicode\UnicodeChecker.cs" />
+    <Compile Include="MappingResolve\Columns\Unicode\UnicodeHandler.cs" />
+    <Compile Include="MappingResolve\Columns\Unicode\UnicodeReplacer.cs" />
+    <Compile Include="MappingResolve\Columns\UniquePrimary\UniquePrimaryChecker.cs" />
+    <Compile Include="MappingResolve\Columns\UniquePrimary\UniquePrimaryHandler.cs" />
+    <Compile Include="MappingResolve\Columns\UniquePrimary\UniquePrimaryReplacer.cs" />
     <Compile Include="MappingResolve\Keys\KeysResolveStrategy.cs" />
     <Compile Include="MappingResolve\Keys\KeysResolveStrategyContext.cs" />
     <Compile Include="MappingResolve\Keys\MoreKeysResolveStrategy.cs" />
@@ -103,7 +128,6 @@
     <Compile Include="TableResolve\TableColumnsExpression.cs" />
     <Compile Include="TableResolve\TableDescExpression.cs" />
     <Compile Include="TableResolve\TableExpression.cs" />
-    <Compile Include="SettingsHandler.cs" />
     <Compile Include="TableResolve\TableHelper.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -118,9 +142,7 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="MappingResolve\Columns\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>xcopy /e /s /k /v /i /y "$(ProjectDir)templates\*.*" "$(ProjectDir)$(OutDir)\templates\"</PostBuildEvent>
