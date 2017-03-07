@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesignToEntityFactory", "DesignToEntityFactory\DesignToEntityFactory.csproj", "{1B521A97-9240-45F7-A247-E165AE528849}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesignToEntityFactory", "src\DesignToEntityFactory\DesignToEntityFactory.csproj", "{1B521A97-9240-45F7-A247-E165AE528849}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{9C464A97-061C-4F88-B3E9-AB021ED5BD00}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,5 +20,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1B521A97-9240-45F7-A247-E165AE528849} = {9C464A97-061C-4F88-B3E9-AB021ED5BD00}
 	EndGlobalSection
 EndGlobal
