@@ -46,13 +46,13 @@ namespace DesignToEntityFactory.TableResolve
                 string dbType;
                 //C#中数据类型
                 string csharpType;
-                //第一限制长度
-                int firstLimitLength;
-                //第二限制长度
-                int secondLimitLength;
+                //总限制长度
+                int totalBit;
+                //小数位限制长度
+                int decimalBit;
 
                 //解析数据类型
-                ResolverDataType(m.Groups["datatype"].Value, canNullable, out csharpType, out dbType, out firstLimitLength, out secondLimitLength);
+                ResolverDataType(m.Groups["datatype"].Value, canNullable, out csharpType, out dbType, out totalBit, out decimalBit);
                 if (!string.IsNullOrWhiteSpace(enumType)) csharpType = enumType;
 
                 TableColumn column = new TableColumn();
@@ -63,6 +63,8 @@ namespace DesignToEntityFactory.TableResolve
                 column.CanNullable = canNullable;
                 column.DataType = csharpType;
                 column.DbType = dbType;
+                column.TotalBit = totalBit;
+                column.DeicmalBit = decimalBit;
                 column.IsPrimaryKey = desc.StartsWith("主键");
                 column.IsUniquePrimary = false; //是否为唯一主键，默认false
 
@@ -86,20 +88,20 @@ namespace DesignToEntityFactory.TableResolve
         }
 
         /// <summary>
-        /// 解析数据类型，同时输出<paramref name="firstLimitLength"/>和<paramref name="secondLimitLength"/>参数值
+        /// 解析数据类型，同时输出<paramref name="totalBit"/>和<paramref name="decimalBit"/>参数值
         /// </summary>
         /// <param name="datatype">html设计中的数据类型</param>
         /// <param name="canNullable">是否允许为空</param>
-        /// <param name="csharpType">out输出csharpType参数</param>
-        /// <param name="dbType">out输出dbType参数</param>
-        /// <param name="firstLimitLength">out输出firstLimitLength参数</param>
-        /// <param name="secondLimitLength">out输出secondLimitLength参数</param>
+        /// <param name="csharpType">out输出CSharp中的数据类型</param>
+        /// <param name="dbType">out输出数据库中的数据类型<</param>
+        /// <param name="totalBit">out输出总限制长度</param>
+        /// <param name="decimalBit">out输出小数位限制长度</param>
         /// <returns></returns>
-        private void ResolverDataType(string datatype, bool canNullable, out string csharpType, out string dbType, out int firstLimitLength, out int secondLimitLength)
+        private void ResolverDataType(string datatype, bool canNullable, out string csharpType, out string dbType, out int totalBit, out int decimalBit)
         {
             dbType = null;
-            firstLimitLength = 0;
-            secondLimitLength = 0;
+            totalBit = 0;
+            decimalBit = 0;
 
             Regex regex = new Regex(@"^(?<type>[a-z][^\(（\?]*)([\(（](?<limitLength>[^\)）]+)[\)）])?\??$", RegexOptions.IgnoreCase | RegexOptions.Compiled);
 
@@ -122,11 +124,11 @@ namespace DesignToEntityFactory.TableResolve
 
             if (limits.Length > 0)
             {
-                int.TryParse(limits[0], out firstLimitLength);
+                int.TryParse(limits[0], out totalBit);
             }
             if (limits.Length > 1)
             {
-                int.TryParse(limits[1], out secondLimitLength);
+                int.TryParse(limits[1], out decimalBit);
             }
 
             #endregion
