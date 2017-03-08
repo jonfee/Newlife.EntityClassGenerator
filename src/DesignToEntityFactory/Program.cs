@@ -9,12 +9,12 @@ namespace DesignToEntityFactory
         [STAThread]
         static void Main(string[] args)
         {
-            //源文件
+            // 源文件
             string sourceFile = SetSoure();
 
-            //定义一个生成服务对象
+            // 定义一个生成服务对象
             GenerateService service = new GenerateService(sourceFile);
-            //运行服务
+            // 运行服务
             service.Running();
             
             Console.WriteLine("按任意键退出！");
@@ -31,26 +31,29 @@ namespace DesignToEntityFactory
         {
             Console.WriteLine("请选择源文件：");
 
-            string path = string.Empty;
+            // 文件路径
+            string filePath = string.Empty;
 
+            // 打开文件选择框，以供用户选择源文件
+            // 仅限html、txt格式文件
             OpenFileDialog fileDialog = new OpenFileDialog();
             fileDialog.Filter = "HTML文件(*.html;*.htm)|*.html;*.htm|文本文件(*.txt)|*.txt";
             var dialogResult = fileDialog.ShowDialog();
 
-            //根据用户操作结果处理
+            // 根据用户操作结果处理
             //  1、选择文件后点击“确定”，则接收文件址
             //  2、用户点击“取消”，则退出程序
             if (dialogResult == DialogResult.OK)
             {
-                path = fileDialog.FileName;
+                filePath = fileDialog.FileName;
             }
             else if (dialogResult == DialogResult.Cancel)
             {
-                //退出程序
+                // 退出程序
                 Exit();
             }
 
-            return path;
+            return filePath;
         }
 
         /// <summary>

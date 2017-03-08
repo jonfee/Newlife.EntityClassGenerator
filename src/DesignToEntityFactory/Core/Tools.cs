@@ -2,6 +2,9 @@
 
 namespace DesignToEntityFactory.Core
 {
+    /// <summary>
+    /// 辅助工具类
+    /// </summary>
     public static class Tools
     {
         /// <summary>
